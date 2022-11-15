@@ -1,0 +1,60 @@
+name: Regenerate course overview
+
+on:
+  repository_dispatch:
+    types: [new_version]
+  push:
+
+env:
+    EXPORTFOLDER: "assets"
+    REPOSITORYFOLDER: "repository"
+
+jobs:
+  run_exporter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check dependencies 
+        run: |
+             sudo apt-get update
+             sudo apt-get -y install git
+             sudo apt-get -y install npm
+             sudo npm install -g @liascript/exporter
+             cd /usr/local/lib/node_modules/@liascript/exporter/node_modules/puppeteer
+             node install.js
+
+      - name: Check out current repository
+        uses: actions/checkout@v2
+        with: 
+          path: repository
+
+      - name: Delete and redefine folder for exports
+        run: |
+              rm -rf ${REPOSITORYFOLDER}/${EXPORTFOLDER}
+              mkdir -p ${REPOSITORYFOLDER}/${EXPORTFOLDER}
+
+      - name: Run exporter for all course files
+        run: |
+             cd ${REPOSITORYFOLDER}
+             liaex -i index.yml -o index --format project --project-category-blur
+             liaex -i prozprog.yml -o prozprog --format project --project-generate-cache --project-generate-pdf --project-generate-ims --project-generate-scorm12 --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
+             liaex -i softwareentwicklung.yml -o softwareentwicklung --format project --project-generate-cache --project-generate-pdf --project-generate-ims --project-generate-scorm12 --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
+             liaex -i robotikprojekt.yml -o robotikprojekt --format project --project-generate-cache --project-generate-pdf --project-generate-ims --project-generate-scorm12 --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
+             liaex -i digitalesysteme.yml -o digitalesysteme --format project --project-generate-cache --project-generate-pdf --project-generate-ims --project-generate-scorm12 --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
+             ls -all
+
+      - name: Commit changes
+        run: |
+             cd ${REPOSITORYFOLDER}
+             git config --local user.email "action@github.com"
+             git config --local user.name "GitHub Action"
+             git status
+             git add .
+             git commit -m "Add new export version of courses" || echo "No changes to commit"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+             github_token: ${{ secrets.GITHUB_TOKEN }}
+             branch: main
+             directory: repository

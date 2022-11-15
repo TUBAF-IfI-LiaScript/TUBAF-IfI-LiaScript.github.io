@@ -1,1060 +1,173 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Kurssammlung</title>
+    
+    <head>
+        <title>OER - Kurssammlung</title>
+        <script type="application/ld+json">
+            {
+                "@context": "http://schema.org/",
+                    "@type": "ItemList",
+                    "itemListElement": [],
+                    "name": "OER - Kurssammlung",
+                    "description": "Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)"
+            }
+        </script>
+        <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Logo_TU_Bergakademie_Freiberg.svg/242px-Logo_TU_Bergakademie_Freiberg.svg.png">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script>
+            window.blur = function (category) {
+                const cards = document.querySelectorAll('div[data-category]')
 
-    <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Logo_TU_Bergakademie_Freiberg.svg/242px-Logo_TU_Bergakademie_Freiberg.svg.png">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <script>
-        window.blur = function(category) {
-            const cards = document.querySelectorAll('div[data-category]')
-
-            for (card of cards) {
-                if(card.dataset.category.includes(category)) {
-                    card.style.filter = ""
-                } else {
-                    card.style.filter = "blur(1px) opacity(35%)"
+                for (card of cards) {
+                    if (card.dataset.category.includes(category)) {
+                        card.style.filter = ""
+                    } else {
+                        card.style.filter = "blur(1px) opacity(35%)"
+                    }
                 }
             }
-        }
-    </script>
-</head>
-<body>
+        </script>
+    </head>
     
-    <main>
-        <div class="container-fluid" style="background-size: cover; background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Universitaetsbibliothek_Freiberg_Fassade.jpg/1024px-Universitaetsbibliothek_Freiberg_Fassade.jpg'); background-position: center center; background-repeat: no-repeat;" >
-            <section class="py-5 text-center container">
-                <div class="row py-lg-5">
-                    <div class="col-lg-6 col-md-8 mx-auto">
-                        <h1 class="fw-light"><span style='background-color: rgba(0,106,179,0.75); padding: 5px; color: white'>Kurssammlung</span></h1>
-                        <p class="lead text-muted"><span style='color: rgb(0,106,179); background-color: rgba(255,255,255,0.75)'>Sammlung der OER Inhalte der Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)</span></p>
+    <body>
+        <main>
+            <div class="container-fluid" style="background-size: cover; background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Universitaetsbibliothek_Freiberg_Fassade.jpg/1024px-Universitaetsbibliothek_Freiberg_Fassade.jpg'); background-position: center center; background-repeat: no-repeat;">
+                <section class="py-5 text-center container">
+                    <div class="row py-lg-5">
+                        <div class="col-lg-6 col-md-8 mx-auto">
+                             <h1 class="fw-light"><span style="background-color: rgba(0,106,179,0.75); padding: 5px; color: white">
+  OER - Kurssammlung
+</span>
+</h1>
 
-                        <select class="form-select" aria-label="Default select example" onchange="window.blur(this.value)">
-          <option value="" selected>All categories</option><option value="liascript">liascript</option><option value="powerpoint">powerpoint</option><option value="tutorial">tutorial</option></select>
+                            <p class="lead text-muted"><span style="color: rgb(0,106,179); background-color: rgba(255,255,255,0.85)">
+  Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)
+</span>
+
+                            </p>
+                            <select class="form-select" aria-label="Default select example" onchange="window.blur(this.value)">
+                                <option value="" selected>All categories</option>
+                                <option value="ad-wandler">ad-wandler</option>
+                                <option value="alu">alu</option>
+                                <option value="atmel 8bit architektur">atmel 8bit architektur</option>
+                                <option value="boolesche algebra">boolesche algebra</option>
+                                <option value="boolesche funktion">boolesche funktion</option>
+                                <option value="c#">c#</option>
+                                <option value="c++">c++</option>
+                                <option value="c++ templates">c++ templates</option>
+                                <option value="cpu">cpu</option>
+                                <option value="datenanalyse">datenanalyse</option>
+                                <option value="datenfusion">datenfusion</option>
+                                <option value="datenvisualisierung">datenvisualisierung</option>
+                                <option value="dotnet">dotnet</option>
+                                <option value="entwurfsmuster">entwurfsmuster</option>
+                                <option value="flip-flop schaltungen">flip-flop schaltungen</option>
+                                <option value="github">github</option>
+                                <option value="iteratoren">iteratoren</option>
+                                <option value="koordinatentransformation">koordinatentransformation</option>
+                                <option value="mikrokontroller">mikrokontroller</option>
+                                <option value="objektorientierung">objektorientierung</option>
+                                <option value="objektorientierung mit c++">objektorientierung mit c++</option>
+                                <option value="programmierparadigmen">programmierparadigmen</option>
+                                <option value="programmierung">programmierung</option>
+                                <option value="python">python</option>
+                                <option value="quine-mccluskey verfahren">quine-mccluskey verfahren</option>
+                                <option value="rechnerarithmetik">rechnerarithmetik</option>
+                                <option value="regelungstechnik">regelungstechnik</option>
+                                <option value="ros">ros</option>
+                                <option value="ros publish-subscribe">ros publish-subscribe</option>
+                                <option value="schaltnetz">schaltnetz</option>
+                                <option value="schaltungssynthese">schaltungssynthese</option>
+                                <option value="schaltwerk">schaltwerk</option>
+                                <option value="sensordatenhandling">sensordatenhandling</option>
+                                <option value="sensoren">sensoren</option>
+                                <option value="smart pointer">smart pointer</option>
+                                <option value="softwaretest">softwaretest</option>
+                                <option value="stl container">stl container</option>
+                                <option value="uml-modellierung">uml-modellierung</option>
+                                <option value="versionsverwaltung">versionsverwaltung</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-xl-3 g-3">
+                        <div class='col-12'><b>Alle Lehrmaterialien der Arbeitsgruppe wurden mit LiaScript erstellt und sind im interaktiven Modus veranstaltungsweise über die untenstehenden Links erreichbar.</b>
+
+                        </div>
+                        <div class='col'>
+                            <div class="card shadow-sm m-1" style="height: 100%" data-category="c#|dotnet|programmierparadigmen|objektorientierung|versionsverwaltung|github|uml-modellierung|softwaretest|entwurfsmuster">
+                                <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('http://www.plantuml.com/plantuml/png/ZPBF3X8n4CRlVOfcJug1u9LuW70YCQ9PVO2odTsTq3-RTgf1zDsTKXPBY8cNfVFDpDTVPzX6Ke6IDS90JvAy33YC93K6w0Yz4_6CRb91MTaP5UEEAE0f4Hmwxrhy2N8jr2bIK1sL2lajGhWAAPU93mUzaPn5DsHbulmF7vuqi0fDBHW_e6j9KOgL_Eux1Eml7tFopTlDoNkJLLDYyLk8Sli-HVBsJj3TWq_AGkqLOC184BYHepHfHV0v-1uDr5uxRT5nOL3aYw7AIktsjt-lY64OJTxO7YRjwAU9A_Syw0B5XpmMT9IxbTOvTI2mDSwNf1mXNOhMZT2TZubgkcFGKAXyFisMrRChAOvuewYa6tG0_hAMWrbiSsqjnfTb_2zZEr_hUd-TEMgCX_BrChqEDQFCxSKs_xdaXr_BvMFHbVIqBp4NoEPz8nUSRjQhrQ9vMiY_Yifm1N_h5F_M3n9RS3fPymS0'); background-position: center center; background-repeat: no-repeat;"></div>
+                                <div class="card-body" style="transform: rotate(0);"> <a href="softwareentwicklung.html" target="_self" class="link-dark stretched-link">
+            <h5 class="card-title">Softwareentwicklung</h5>
+        </a>
+
+                                    <p class="card-text">Grundlagen des Entwurfes und der methodischen Umsetzung von Software</p>
+                                    <p><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">C#</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">dotnet</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Programmierparadigmen</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Objektorientierung</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Versionsverwaltung</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">GitHub</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">UML-Modellierung</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Softwaretest</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Entwurfsmuster</span>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col'>
+                            <div class="card shadow-sm m-1" style="height: 100%" data-category="c++|python|programmierung|objektorientierung|datenanalyse|datenvisualisierung">
+                                <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/images/12_Anwendung/DistanzSetup_vonLinks.jpeg?raw=true'); background-position: center center; background-repeat: no-repeat;"></div>
+                                <div class="card-body" style="transform: rotate(0);"> <a href="prozprog.html" target="_self" class="link-dark stretched-link">
+            <h5 class="card-title">Prozedurale Programmierung (alter Name)</h5>
+        </a>
+
+                                    <p class="card-text">Datenerfassung und Aufbereitung im Kontext wissenschaftlicher Arbeit</p>
+                                    <p><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">C++</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Python</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Programmierung</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Objektorientierung</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Datenanalyse</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Datenvisualisierung</span>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col'>
+                            <div class="card shadow-sm m-1" style="height: 100%" data-category="objektorientierung mit c++|smart pointer|c++ templates|iteratoren|stl container|entwurfsmuster|ros|ros publish-subscribe|sensoren|koordinatentransformation|sensordatenhandling|regelungstechnik|datenfusion">
+                                <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('https://github.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/blob/master/image/09_Sensoren/LokalisierungMagnetfeld.png?raw=true'); background-position: center center; background-repeat: no-repeat;"></div>
+                                <div class="card-body" style="transform: rotate(0);"> <a href="robotikprojekt.html" target="_self" class="link-dark stretched-link">
+            <h5 class="card-title">Robotikprojekt</h5>
+        </a>
+
+                                    <p class="card-text">Grundlagen der mobilen Robotik</p>
+                                    <p><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Objektorientierung mit C++</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Smart Pointer</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">C++ Templates</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Iteratoren</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">STL Container</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Entwurfsmuster</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">ROS</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">ROS Publish-Subscribe</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Sensoren</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Koordinatentransformation</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Sensordatenhandling</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Regelungstechnik</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Datenfusion</span>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col'>
+                            <div class="card shadow-sm m-1" style="height: 100%" data-category="boolesche algebra|boolesche funktion|schaltungssynthese|quine-mccluskey verfahren|schaltnetz|flip-flop schaltungen|schaltwerk|rechnerarithmetik|alu|cpu|atmel 8bit architektur|ad-wandler|mikrokontroller">
+                                <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/images/05_FlipFlops/SynchronesRSFF.png?raw=true'); background-position: center center; background-repeat: no-repeat;"></div>
+                                <div class="card-body" style="transform: rotate(0);"> <a href="digitalesysteme.html" target="_self" class="link-dark stretched-link">
+            <h5 class="card-title">Digitale Systeme</h5>
+        </a>
+
+                                    <p class="card-text">Grundlagen der mobilen Robotik</p>
+                                    <p><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Boolesche Algebra</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Boolesche Funktion</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Schaltungssynthese</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Quine-McCluskey Verfahren</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Schaltnetz</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Flip-Flop Schaltungen</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Schaltwerk</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Rechnerarithmetik</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">ALU</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">CPU</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Atmel 8bit Architektur</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">AD-Wandler</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Mikrokontroller</span>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
-        </div>
-
-        <div class="album py-5 bg-light">
+            </div>
+        </main>
+        <footer class="text-muted py-3">
             <div class="container">
-                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-xl-3 g-3">
-                    
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    Prozedurale Programmierung
-                </div>
-                <div class="card-body">
-                    <p class="card-text">todo</p>
-                    <div class="row">
-                        <div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/img/LogoCodeExample.png'); background-position: center center; background-repeat: no-repeat;"></div>
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/00_Einfuehrung.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Einführung</h6>
-        </a>
-        <p class="card-text"><small>Einführung in die Programmierung für Nicht-Informatiker</small></p>
-        
-    </div>
-</div>
+                <p class="float-end"> <a href="#">Back to top</a>
 
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/img/LogoCodeExample.png'); background-position: center center; background-repeat: no-repeat;"></div>
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/01_EingabeAusgabeDatentypen.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Grundlagen der Sprache C</h6>
-        </a>
-        <p class="card-text"><small>Einführung in die Programmierung für Nicht-Informatiker</small></p>
-        
-    </div>
-</div>
+                </p>
+                <p>Kontakt - Prof. Dr.-Ing. Sebastian Zug - <a href="https://tu-freiberg.de/fakult1/inf/professuren/softwaretechnologie-und-robotik" target="_blank">Lehrstuhl für Softwaretechnologie und Robotik</a> - <a href="mailto:Sebastian.Zug@informatik.tu-freiberg.de">Sebastian.Zug@informatik.tu-freiberg.de</a>
 
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/img/LogoCodeExample.png'); background-position: center center; background-repeat: no-repeat;"></div>
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/02_OperatorenKontrollstrukturen.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Operatoren & Kontrollstrukturen</h6>
-        </a>
-        <p class="card-text"><small>Einführung in die Programmierung für Nicht-Informatiker</small></p>
-        
-    </div>
-</div>
-
-          </div>
-                    </div>
-                </div>
+                </p>
             </div>
-        </div><div class='col-12'><hr> <h1>Softwareentwicklung</h1>
-<p>todo</p>
-</div>
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    Softwareentwicklung
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Todo</p>
-                    <div class="row">
-                        <div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/00_Einfuehrung.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Einführung</h6>
-        </a>
-        <p class="card-text"><small>Motivation der Vorlesung Softwareentwicklung</small></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/01_Software.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Softwareentwicklung als Prozess</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/02_DotNet.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">.NET und Einordnung der Sprache C#</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/03_CsharpGrundlagenI.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">C# Grundlagen I</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/04_CsharpGrundlagenII.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">C# Grundlagen II</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/05_CsharpGrundlagenIII.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">C# Grundlagen III</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/06_ProgrammflussUndFunktionen.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Programmfluss und Funktionen</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/07_OOPGrundlagenI.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">OOP Motivation</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/08_OOPGrundlagenII.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">OOP Konzepte I</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/09_Vererbung.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Vererbung</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/10_AbstrakteKlassenUndInterfaces.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Abstrakte Klassen und Interfaces</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/11_VersionsverwaltungI.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Versionsverwaltung I</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/12_VersionsverwaltungII.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Versionsverwaltung II</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/13_UML_Modellierung.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Modellierung von Software</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/14_UML_ModellierungII.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Modellierung von Software</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/15_UML_ModellierungIII.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Modellierung von Software</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/16_Testen.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Modellierung von Software</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/17_Dokumentation_BuildTools.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Dokumentation und Build-Tools</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/18_ContinuousIntegration.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Continuous Integration</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/19_Generics.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Generics</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/20_Container.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Collections</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/21_Delegaten.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Delegaten</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/22_Events.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Events</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/23_Threads.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Threads</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/24_Tasks.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Tasks</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/25_LINQ.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Language-Integrated Query</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/26_DesignPattern.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Entwurfsmuster</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/27_Anwendungen.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Anwendungsbeispiele</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    Eingebettete Systeme
-                </div>
-                <div class="card-body">
-                    <p class="card-text">todo</p>
-                    <div class="row">
-                        <div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/00_Einfuehrung.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Einführung</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/01_HistorischerUeberblick.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Historischer Überblick</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/02_BoolscheAlgebra.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Boolsche Algebra</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/03_Minimierung.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Minimierung von boolschen Funktionen</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/04_Schaltnetze.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Minimierung von boolschen Funktionen / Schaltnetze</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/05_Standardschaltnetze.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Standardschaltnetze</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/06_FlipFlops.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">FlipFlops</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/07_Schaltwerke.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Schaltwerke</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/08_StandardSchaltwerke.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Standardschaltwerke</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/09_Rechnerarithmetik.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Rechnerarithmetik</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/10_CPU_Basis.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Von mathematischen Operationen zur CPU</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/11_Modell_CPU.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Modell CPU</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/12_RISC_CISC.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">RISC vs. CISC</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/13_AVR_CPU.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Programmierung CPU</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/14_ADC.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Analog-Digital-Wandler</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/15_TimerUndInterrupts.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Timer und Interrupts</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/16_Aktoren.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Ansteuerung von peripheren Komponenten</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    Softwareprojekt Robotik
-                </div>
-                <div class="card-body">
-                    <p class="card-text">todo</p>
-                    <div class="row">
-                        <div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/00_Einfuehrung.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Einführung</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/01_OOPinC%2B%2B.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Objektorientierte Programmierung in C++</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/02_SpeicherUndPointer.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Speicher und Pointer</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/03_Templates.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Templates</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/04_OOP_Container.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">OOP und Container</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/05_Entwurfsmuster.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Entwurfsmuster</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/06_EinfuehrungROS.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Einführung in ROS2</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/07_ROS_Pakete.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">ROS2 Pakete</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/08_ROS_Kommunikation.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">ROS2 Kommunikationsmethoden</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/09_Sensoren.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Sensoren</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/10_Sensordatenverarbeitung.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Sensordatenverarbeitung</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/11_Regelungstechnik.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Regelungstechnik</h6>
-        </a>
-        <p class="card-text"><small>In dieser Vorlesungen werden die Schichten einer Roboterarchitektur adressiert.</small></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/12_Datenfusion.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Datenfusion</h6>
-        </a>
-        <p class="card-text"><small>In dieser Vorlesungen werden die Schichten einer Roboterarchitektur adressiert.</small></p>
-        
-    </div>
-</div>
-
-          </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    Digitale Systeme
-                </div>
-                <div class="card-body">
-                    <p class="card-text">todo</p>
-                    <div class="row">
-                        <div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/00_Einfuehrung.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Einführung und Motivation</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/01_Grundbegriffe.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Einführung und Motivation</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/02_ATmegaFamilie.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">ATmega Controller</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/03_Limitations.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Beschränkungen der ATmega Controller</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/04_AnalogDigitalWandler.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Analog-Digital-Wandler</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/05_InterruptsTimer.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Interrupts und Timer</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/06_Kommunikation.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Kommunikation</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/07_RTOS_Konzepte.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Scheduling</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/08_RTOS_Schedulingalgorithmen.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Scheduling Algorithmen</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/09_XMEGA.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Erweiterte AVR Architekturen</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/10_XMEGA_Abgrenzung.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Abgrenzung des 4809</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/11_CortexMController.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">ARM Cortex M Controller</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div><div class='col-sm-6 col-md-4 col-lg-3 mb-3'>
-          <div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/12_CortexMFeatures.md" target="_blank" class="link-dark stretched-link">
-            <h6 class="card-title">Features STM32F4</h6>
-        </a>
-        <p class="card-text"></p>
-        
-    </div>
-</div>
-
-          </div>
-                    </div>
-                </div>
-            </div>
-        </div><div class='col-12'><hr> <h1>Sonstiges</h1>
-<p>Diese Kurse wurden mit LiaScript Markdown erstellt:</p>
-</div><div class='col'><div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('https://liascript.github.io/img/bg-showcase-1.jpg'); background-position: center center; background-repeat: no-repeat;"></div>
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/LiaScript/docs/master/README.md" target="_blank" class="link-dark stretched-link">
-            <h5 class="card-title">LiaScript</h5>
-        </a>
-        <p class="card-text">This document shall provide an entire compendium and course on the development of Open-courSes with LiaScript. As the language and the systems grows, also this document will be updated. Feel free to fork or copy it, translations are very welcome...</p>
-        
-    </div>
-</div>
-</div><div class='col'><div class="card shadow-sm m-1" style="height: 100%" data-category="liascript|powerpoint|tutorial">
-    <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('https://raw.githubusercontent.com/LiaBooks/LiaScript-Tutorial/main/pic/logo.jpg'); background-position: center center; background-repeat: no-repeat;"></div>
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/LiaBooks/LiaScript-Tutorial/main/README.md" target="_blank" class="link-dark stretched-link">
-            <h5 class="card-title">Tutorial</h5>
-        </a>
-        <p class="card-text">Es wird gezeigt, wie typische bekannte Präsentationselemente auch mithilfe von LiaScript genutzt werden können.</p>
-        <div class="d-flex align-items-center"><span class="badge rounded-pill bg-light text-dark">LiaScript</span><span class="badge rounded-pill bg-light text-dark">PowerPoint</span><span class="badge rounded-pill bg-light text-dark">Tutorial</span></div>
-    </div>
-</div>
-</div><div class='col'><div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('https://assets-global.website-files.com/5e9996a6531fea7d1003b18e/62247118d91be13aa5de577f_Group%201919-min.png'); background-position: center center; background-repeat: no-repeat;"></div>
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/LiaPlayground/LiaScript_WeAreDevelopers2022/main/README.md" target="_blank" class="link-dark stretched-link">
-            <h5 class="card-title">LiaScript - Interactive Markdown for Education & Documentation</h5>
-        </a>
-        <p class="card-text">Presentation and interactive demonstration of LiaScript at the "We Are Developers 2022" conference in Berlin.</p>
-        
-    </div>
-</div>
-</div><div class='col'><div class="card shadow-sm m-1" style="height: 100%" data-category="">
-    <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('https://www.elearning-africa.com/conference2022/ressources/banner/2022/social_1200_630.png'); background-position: center center; background-repeat: no-repeat;"></div>
-    <div class="card-body">
-        <a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/LiaPlayground/LiaScript_Tutorial_Kigali/main/README.md" target="_blank" class="link-dark stretched-link">
-            <h5 class="card-title">LiaScript Tutorial: eLearning Africa 2022</h5>
-        </a>
-        <p class="card-text">Full day workshop at eLearning Africa 2022.</p>
-        
-    </div>
-</div>
-</div>
-                </div>
-            </div>
-        </div>
-
-    </main>
-    
-
-    <footer class="text-muted py-3">
-        <div class="container">
-            <p class="float-end">
-                <a href="#">Back to top</a>
-            </p>
-            <p>Kontakt - Prof. Dr.-Ing. Sebastian Zug - <a href="https://tu-freiberg.de/fakult1/inf/professuren/softwaretechnologie-und-robotik" target="_blank">Lehrstuhl für Softwaretechnologie und Robotik</a> - <a href="mailto:Sebastian.Zug@informatik.tu-freiberg.de">Sebastian.Zug@informatik.tu-freiberg.de</a></p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
-</html> 
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+
+</html>
