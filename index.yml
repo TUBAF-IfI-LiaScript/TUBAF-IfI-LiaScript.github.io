@@ -1,0 +1,89 @@
+title: >
+  <span style="background-color: rgba(0,106,179,0.75); padding: 5px; color: white">
+    OER - Kurssammlung
+  </span>
+
+comment: >
+  <span style="color: rgb(0,106,179); background-color: rgba(255,255,255,0.85)">
+    Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)
+  </span>
+
+logo: https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Universitaetsbibliothek_Freiberg_Fassade.jpg/1024px-Universitaetsbibliothek_Freiberg_Fassade.jpg
+
+icon: https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Logo_TU_Bergakademie_Freiberg.svg/242px-Logo_TU_Bergakademie_Freiberg.svg.png
+
+footer: >
+  Kontakt - Prof. Dr.-Ing. Sebastian Zug -
+  <a href="https://tu-freiberg.de/fakult1/inf/professuren/softwaretechnologie-und-robotik" target="_blank">Lehrstuhl für Softwaretechnologie und Robotik</a>
+  -
+  <a href="mailto:Sebastian.Zug@informatik.tu-freiberg.de">Sebastian.Zug@informatik.tu-freiberg.de</a>
+
+meta:
+  title: OER-Kurssammlung
+  description: Sammlung der OER Inhalte der Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)
+  #image:
+
+collection:
+  - html: >
+      <b>Alle Lehrmaterialien der Arbeitsgruppe wurden mit LiaScript erstellt und sind im interaktiven Modus veranstaltungsweise über die untenstehenden Links erreichbar.</b>
+  - title:  Softwareentwicklung
+    link: softwareentwicklung.html 
+    comment: Grundlagen des Entwurfes und der methodischen Umsetzung von Software
+    logo: http://www.plantuml.com/plantuml/png/ZPBF3X8n4CRlVOfcJug1u9LuW70YCQ9PVO2odTsTq3-RTgf1zDsTKXPBY8cNfVFDpDTVPzX6Ke6IDS90JvAy33YC93K6w0Yz4_6CRb91MTaP5UEEAE0f4Hmwxrhy2N8jr2bIK1sL2lajGhWAAPU93mUzaPn5DsHbulmF7vuqi0fDBHW_e6j9KOgL_Eux1Eml7tFopTlDoNkJLLDYyLk8Sli-HVBsJj3TWq_AGkqLOC184BYHepHfHV0v-1uDr5uxRT5nOL3aYw7AIktsjt-lY64OJTxO7YRjwAU9A_Syw0B5XpmMT9IxbTOvTI2mDSwNf1mXNOhMZT2TZubgkcFGKAXyFisMrRChAOvuewYa6tG0_hAMWrbiSsqjnfTb_2zZEr_hUd-TEMgCX_BrChqEDQFCxSKs_xdaXr_BvMFHbVIqBp4NoEPz8nUSRjQhrQ9vMiY_Yifm1N_h5F_M3n9RS3fPymS0
+    tags: 
+      - C#
+      - dotnet
+      - Programmierparadigmen
+      - Objektorientierung
+      - Versionsverwaltung
+      - GitHub
+      - UML-Modellierung
+      - Softwaretest
+      - Entwurfsmuster
+  - title:  Prozedurale Programmierung (alter Name)
+    link: prozprog.html 
+    comment: Datenerfassung und Aufbereitung im Kontext wissenschaftlicher Arbeit
+    logo: https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/images/12_Anwendung/DistanzSetup_vonLinks.jpeg?raw=true
+    tags: 
+      - C++
+      - Python
+      - Programmierung
+      - Objektorientierung
+      - Datenanalyse
+      - Datenvisualisierung
+  - title:  Robotikprojekt
+    link: robotikprojekt.html 
+    comment: Grundlagen der mobilen Robotik
+    logo: https://github.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/blob/master/image/09_Sensoren/LokalisierungMagnetfeld.png?raw=true
+    tags: 
+      - Objektorientierung mit C++
+      - Smart Pointer
+      - C++ Templates
+      - Iteratoren
+      - STL Container
+      - Entwurfsmuster
+      - ROS
+      - ROS Publish-Subscribe
+      - Sensoren
+      - Koordinatentransformation
+      - Sensordatenhandling
+      - Regelungstechnik
+      - Datenfusion
+  - title:  Digitale Systeme
+    link: digitalesysteme.html 
+    comment: Grundlagen der mobilen Robotik
+    logo: https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/images/05_FlipFlops/SynchronesRSFF.png?raw=true
+    tags: 
+      - Boolesche Algebra
+      - Boolesche Funktion
+      - Schaltungssynthese
+      - Quine-McCluskey Verfahren
+      - Schaltnetz
+      - Flip-Flop Schaltungen
+      - Schaltwerk
+      - Rechnerarithmetik
+      - ALU
+      - CPU
+      - Atmel 8bit Architektur
+      - AD-Wandler
+      - Mikrokontroller

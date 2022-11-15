@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>OER - Kurssammlung</title>
+        <script type="application/ld+json">
+            {
+                "@context": "http://schema.org/",
+                    "@type": "ItemList",
+                    "itemListElement": [],
+                    "name": "OER - Kurssammlung",
+                    "description": "Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)"
+            }
+        </script>
+        <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Logo_TU_Bergakademie_Freiberg.svg/242px-Logo_TU_Bergakademie_Freiberg.svg.png">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script>
+            window.blur = function (category) {
+                const cards = document.querySelectorAll('div[data-category]')
+
+                for (card of cards) {
+                    if (card.dataset.category.includes(category)) {
+                        card.style.filter = ""
+                    } else {
+                        card.style.filter = "blur(1px) opacity(35%)"
+                    }
+                }
+            }
+        </script>
+    </head>
+    
+    <body>
+        <main>
+            <div class="container-fluid" style="background-size: cover; background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Universitaetsbibliothek_Freiberg_Fassade.jpg/1024px-Universitaetsbibliothek_Freiberg_Fassade.jpg'); background-position: center center; background-repeat: no-repeat;">
+                <section class="py-5 text-center container">
+                    <div class="row py-lg-5">
+                        <div class="col-lg-6 col-md-8 mx-auto">
+                             <h1 class="fw-light"><span style="background-color: rgba(0,106,179,0.75); padding: 5px; color: white">
+  OER - Kurssammlung
+</span>
+</h1>
+
+                            <p class="lead text-muted"><span style="color: rgb(0,106,179); background-color: rgba(255,255,255,0.85)">
+  Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)
+</span>
+
+                            </p>
+                            <select class="form-select" aria-label="Default select example" onchange="window.blur(this.value)">
+                                <option value="" selected>All categories</option>
+                                <option value="ad-wandler">ad-wandler</option>
+                                <option value="alu">alu</option>
+                                <option value="atmel 8bit architektur">atmel 8bit architektur</option>
+                                <option value="boolesche algebra">boolesche algebra</option>
+                                <option value="boolesche funktion">boolesche funktion</option>
+                                <option value="c#">c#</option>
+                                <option value="c++">c++</option>
+                                <option value="c++ templates">c++ templates</option>
+                                <option value="cpu">cpu</option>
+                                <option value="datenanalyse">datenanalyse</option>
+                                <option value="datenfusion">datenfusion</option>
+                                <option value="datenvisualisierung">datenvisualisierung</option>
+                                <option value="dotnet">dotnet</option>
+                                <option value="entwurfsmuster">entwurfsmuster</option>
+                                <option value="flip-flop schaltungen">flip-flop schaltungen</option>
+                                <option value="github">github</option>
+                                <option value="iteratoren">iteratoren</option>
+                                <option value="koordinatentransformation">koordinatentransformation</option>
+                                <option value="mikrokontroller">mikrokontroller</option>
+                                <option value="objektorientierung">objektorientierung</option>
+                                <option value="objektorientierung mit c++">objektorientierung mit c++</option>
+                                <option value="programmierparadigmen">programmierparadigmen</option>
+                                <option value="programmierung">programmierung</option>
+                                <option value="python">python</option>
+                                <option value="quine-mccluskey verfahren">quine-mccluskey verfahren</option>
+                                <option value="rechnerarithmetik">rechnerarithmetik</option>
+                                <option value="regelungstechnik">regelungstechnik</option>
+                                <option value="ros">ros</option>
+                                <option value="ros publish-subscribe">ros publish-subscribe</option>
+                                <option value="schaltnetz">schaltnetz</option>
+                                <option value="schaltungssynthese">schaltungssynthese</option>
+                                <option value="schaltwerk">schaltwerk</option>
+                                <option value="sensordatenhandling">sensordatenhandling</option>
+                                <option value="sensoren">sensoren</option>
+                                <option value="smart pointer">smart pointer</option>
+                                <option value="softwaretest">softwaretest</option>
+                                <option value="stl container">stl container</option>
+                                <option value="uml-modellierung">uml-modellierung</option>
+                                <option value="versionsverwaltung">versionsverwaltung</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-xl-3 g-3">
+                        <div class='col-12'><b>Alle Lehrmaterialien der Arbeitsgruppe wurden mit LiaScript erstellt und sind im interaktiven Modus veranstaltungsweise über die untenstehenden Links erreichbar.</b>
+
+                        </div>
+                        <div class='col'>
+                            <div class="card shadow-sm m-1" style="height: 100%" data-category="c#|dotnet|programmierparadigmen|objektorientierung|versionsverwaltung|github|uml-modellierung|softwaretest|entwurfsmuster">
+                                <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('http://www.plantuml.com/plantuml/png/ZPBF3X8n4CRlVOfcJug1u9LuW70YCQ9PVO2odTsTq3-RTgf1zDsTKXPBY8cNfVFDpDTVPzX6Ke6IDS90JvAy33YC93K6w0Yz4_6CRb91MTaP5UEEAE0f4Hmwxrhy2N8jr2bIK1sL2lajGhWAAPU93mUzaPn5DsHbulmF7vuqi0fDBHW_e6j9KOgL_Eux1Eml7tFopTlDoNkJLLDYyLk8Sli-HVBsJj3TWq_AGkqLOC184BYHepHfHV0v-1uDr5uxRT5nOL3aYw7AIktsjt-lY64OJTxO7YRjwAU9A_Syw0B5XpmMT9IxbTOvTI2mDSwNf1mXNOhMZT2TZubgkcFGKAXyFisMrRChAOvuewYa6tG0_hAMWrbiSsqjnfTb_2zZEr_hUd-TEMgCX_BrChqEDQFCxSKs_xdaXr_BvMFHbVIqBp4NoEPz8nUSRjQhrQ9vMiY_Yifm1N_h5F_M3n9RS3fPymS0'); background-position: center center; background-repeat: no-repeat;"></div>
+                                <div class="card-body" style="transform: rotate(0);"> <a href="softwareentwicklung.html" target="_self" class="link-dark stretched-link">
+            <h5 class="card-title">Softwareentwicklung</h5>
+        </a>
+
+                                    <p class="card-text">Grundlagen des Entwurfes und der methodischen Umsetzung von Software</p>
+                                    <p><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">C#</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">dotnet</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Programmierparadigmen</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Objektorientierung</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Versionsverwaltung</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">GitHub</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">UML-Modellierung</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Softwaretest</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Entwurfsmuster</span>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col'>
+                            <div class="card shadow-sm m-1" style="height: 100%" data-category="c++|python|programmierung|objektorientierung|datenanalyse|datenvisualisierung">
+                                <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/images/12_Anwendung/DistanzSetup_vonLinks.jpeg?raw=true'); background-position: center center; background-repeat: no-repeat;"></div>
+                                <div class="card-body" style="transform: rotate(0);"> <a href="prozprog.html" target="_self" class="link-dark stretched-link">
+            <h5 class="card-title">Prozedurale Programmierung (alter Name)</h5>
+        </a>
+
+                                    <p class="card-text">Datenerfassung und Aufbereitung im Kontext wissenschaftlicher Arbeit</p>
+                                    <p><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">C++</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Python</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Programmierung</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Objektorientierung</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Datenanalyse</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Datenvisualisierung</span>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col'>
+                            <div class="card shadow-sm m-1" style="height: 100%" data-category="objektorientierung mit c++|smart pointer|c++ templates|iteratoren|stl container|entwurfsmuster|ros|ros publish-subscribe|sensoren|koordinatentransformation|sensordatenhandling|regelungstechnik|datenfusion">
+                                <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('https://github.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/blob/master/image/09_Sensoren/LokalisierungMagnetfeld.png?raw=true'); background-position: center center; background-repeat: no-repeat;"></div>
+                                <div class="card-body" style="transform: rotate(0);"> <a href="robotikprojekt.html" target="_self" class="link-dark stretched-link">
+            <h5 class="card-title">Robotikprojekt</h5>
+        </a>
+
+                                    <p class="card-text">Grundlagen der mobilen Robotik</p>
+                                    <p><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Objektorientierung mit C++</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Smart Pointer</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">C++ Templates</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Iteratoren</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">STL Container</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Entwurfsmuster</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">ROS</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">ROS Publish-Subscribe</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Sensoren</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Koordinatentransformation</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Sensordatenhandling</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Regelungstechnik</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Datenfusion</span>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col'>
+                            <div class="card shadow-sm m-1" style="height: 100%" data-category="boolesche algebra|boolesche funktion|schaltungssynthese|quine-mccluskey verfahren|schaltnetz|flip-flop schaltungen|schaltwerk|rechnerarithmetik|alu|cpu|atmel 8bit architektur|ad-wandler|mikrokontroller">
+                                <div class="card-img-top" style="background-size: cover; height: 175px; background-image: url('https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/images/05_FlipFlops/SynchronesRSFF.png?raw=true'); background-position: center center; background-repeat: no-repeat;"></div>
+                                <div class="card-body" style="transform: rotate(0);"> <a href="digitalesysteme.html" target="_self" class="link-dark stretched-link">
+            <h5 class="card-title">Digitale Systeme</h5>
+        </a>
+
+                                    <p class="card-text">Grundlagen der mobilen Robotik</p>
+                                    <p><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Boolesche Algebra</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Boolesche Funktion</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Schaltungssynthese</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Quine-McCluskey Verfahren</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Schaltnetz</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Flip-Flop Schaltungen</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Schaltwerk</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Rechnerarithmetik</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">ALU</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">CPU</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Atmel 8bit Architektur</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">AD-Wandler</span><span style="display: inline; white-space: break-spaces;" class="badge rounded-pill bg-light text-dark">Mikrokontroller</span>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="text-muted py-3">
+            <div class="container">
+                <p class="float-end"> <a href="#">Back to top</a>
+
+                </p>
+                <p>Kontakt - Prof. Dr.-Ing. Sebastian Zug - <a href="https://tu-freiberg.de/fakult1/inf/professuren/softwaretechnologie-und-robotik" target="_blank">Lehrstuhl für Softwaretechnologie und Robotik</a> - <a href="mailto:Sebastian.Zug@informatik.tu-freiberg.de">Sebastian.Zug@informatik.tu-freiberg.de</a>
+
+                </p>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+
+</html>
