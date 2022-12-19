@@ -1,4 +1,4 @@
-name: Build
+name: Regenerate course overview
 
 on:
   workflow_dispatch:
@@ -9,5 +9,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Hello World
-        run: echo Hello, world!
+      - name: Liaex
+        run: echo "Running liaex!"
