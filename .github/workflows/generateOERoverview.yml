@@ -1,7 +1,12 @@
 name: Regenerate course overview
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+#on:
+#  workflow_dispatch:
 
 env:
     EXPORTFOLDER: "assets"
