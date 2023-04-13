@@ -1,0 +1,38 @@
+title: >
+  <span style="background-color: rgba(0,106,179,0.75); padding: 5px; color: white">
+    OER - Kurssammlung
+  </span>
+
+comment: >
+  <span style="color: rgb(0,106,179); background-color: rgba(255,255,255,0.75)">
+    Sammlung der OER Inhalte der Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)
+  </span>
+
+logo: https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Universitaetsbibliothek_Freiberg_Fassade.jpg/1024px-Universitaetsbibliothek_Freiberg_Fassade.jpg
+
+icon: https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Logo_TU_Bergakademie_Freiberg.svg/242px-Logo_TU_Bergakademie_Freiberg.svg.png
+
+footer: >
+  Kontakt - Prof. Dr.-Ing. Sebastian Zug -
+  <a href="https://tu-freiberg.de/fakult1/inf/professuren/softwaretechnologie-und-robotik" target="_blank">Lehrstuhl für Softwaretechnologie und Robotik</a>
+  -
+  <a href="mailto:Sebastian.Zug@informatik.tu-freiberg.de">Sebastian.Zug@informatik.tu-freiberg.de</a>
+
+meta:
+  title: OER-Kurssammlung
+  description: Sammlung der OER Inhalte der Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)
+  #image:
+
+collection:
+  - title:  Softwareentwicklung
+    link: softwareentwicklung.html 
+    comment: ToDo
+    tags: 
+      - Software design
+      - Entwurfsmuster
+      - Objektorientierter Programmierung
+  - title:  Prozedurale Programmierung/
+    link: prozprog.html 
+    tags: 
+      - Einführung Informatik
+      - Objektorientierter Programmierung

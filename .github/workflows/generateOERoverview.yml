@@ -1,0 +1,53 @@
+name: Regenerate course overview
+
+on:
+  workflow_dispatch:
+
+env:
+    EXPORTFOLDER: "assets"
+    REPOSITORYFOLDER: "repository"
+
+jobs:
+  run_exporter:
+    runs-on: ubuntu-latest
+    container: pandoc/ubuntu-latex:latest
+
+    steps:
+      - name: Check dependencies 
+        run: |
+             apt update
+             apt -y install git
+             apt -y install npm
+             npm install -g --verbose @liascript/exporter
+
+      - name: Check out current repository
+        uses: actions/checkout@v2
+        with: 
+          path: repository
+
+      - name: Delete and redefine folder for exports
+        run: |
+              rm -rf ${REPOSITORYFOLDER}/${EXPORTFOLDER}
+              mkdir -p ${REPOSITORYFOLDER}/${EXPORTFOLDER}
+
+      - name: Run exporter for all course files
+        run: |
+             liaex -i index.yml -o index --format project --project-category-blur
+             liaex -i prozprog.yml -o prozprog --format project --project-category-blur --project-generate-pdf
+             liaex -i softwareentwicklung.yml -o softwareentwicklung --format project --project-category-blur --project-generate-pdf
+
+      - name: Commit changes
+        run: |
+             cd ${REPOSITORYFOLDER}
+             git config --local user.email "action@github.com"
+             git config --local user.name "GitHub Action"
+             git status
+             git add --all
+             git commit -m "Add new export version of courses" || echo "No changes to commit"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+             github_token: ${{ secrets.GITHUB_TOKEN }}
+             branch: main
+             directory: repository

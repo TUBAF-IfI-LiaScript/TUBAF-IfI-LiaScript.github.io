@@ -1,0 +1,113 @@
+title: >
+  <span style="background-color: rgba(0,106,179,0.75); padding: 5px; color: white">
+    OER - Kurssammlung
+  </span>
+
+comment: >
+  <span style="color: rgb(0,106,179); background-color: rgba(255,255,255,0.75)">
+    Sammlung der OER Inhalte der Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)
+  </span>
+
+logo: https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Universitaetsbibliothek_Freiberg_Fassade.jpg/1024px-Universitaetsbibliothek_Freiberg_Fassade.jpg
+
+icon: https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Logo_TU_Bergakademie_Freiberg.svg/242px-Logo_TU_Bergakademie_Freiberg.svg.png
+
+footer: >
+  Kontakt - Prof. Dr.-Ing. Sebastian Zug -
+  <a href="https://tu-freiberg.de/fakult1/inf/professuren/softwaretechnologie-und-robotik" target="_blank">Lehrstuhl für Softwaretechnologie und Robotik</a>
+  -
+  <a href="mailto:Sebastian.Zug@informatik.tu-freiberg.de">Sebastian.Zug@informatik.tu-freiberg.de</a>
+
+meta:
+  title: OER-Kurssammlung
+  description: Sammlung der OER Inhalte der Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)
+  #image:
+
+collection:
+  - html: >
+      <hr>
+      <span style="color: rgb(0,106,179)">
+      <h1>Prozedurale Programmierung</h1>
+      </span>
+      <p><img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Code_Hello_World_en_C%2B%2B11.png"> </p>
+  - title: Prozedurale Programmierung - Einführung in die Informatik
+    #logo: hier geht nicht
+    comment: Lehrveranstaltung  vermittelt grundlegende Konzepte und anwendungsbezogene Fähigkeiten beim Entwurf und der Umsetzung von Softwarelösungen unter Verwendung der Programmiersprachen C++ und Python
+    grid: true # Remove this or set it to false to make the collection appear linear
+    tags: 
+      - C++
+      - Python
+      - Programmierung
+      - Objektorientierung
+      - Datenanalyse
+      - Datenvisualisierung
+    collection:
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/README.md
+        logo:
+        title: Organisatorische Einordnung und Motivation
+        comment: Motivation aus Anwendungs- und Umsetzungsicht
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/00_Einfuehrung.md
+        #title: Rename the current course
+        #logo: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/images/00_Einfuehrung/compilerElements.png
+        #comment: Add a custom description, this will overwrite the comment within the course
+        # tags will be used for navigation and searching
+        #tags: 
+        # - Hardware       
+        title: Einführung
+        logo: 
+        comment: Einordnung der Programmiersprache C++, Kompilierprozess
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/01_EingabeAusgabeDatentypen.md
+        title: Variablen und Datentypen
+        logo:
+        comment: C++-Variabledefinition, Datentypen, Ein- und Ausgabe mit Streams
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/02_OperatorenKontrollstrukturen.md
+        title: Operatoren und Konstrollstrukturen
+        logo:
+        comment: Operatorenübersicht, Steuerung des Programmflusses mit Kontrollstrukturen
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/03_ArrayZeigerReferenzen.md
+        title: Array, Zeiger und Referenzen
+        logo:
+        comment: Definition und Zugriff auf Array, Zeiger- und Referenzenkonzept in C++
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/04_Funktionen.md
+        title: Funktionen
+        logo:
+        comment: Definition, Parameterübergabe und Ergebnisrückgabe    
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/05_OOPI.md
+        title: Objektorientierte Programmierung mit C++, Teil I
+        logo:
+        comment: Klassen und Objekte, Datenkapselung, Überladung von Methoden, Konstruktoren und Destruktoren   
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/06_OOPII.md
+        title: Objektorientierte Programmierung mit C++, Teil II
+        logo:
+        comment: Operatorenüberladung und Vererbung   
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/07_Microcontroller.md 
+        title: Microcontroller
+        logo:
+        comment: Anwendung von C++ auf bei der  Mikrocontrollerprogrammierung
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/08_PythonGrundlagen.md 
+        title: Python Grundlagen
+        logo:
+        comment: Datentypen, Ein- und Ausgabe, Listen und Kontrollstrukturen
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/09_PythonVertiefung.md 
+        title: Erweiterte Konzepte der Programmiersprache Python
+        logo:
+        comment: Weitere Datentypen (Tupel, Dictionary, Set) und Funktionen
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/10_Datenvisualisierung.md 
+        title: Datenvisualisierung
+        logo:
+        comment: Objektorientierung in Python,  Visualisierungstool Matplotlib       
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/11_DatenAnalyse.md 
+        title: Datenanalyse mit Python
+        logo:
+        comment: Datenanalyse mit dem Python Paket Pandas - Series und DataFrame
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/12_Anwendungen.md 
+        title: Finale Anwendung und Aublick
+        logo:
+        comment: Anwendungsbeispiel mit Datenerhebung, Datenfilterung und Datenanalyse
+  # HTML content can be placed between cards
+  - html: >
+      <hr>
+      <span style="color: rgb(0,106,179)">
+      <h1>Softwareentwicklung</h1>    
+      </span>
+      <p><img src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif"></p>
