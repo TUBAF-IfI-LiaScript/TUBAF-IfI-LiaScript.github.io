@@ -16,10 +16,10 @@ jobs:
     steps:
       - name: Check dependencies 
         run: |
-             apt update
-             apt -y install git
-             apt -y install npm
-             npm install -g --verbose @liascript/exporter
+             sudo apt-get update
+             sudo apt-get -y install git
+             sudo apt-get -y install npm
+             sudo npm install -g --verbose @liascript/exporter
 
       - name: Check out current repository
         uses: actions/checkout@v2
