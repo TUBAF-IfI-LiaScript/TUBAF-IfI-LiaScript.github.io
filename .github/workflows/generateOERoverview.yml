@@ -12,7 +12,6 @@ env:
 jobs:
   run_exporter:
     runs-on: ubuntu-latest
-    container: pandoc/ubuntu-latex:latest
 
     steps:
       - name: Check dependencies 
