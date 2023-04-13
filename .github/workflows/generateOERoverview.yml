@@ -33,9 +33,11 @@ jobs:
 
       - name: Run exporter for all course files
         run: |
+             cd ${REPOSITORYFOLDER}
              liaex -i index.yml -o index --format project --project-category-blur
              liaex -i prozprog.yml -o prozprog --format project --project-category-blur --project-generate-pdf
              liaex -i softwareentwicklung.yml -o softwareentwicklung --format project --project-category-blur --project-generate-pdf
+             ls -all
 
       - name: Commit changes
         run: |
