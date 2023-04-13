@@ -27,10 +27,10 @@ collection:
   - html: >
       <hr>
       <span style="color: rgb(0,106,179)">
-      <h1>Prozedurale Programmierung</h1>
+      <h1>Vorlesung Prozedurale Programmierung</h1>
       </span>
       <p><img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Code_Hello_World_en_C%2B%2B11.png"> </p>
-  - title: Prozedurale Programmierung - Einführung in die Informatik
+  - title: Prozedurale Programmierung - Einführung in die Informatik (WiSe 2022/23)
     #logo: hier geht nicht
     comment: Lehrveranstaltung  vermittelt grundlegende Konzepte und anwendungsbezogene Fähigkeiten beim Entwurf und der Umsetzung von Softwarelösungen unter Verwendung der Programmiersprachen C++ und Python
     grid: true # Remove this or set it to false to make the collection appear linear
@@ -104,10 +104,3 @@ collection:
         title: Finale Anwendung und Aublick
         logo:
         comment: Anwendungsbeispiel mit Datenerhebung, Datenfilterung und Datenanalyse
-  # HTML content can be placed between cards
-  - html: >
-      <hr>
-      <span style="color: rgb(0,106,179)">
-      <h1>Softwareentwicklung</h1>    
-      </span>
-      <p><img src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif"></p>

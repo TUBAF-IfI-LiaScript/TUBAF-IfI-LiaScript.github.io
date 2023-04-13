@@ -24,8 +24,14 @@ meta:
   #image:
 
 collection:
-  - title: Softwareentwicklung
-    comment: Lehrveranstaltung vermittelt Konzepte objektorientierten und interaktiven Programmierung, Syntax und Semantik der Programmiersprache C# sowie die Fähigkeiten Probleme kollaborativ bei verteilter Verantwortlichkeit von Klassen zu lösen.
+  - html: >
+      <hr>
+      <span style="color: rgb(0,106,179)">
+      <h1>Vorlesung Softwareentwicklung</h1>
+      </span>
+      <p><img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Code_Hello_World_en_C%2B%2B11.png"> </p>
+  - title:  Softwareentwicklung / Einführung in die Softwareentwicklung (SoSe 2023)
+    comment: Die Lehrveranstaltung vermittelt Konzepte objektorientierten und interaktiven Programmierung, Syntax und Semantik der Programmiersprache C# sowie die Fähigkeiten Probleme kollaborativ bei verteilter Verantwortlichkeit von Klassen zu lösen.
     grid: true
     tags: 
       - C# / dotnet
