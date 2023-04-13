@@ -36,7 +36,7 @@ jobs:
              cd ${REPOSITORYFOLDER}
              liaex -i index.yml -o index --format project --project-category-blur
              liaex -i prozprog.yml -o prozprog --format project --project-category-blur #--project-generate-pdf
-             #liaex -i softwareentwicklung.yml -o softwareentwicklung --format project --project-category-blur --project-generate-pdf
+             liaex -i softwareentwicklung.yml -o softwareentwicklung --format project --project-category-blur -#-project-generate-pdf
              ls -all
 
       - name: Commit changes
@@ -45,7 +45,7 @@ jobs:
              git config --local user.email "action@github.com"
              git config --local user.name "GitHub Action"
              git status
-             git add --all
+             git add .
              git commit -m "Add new export version of courses" || echo "No changes to commit"
 
       - name: Push changes
