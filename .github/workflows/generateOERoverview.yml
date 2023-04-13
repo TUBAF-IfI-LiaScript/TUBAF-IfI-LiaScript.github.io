@@ -1,9 +1,6 @@
 name: Regenerate course overview
 
-on:
-  push:
-    branches:
-      - master
+on: [push]
 
 #on:
 #  workflow_dispatch:
