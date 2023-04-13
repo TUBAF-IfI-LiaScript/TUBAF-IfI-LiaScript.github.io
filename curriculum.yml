@@ -24,36 +24,108 @@ meta:
   #image:
 
 collection:
-
-  - title: Prozedurale Programmierung
-    comment: todo
+  - html: >
+      <hr>
+      <span style="color: rgb(0,106,179)">
+      <h1>Prozedurale Programmierung</h1>
+      </span>
+      <p><img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Code_Hello_World_en_C%2B%2B11.png"> </p>
+  - title: Prozedurale Programmierung - Einführung in die Informatik
+    #logo: hier geht nicht
+    comment: Lehrveranstaltung  vermittelt grundlegende Konzepte und anwendungsbezogene Fähigkeiten beim Entwurf und der Umsetzung von Softwarelösungen unter Verwendung der Programmiersprachen C++ und Python
     grid: true # Remove this or set it to false to make the collection appear linear
+    tags: 
+      - C++
+      - Python
+      - Programmierung
+      - Objektorientierung
+      - Datenanalyse
+      - Datenvisualisierung
     collection:
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/README.md
+        logo:
+        title: Organisatorische Einordnung und Motivation
+        comment: Motivation aus Anwendungs- und Umsetzungsicht
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/00_Einfuehrung.md
         #title: Rename the current course
-        #logo: Manually set an logo
+        #logo: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/images/00_Einfuehrung/compilerElements.png
         #comment: Add a custom description, this will overwrite the comment within the course
         # tags will be used for navigation and searching
         #tags: 
-        # - C++
-        # - Programmierung
-        # - Hardware
+        # - Hardware       
+        title: Einführung
+        logo: 
+        comment: Einordnung der Programmiersprache C++, Kompilierprozess
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/01_EingabeAusgabeDatentypen.md
+        title: Variablen und Datentypen
+        logo:
+        comment: C++-Variabledefinition, Datentypen, Ein- und Ausgabe mit Streams
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/02_OperatorenKontrollstrukturen.md
-
+        title: Operatoren und Konstrollstrukturen
+        logo:
+        comment: Operatorenübersicht, Steuerung des Programmflusses mit Kontrollstrukturen
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/03_ArrayZeigerReferenzen.md
+        title: Array, Zeiger und Referenzen
+        logo:
+        comment: Definition und Zugriff auf Array, Zeiger- und Referenzenkonzept in C++
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/04_Funktionen.md
+        title: Funktionen
+        logo:
+        comment: Definition, Parameterübergabe und Ergebnisrückgabe    
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/05_OOPI.md
+        title: Objektorientierte Programmierung mit C++, Teil I
+        logo:
+        comment: Klassen und Objekte, Datenkapselung, Überladung von Methoden, Konstruktoren und Destruktoren   
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/06_OOPII.md
+        title: Objektorientierte Programmierung mit C++, Teil II
+        logo:
+        comment: Operatorenüberladung und Vererbung   
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/07_Microcontroller.md 
+        title: Microcontroller
+        logo:
+        comment: Anwendung von C++ auf bei der  Mikrocontrollerprogrammierung
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/08_PythonGrundlagen.md 
+        title: Python Grundlagen
+        logo:
+        comment: Datentypen, Ein- und Ausgabe, Listen und Kontrollstrukturen
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/09_PythonVertiefung.md 
+        title: Erweiterte Konzepte der Programmiersprache Python
+        logo:
+        comment: Weitere Datentypen (Tupel, Dictionary, Set) und Funktionen
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/10_Datenvisualisierung.md 
+        title: Datenvisualisierung
+        logo:
+        comment: Objektorientierung in Python,  Visualisierungstool Matplotlib       
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/11_DatenAnalyse.md 
+        title: Datenanalyse mit Python
+        logo:
+        comment: Datenanalyse mit dem Python Paket Pandas - Series und DataFrame
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/12_Anwendungen.md 
+        title: Finale Anwendung und Aublick
+        logo:
+        comment: Anwendungsbeispiel mit Datenerhebung, Datenfilterung und Datenanalyse
   # HTML content can be placed between cards
   - html: >
       <hr>
-      <h1>Softwareentwicklung</h1>
-      
-      <p>todo</p>
+      <span style="color: rgb(0,106,179)">
+      <h1>Softwareentwicklung</h1>    
+      </span>
+      <p><img src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif"></p>
 
   - title: Softwareentwicklung
-    comment: Todo
+    comment: Lehrveranstaltung vermittelt Konzepte objektorientierten und interaktiven Programmierung, Syntax und Semantik der Programmiersprache C# sowie die Fähigkeiten Probleme kollaborativ bei verteilter Verantwortlichkeit von Klassen zu lösen.
     grid: true
+    tags: 
+      - C# / dotnet
+      - Programmierparadigmen
+      - Objektorientierung
+      - Versionsverwaltung
+      - GitHub
+      - UML-Modellierung
+      - Softwaretest
+      - Entwurfsmuster
     collection:
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/00_Einfuehrung.md
-        logo: # this is used to empty the default image icon
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/01_Software.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/02_DotNet.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/03_CsharpGrundlagenI.md
@@ -80,8 +152,9 @@ collection:
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/24_Tasks.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/25_LINQ.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/26_DesignPattern.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/27_Anwendungen.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/27_Anwendungen.md    
 
+ 
   - title: Eingebettete Systeme
     comment: todo
     grid: true
@@ -98,7 +171,7 @@ collection:
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/09_Rechnerarithmetik.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/10_CPU_Basis.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/11_Modell_CPU.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/12_RISC_CISC.md
+#      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/12_RISC_CISC.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/13_AVR_CPU.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/14_ADC.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/15_TimerUndInterrupts.md
@@ -118,10 +191,12 @@ collection:
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/07_ROS_Pakete.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/08_ROS_Kommunikation.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/09_Sensoren.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/10_Sensordatenverarbeitung.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/11_Regelungstechnik.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/12_Datenfusion.md
-
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/10_Koordinatentransformation.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/11_Sensordatenhandling.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/12_Regelungstechnik.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/13_Datenfusion.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/14_Pfadplanung.md
+    
   - title: Digitale Systeme
     comment: todo
     grid: true
@@ -139,7 +214,6 @@ collection:
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/10_XMEGA_Abgrenzung.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/11_CortexMController.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_DigitaleSysteme/main/lectures/12_CortexMFeatures.md
-
   - html: >
       <hr>
       <h1>Sonstiges</h1>
