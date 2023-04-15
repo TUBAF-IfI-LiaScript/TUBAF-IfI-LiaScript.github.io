@@ -4,8 +4,8 @@ title: >
   </span>
 
 comment: >
-  <span style="color: rgb(0,106,179); background-color: rgba(255,255,255,0.75)">
-    Sammlung der OER Inhalte der Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)
+  <span style="color: rgb(0,106,179); background-color: rgba(255,255,255,0.85)">
+    Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)
   </span>
 
 logo: https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Universitaetsbibliothek_Freiberg_Fassade.jpg/1024px-Universitaetsbibliothek_Freiberg_Fassade.jpg
@@ -32,7 +32,9 @@ collection:
       <p><img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Code_Hello_World_en_C%2B%2B11.png"> </p>
   - title: Prozedurale Programmierung - Einführung in die Informatik (WiSe 2022/23)
     #logo: hier geht nicht
-    comment: Lehrveranstaltung  vermittelt grundlegende Konzepte und anwendungsbezogene Fähigkeiten beim Entwurf und der Umsetzung von Softwarelösungen unter Verwendung der Programmiersprachen C++ und Python
+    comment: >
+       <p>Die Lehrveranstaltung  vermittelt grundlegende Konzepte und anwendungsbezogene Fähigkeiten beim Entwurf und der Umsetzung von Softwarelösungen unter Verwendung der Programmiersprachen C++ und Python.</p>
+       <p>Die "Quellcodes" aller Vorlesungsmaterialien finden Sie im zugehörigen Github-Repository <a href="https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung">Github-Repository</a></p>
     grid: true # Remove this or set it to false to make the collection appear linear
     tags: 
       - C++
