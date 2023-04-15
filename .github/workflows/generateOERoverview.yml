@@ -1,9 +1,11 @@
 name: Regenerate course overview
 
-on: [push]
-
-#on:
-#  workflow_dispatch:
+on:
+  repository_dispatch:
+    types: [some_event]
+  push:
+    branches:
+      - main
 
 env:
     EXPORTFOLDER: "assets"
