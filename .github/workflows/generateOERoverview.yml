@@ -4,8 +4,6 @@ on:
   repository_dispatch:
     types: [new_version]
   push:
-    branches:
-      - main
 
 env:
     EXPORTFOLDER: "assets"
