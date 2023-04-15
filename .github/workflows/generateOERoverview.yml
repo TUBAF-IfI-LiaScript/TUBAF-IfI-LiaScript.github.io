@@ -2,7 +2,7 @@ name: Regenerate course overview
 
 on:
   repository_dispatch:
-    types: [some_event]
+    types: [new_version]
   push:
     branches:
       - main
