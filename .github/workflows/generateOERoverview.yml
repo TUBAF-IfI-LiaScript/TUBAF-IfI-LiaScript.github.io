@@ -28,10 +28,10 @@ jobs:
         with: 
           path: repository
 
-      - name: Delete and redefine folder for exports
-        run: |
-              rm -rf ${REPOSITORYFOLDER}/${EXPORTFOLDER}
-              mkdir -p ${REPOSITORYFOLDER}/${EXPORTFOLDER}
+#      - name: Delete and redefine folder for exports
+#        run: |
+#              rm -rf ${REPOSITORYFOLDER}/${EXPORTFOLDER}
+#              mkdir -p ${REPOSITORYFOLDER}/${EXPORTFOLDER}
 
       - name: Run exporter for all course files
         run: |
