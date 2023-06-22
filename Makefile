@@ -4,13 +4,12 @@ index:
 	liaex --input index.yml --output index --format project
 
 digitalesysteme:
-	liaex --input digitalesysteme.yml --output digitalesysteme --format project --project-generate-pdf --project-generate-ims --project-generate-scorm12 --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80
+	liaex --input digitalesysteme.yml --output digitalesysteme --format project --project-generate-pdf 
 
 prozprog:
-	liaex --input prozprog.yml --output prozprog --format project --project-generate-pdf --project-generate-ims --project-generate-scorm12 --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80
+	liaex --input prozprog.yml --output prozprog --format project --project-generate-pdf 
 
 robotikprojekt:
-	liaex --input robotikprojekt.yml --output robotikprojekt --format project --project-generate-pdf --project-generate-ims --project-generate-scorm12 --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80
-
+	liaex --input robotikprojekt.yml --output robotikprojekt --format project --project-generate-pdf
 softwareentwicklung:
-	liaex --input softwareentwicklung.yml --output softwareentwicklung --format project --project-generate-pdf --project-generate-ims --project-generate-scorm12 --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80
+	liaex --input softwareentwicklung.yml --output softwareentwicklung --format project --project-generate-pdf
