@@ -263,9 +263,9 @@
 
                 for (card of cards) {
                     if (card.dataset.category.includes(category)) {
-                        card.style.filter = ""
+                        card.parentNode.style.display = "block"
                     } else {
-                        card.style.filter = "blur(1px) opacity(35%)"
+                        card.parentNode.style.display = "none"
                     }
                 }
             }

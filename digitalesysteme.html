@@ -17,7 +17,7 @@
                                 "email": "sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de",
                                 "name": "Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele`"
                         },
-                            "description": "A set of macros for plotting diagrams with plantUML in LiaScript. See also https://plantuml.com for more information.",
+                            "description": "A Arduino-Simulator template for JavaScript based on NetSwarm, which can be included into your course to make Arduino-code snippets executeable.",
                             "inLanguage": "de",
                             "name": "Einführung",
                             "url": "https://LiaScript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/00_Einfuehrung.md",
@@ -82,7 +82,7 @@
                                 "email": "sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de",
                                 "name": "Sebastian Zug & André Dietrich & Fabian Bär"
                         },
-                            "description": "LiaScript template for the AVR8js simulator.",
+                            "description": "Set of PyScript-macros to be used with LiaScript for creating interactive Python tutorial.",
                             "inLanguage": "de",
                             "name": "Standardschaltnetze",
                             "url": "https://LiaScript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/05_Standardschaltnetze.md",
@@ -95,7 +95,7 @@
                                 "email": "sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de",
                                 "name": "Sebastian Zug & André Dietrich & Fabian Bär"
                         },
-                            "description": "LiaScript template for the AVR8js simulator.",
+                            "description": "Use the real Python in your LiaScript courses, by loading this template. For more information and to see, which Python-modules are accessible visit the [pyodide-website](https://alpha.iodide.io).",
                             "inLanguage": "de",
                             "name": "FlipFlops",
                             "url": "https://LiaScript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/06_FlipFlops.md",
@@ -173,7 +173,7 @@
                                 "email": "sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de",
                                 "name": "Sebastian Zug & André Dietrich & Fabian Bär"
                         },
-                            "description": "Use the real Python in your LiaScript courses, by loading this template. For more information and to see, which Python-modules are accessible visit the [pyodide-website](https://alpha.iodide.io).",
+                            "description": "A set of macros for plotting diagrams with plantUML in LiaScript. See also https://plantuml.com for more information.",
                             "inLanguage": "de",
                             "name": "Programmierung CPU",
                             "url": "https://LiaScript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/13_AVR_CPU.md",
@@ -199,7 +199,7 @@
                                 "email": "sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de",
                                 "name": "Sebastian Zug & André Dietrich & Fabian Bär"
                         },
-                            "description": "Kein Kommentar!",
+                            "description": "Use the real Python in your LiaScript courses, by loading this template. For more information and to see, which Python-modules are accessible visit the [pyodide-website](https://alpha.iodide.io).",
                             "inLanguage": "de",
                             "name": "Timer und Interrupts",
                             "url": "https://LiaScript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/15_TimerUndInterrupts.md",
@@ -212,7 +212,7 @@
                                 "email": "sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de",
                                 "name": "Sebastian Zug & André Dietrich & Fabian Bär"
                         },
-                            "description": "A set of macros for plotting diagrams with plantUML in LiaScript. See also https://plantuml.com for more information.",
+                            "description": "Use the real Python in your LiaScript courses, by loading this template. For more information and to see, which Python-modules are accessible visit the [pyodide-website](https://alpha.iodide.io).",
                             "inLanguage": "de",
                             "name": "Ansteuerung von peripheren Komponenten",
                             "url": "https://LiaScript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/16_Aktoren.md",
@@ -233,9 +233,9 @@
 
                 for (card of cards) {
                     if (card.dataset.category.includes(category)) {
-                        card.style.filter = ""
+                        card.parentNode.style.display = "block"
                     } else {
-                        card.style.filter = "blur(1px) opacity(35%)"
+                        card.parentNode.style.display = "none"
                     }
                 }
             }
