@@ -17,10 +17,11 @@
                                 "email": "sebastian.zug@informatik.tu-freiberg.de & Georg.Jaeger@informatik.tu-freiberg.de",
                                 "name": "Sebastian Zug & Georg Jäger"
                         },
+                            "description": "LiaScript template for the AVR8js simulator.",
                             "inLanguage": "de",
                             "name": "Einführung",
                             "url": "https://LiaScript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/00_Einfuehrung.md",
-                            "version": "0.1.2"
+                            "version": "0.1.3"
                     }, {
                         "@id": "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/01_OOPinC%2B%2B.md",
                             "@type": "Course",
@@ -44,7 +45,7 @@
                             "inLanguage": "de",
                             "name": "Speicher und Pointer",
                             "url": "https://LiaScript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/02_SpeicherUndPointer.md",
-                            "version": "0.0.1"
+                            "version": "0.0.2"
                     }, {
                         "@id": "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/03_Templates.md",
                             "@type": "Course",
@@ -56,7 +57,7 @@
                             "inLanguage": "de",
                             "name": "Templates",
                             "url": "https://LiaScript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/03_Templates.md",
-                            "version": "0.0.1"
+                            "version": "0.0.2"
                     }, {
                         "@id": "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/04_OOP_Container.md",
                             "@type": "Course",
@@ -93,7 +94,7 @@
                             "inLanguage": "de",
                             "name": "Einführung in ROS2",
                             "url": "https://LiaScript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/06_EinfuehrungROS.md",
-                            "version": "0.0.3"
+                            "version": "0.0.4"
                     }, {
                         "@id": "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/07_ROS_Pakete.md",
                             "@type": "Course",
@@ -214,9 +215,9 @@
 
                 for (card of cards) {
                     if (card.dataset.category.includes(category)) {
-                        card.style.filter = ""
+                        card.parentNode.style.display = "block"
                     } else {
-                        card.style.filter = "blur(1px) opacity(35%)"
+                        card.parentNode.style.display = "none"
                     }
                 }
             }
@@ -278,15 +279,6 @@
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/27bc6f6f.pdf">PDF</a>
 
                                                             </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/27bc6f6f.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/27bc6f6f.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/27bc6f6f.zip">IMS Content Packaging</a>
-
-                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -307,15 +299,6 @@
 
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/7974ad18.pdf">PDF</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/7974ad18.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/7974ad18.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/7974ad18.zip">IMS Content Packaging</a>
 
                                                             </li>
                                                         </ul>
@@ -340,15 +323,6 @@
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/b3bb738.pdf">PDF</a>
 
                                                             </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/b3bb738.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/b3bb738.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/b3bb738.zip">IMS Content Packaging</a>
-
-                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -369,15 +343,6 @@
 
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/0798c5a1b.pdf">PDF</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/0798c5a1b.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/0798c5a1b.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/0798c5a1b.zip">IMS Content Packaging</a>
 
                                                             </li>
                                                         </ul>
@@ -402,15 +367,6 @@
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/024cfd427.pdf">PDF</a>
 
                                                             </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/024cfd427.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/024cfd427.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/024cfd427.zip">IMS Content Packaging</a>
-
-                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -431,15 +387,6 @@
 
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/02c5523be.pdf">PDF</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/02c5523be.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/02c5523be.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/02c5523be.zip">IMS Content Packaging</a>
 
                                                             </li>
                                                         </ul>
@@ -464,15 +411,6 @@
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/07a6d26a1.pdf">PDF</a>
 
                                                             </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/07a6d26a1.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/07a6d26a1.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/07a6d26a1.zip">IMS Content Packaging</a>
-
-                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -493,15 +431,6 @@
 
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/1564d8ad.pdf">PDF</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/1564d8ad.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/1564d8ad.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/1564d8ad.zip">IMS Content Packaging</a>
 
                                                             </li>
                                                         </ul>
@@ -526,15 +455,6 @@
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/02c8e1af4.pdf">PDF</a>
 
                                                             </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/02c8e1af4.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/02c8e1af4.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/02c8e1af4.zip">IMS Content Packaging</a>
-
-                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -555,15 +475,6 @@
 
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/05963ad17.pdf">PDF</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/05963ad17.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/05963ad17.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/05963ad17.zip">IMS Content Packaging</a>
 
                                                             </li>
                                                         </ul>
@@ -588,15 +499,6 @@
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/7ebdf4e9.pdf">PDF</a>
 
                                                             </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/7ebdf4e9.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/7ebdf4e9.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/7ebdf4e9.zip">IMS Content Packaging</a>
-
-                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -617,15 +519,6 @@
 
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/0359124b2.pdf">PDF</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/0359124b2.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/0359124b2.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/0359124b2.zip">IMS Content Packaging</a>
 
                                                             </li>
                                                         </ul>
@@ -652,15 +545,6 @@
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/05803660a.pdf">PDF</a>
 
                                                             </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/05803660a.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/05803660a.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/05803660a.zip">IMS Content Packaging</a>
-
-                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -685,15 +569,6 @@
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/67befe05.pdf">PDF</a>
 
                                                             </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/67befe05.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/67befe05.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/67befe05.zip">IMS Content Packaging</a>
-
-                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -716,15 +591,6 @@
 
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
                                                             <li><a class="dropdown-item btn-sm" target="_blank" href="assets/pdf/03d1d9a3c.pdf">PDF</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm12/03d1d9a3c.zip">SCORM 1.2</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/scorm2004/03d1d9a3c.zip">SCORM 2004</a>
-
-                                                            </li>
-                                                            <li><a class="dropdown-item btn-sm" href="assets/ims/03d1d9a3c.zip">IMS Content Packaging</a>
 
                                                             </li>
                                                         </ul>
