@@ -27,10 +27,10 @@ collection:
   - html: >
       <hr>
       <span style="color: rgb(0,106,179)">
-      <h1>Vorlesung Prozedurale Programmierung</h1>
+      <h1>Vorlesung Erhebung, Analyse und Visualisierung digitaler Daten</h1>
       </span>
       <p><img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Code_Hello_World_en_C%2B%2B11.png"> </p>
-  - title: Prozedurale Programmierung - Einführung in die Informatik (WiSe 2022/23)
+  - title: Erhebung, Analyse und Visualisierung digitaler Daten (/ Prozedurale Programmierung / Einführung in die Informatik) (WiSe 2024/25)
     #logo: hier geht nicht
     comment: >
        <p>Die Lehrveranstaltung  vermittelt grundlegende Konzepte und anwendungsbezogene Fähigkeiten beim Entwurf und der Umsetzung von Softwarelösungen unter Verwendung der Programmiersprachen C++ und Python.</p>
@@ -82,11 +82,7 @@ collection:
         title: Objektorientierte Programmierung mit C++, Teil II
         logo:
         comment: Operatorenüberladung und Vererbung   
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/07_Microcontroller.md 
-        title: Microcontroller
-        logo:
-        comment: Anwendung von C++ auf bei der  Mikrocontrollerprogrammierung
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/08_PythonGrundlagen.md 
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/07_PythonGrundlagen.md 
         title: Python Grundlagen
         logo:
         comment: Datentypen, Ein- und Ausgabe, Listen und Kontrollstrukturen
@@ -97,7 +93,7 @@ collection:
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/10_Datenvisualisierung.md 
         title: Datenvisualisierung
         logo:
-        comment: Objektorientierung in Python,  Visualisierungstool Matplotlib       
+        comment: Objektorientierung in Python, Visualisierungstool Matplotlib       
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/11_DatenAnalyse.md 
         title: Datenanalyse mit Python
         logo:
