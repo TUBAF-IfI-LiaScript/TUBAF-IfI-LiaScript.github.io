@@ -1,0 +1,178 @@
+name: Regenerate course overview
+
+on:
+  repository_dispatch:
+    types: [new_version]
+  push:
+
+env:
+  EXPORTFOLDER: 'assets'
+  REPOSITORYFOLDER: 'repository'
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out current repository
+        uses: actions/checkout@v3
+        with:
+          path: repository
+
+      - name: Delete and redefine folder for exports
+        run: |
+          rm -rf ${REPOSITORYFOLDER}/${EXPORTFOLDER}
+          mkdir -p ${REPOSITORYFOLDER}/${EXPORTFOLDER}
+
+      - name: Cache repository
+        uses: actions/cache@v3
+        with:
+          path: repository
+          key: repository-${{ github.sha }}
+
+  run_index:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore repository
+        uses: actions/cache@v3
+        with:
+          path: repository
+          key: repository-${{ github.sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          # Removed npm cache that was causing failures
+
+      - name: Install LiaScript exporter
+        run: npm install -g @liascript/exporter
+
+      - name: Run exporter for index
+        run: |
+          cd ${REPOSITORYFOLDER}
+          liaex -i index.yml -o index --format project --project-category-blur
+
+  run_prozprog:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore repository
+        uses: actions/cache@v3
+        with:
+          path: repository
+          key: repository-${{ github.sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          # Removed npm cache that was causing failures
+
+      - name: Install LiaScript exporter
+        run: npm install -g @liascript/exporter
+
+      - name: Run exporter for prozprog
+        run: |
+          cd ${REPOSITORYFOLDER}
+          liaex -i prozprog.yml -o prozprog --format project --project-generate-cache --project-generate-pdf --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
+
+  run_softwareentwicklung:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore repository
+        uses: actions/cache@v3
+        with:
+          path: repository
+          key: repository-${{ github.sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          # Removed npm cache that was causing failures
+
+      - name: Install LiaScript exporter
+        run: npm install -g @liascript/exporter
+
+      - name: Run exporter for softwareentwicklung
+        run: |
+          cd ${REPOSITORYFOLDER}
+          liaex -i softwareentwicklung.yml -o softwareentwicklung --format project --project-generate-cache --project-generate-pdf --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
+
+  run_robotikprojekt:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore repository
+        uses: actions/cache@v3
+        with:
+          path: repository
+          key: repository-${{ github.sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          # Removed npm cache that was causing failures
+
+      - name: Install LiaScript exporter
+        run: npm install -g @liascript/exporter
+
+      - name: Run exporter for robotikprojekt
+        run: |
+          cd ${REPOSITORYFOLDER}
+          liaex -i robotikprojekt.yml -o robotikprojekt --format project --project-generate-cache --project-generate-pdf --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
+
+  run_digitalesysteme:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore repository
+        uses: actions/cache@v3
+        with:
+          path: repository
+          key: repository-${{ github.sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          # Removed npm cache that was causing failures
+
+      - name: Install LiaScript exporter
+        run: npm install -g @liascript/exporter
+
+      - name: Run exporter for digitalesysteme
+        run: |
+          cd ${REPOSITORYFOLDER}
+          liaex -i digitalesysteme.yml -o digitalesysteme --format project --project-generate-cache --project-generate-pdf --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
+
+  commit_changes:
+    needs:
+      [
+        run_index,
+        run_prozprog,
+        run_softwareentwicklung,
+        run_robotikprojekt,
+        run_digitalesysteme,
+      ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore repository
+        uses: actions/cache@v3
+        with:
+          path: repository
+          key: repository-${{ github.sha }}
+
+      - name: Commit and push changes
+        run: |
+          cd ${REPOSITORYFOLDER}
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Add new export version of courses" || echo "No changes to commit"
+          git push origin HEAD:${GITHUB_REF#refs/heads/}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
