@@ -29,7 +29,7 @@ collection:
       <span style="color: rgb(0,106,179)">
       <h1>Vorlesung Softwareentwicklung</h1>
       </span>
-  - title:  Softwareentwicklung / Einführung in die Softwareentwicklung (SoSe 2023)
+  - title:  Softwareentwicklung / Einführung in die Softwareentwicklung (SoSe 2025)
     comment: >
        <p>Die Lehrveranstaltung vermittelt Konzepte objektorientierten und interaktiven Programmierung, Syntax und Semantik der Programmiersprache C# sowie die Fähigkeiten Probleme kollaborativ bei verteilter Verantwortlichkeit von Klassen zu lösen.</p>
        <p>Die "Quellcodes" aller Vorlesungsmaterialien finden Sie im zugehörigen Github-Repository <a href="https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung">Github-Repository</a></p>
@@ -55,20 +55,22 @@ collection:
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/08_OOPGrundlagenII.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/09_Vererbung.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/10_AbstrakteKlassenUndInterfaces.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/11_VersionsverwaltungI.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/12_VersionsverwaltungII.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/13_UML_Modellierung.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/14_UML_ModellierungII.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/15_UML_ModellierungIII.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/16_Testen.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/17_Dokumentation_BuildTools.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/18_ContinuousIntegration.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/19_Generics.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/20_Container.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/11_Generics.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/12_Container.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/13_VersionsverwaltungI.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/14_VersionsverwaltungII.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/15_UML_Modellierung.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/16_UML_ModellierungII.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/17_UML_ModellierungIII.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/18_Dokumentation_BuildTools.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/19_Testen.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/20_ContinuousIntegration.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/21_Delegaten.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/22_Events.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/23_Threads.md
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/24_Tasks.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/25_LINQ.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/26_DesignPattern.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/27_Anwendungen.md    
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/25_DesignPattern.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/26_LINQ.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/27_MAUI.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/28_MAUI_II.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/29_Anwendungen.md

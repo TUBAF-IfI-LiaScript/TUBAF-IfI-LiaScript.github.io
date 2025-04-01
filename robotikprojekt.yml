@@ -26,18 +26,13 @@ collection:
       <span style="color: rgb(0,106,179)">
       <h1>Vorlesung Software Projekt / Robotik</h1>
       </span>
-  - title:  Softwareprojekt / Robotik (WiSe 2022/23)
+  - title:  Softwareprojekt / Robotik (WiSe 2024/25)
     comment: >
        <p>Die Lehrveranstaltung vermittelt Konzepte von C++ und Robot Operating System (ROS). ROS1 und ROS2 werden gegenübergestellt und die Elemente von Robotersystemen wie Sensoren und Aktoren werden vorgestellt. Weiterhin befasst sich die Lehrveranstaltung mit Sensorendatenverarbeitung und Fusion sowie Aktorenregelung. </p>
        <p>Die "Quellcodes" aller Vorlesungsmaterialien finden Sie im zugehörigen Github-Repository <a href="https://github.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik">Github-Repository</a></p>
+       <p>Im zweiten Teil der Veranstaltung war eine praktische Teamarbeit zur realiseren.</a></p>
     grid: true
     tags: 
-      - Objektorientierung mit C++
-      - Smart Pointer
-      - C++ Templates
-      - Iteratoren
-      - STL Container
-      - Entwurfsmuster
       - ROS
       - ROS Publish-Subscribe
       - Sensoren
@@ -47,17 +42,11 @@ collection:
       - Datenfusion
     collection:
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/00_Einfuehrung.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/01_OOPinC%2B%2B.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/02_SpeicherUndPointer.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/03_Templates.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/04_OOP_Container.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/05_Entwurfsmuster.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/06_EinfuehrungROS.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/07_ROS_Pakete.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/08_ROS_Kommunikation.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/09_Sensoren.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/10_Koordinatentransformation.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/11_Sensordatenhandling.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/12_Regelungstechnik.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/13_Datenfusion.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/14_Pfadplanung.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/01_EinfuehrungROS.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/02_ROS_Pakete.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/03_ROS_Kommunikation.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/04_Sensoren.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/05_KoordinatenTransformation.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/06_Sensordatenhandling.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/07_Regelungstechnik.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_SoftwareprojektRobotik/master/08_Datenfusion.md
