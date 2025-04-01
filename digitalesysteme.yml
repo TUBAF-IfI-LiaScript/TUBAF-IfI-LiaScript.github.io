@@ -47,19 +47,19 @@ collection:
       - Mikrokontroller
 
     collection:
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/00_Einfuehrung.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/01_HistorischerUeberblick.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/02_BoolscheAlgebra.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/03_Minimierung.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/04_Schaltnetze.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/05_Standardschaltnetze.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/06_FlipFlops.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/07_Schaltwerke.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/08_StandardSchaltwerke.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/09_Rechnerarithmetik.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/10_CPU_Basis.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/11_Modell_CPU.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/13_AVR_CPU.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/14_ADC.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/15_TimerUndInterrupts.md
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/16_Aktoren.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/00_Einfuehrung.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/01_HistorischerUeberblick.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/02_BoolscheAlgebra.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/03_Minimierung.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/04_Schaltnetze.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/05_Standardschaltnetze.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/06_FlipFlops.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/07_Schaltwerke.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/08_StandardSchaltwerke.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/09_Rechnerarithmetik.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/10_CPU_Basis.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/11_Modell_CPU.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/13_AVR_CPU.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/14_ADC.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/15_TimerUndInterrupts.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/refs/heads/master/16_Aktoren.md
