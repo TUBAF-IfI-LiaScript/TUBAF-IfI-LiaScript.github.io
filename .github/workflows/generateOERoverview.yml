@@ -173,6 +173,9 @@ jobs:
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "Add new export version of courses" || echo "No changes to commit"
-          git push origin HEAD:${GITHUB_REF#refs/heads/}
+
+          # Fix authentication by updating remote URL with token
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
