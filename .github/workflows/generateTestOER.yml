@@ -85,6 +85,8 @@ jobs:
         run_robotikprojekt,
       ]
     runs-on: ubuntu-latest
+    permissions: 
+      contents: write
     steps:
       - name: Restore repository
         uses: actions/cache@v3
@@ -98,4 +100,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git commit -am "Add new export version of courses" || echo "No changes to commit"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
