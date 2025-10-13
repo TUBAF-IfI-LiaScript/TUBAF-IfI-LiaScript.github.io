@@ -1,181 +1,132 @@
-name: Regenerate course overview
+name: Deploy locally generated course assets
 
 on:
-  repository_dispatch:
-    types: [new_version]
   push:
-
-env:
-  EXPORTFOLDER: 'assets'
-  REPOSITORYFOLDER: 'repository'
+    branches: [ main ]
+    paths:
+      - '*.html'
+      - 'assets/**'
+      - '*.yml'
+  workflow_dispatch:
 
 jobs:
-  prepare:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out current repository
+      - name: Check out repository
         uses: actions/checkout@v3
         with:
-          path: repository
+          fetch-depth: 2  # Need previous commit to compare changes
 
-      - name: Delete and redefine folder for exports
+      - name: Detect changed YAML files and missing HTML
+        id: changes
         run: |
-          rm -rf ${REPOSITORYFOLDER}/${EXPORTFOLDER}
-          mkdir -p ${REPOSITORYFOLDER}/${EXPORTFOLDER}
+          echo "=== Detecting Changes ==="
+          
+          # Get changed YAML files from last commit
+          changed_yamls=$(git diff --name-only HEAD~1 HEAD | grep '\.yml$' | grep -v '^\.github/' || true)
+          echo "Changed YAML files: $changed_yamls"
+          
+          # Initialize arrays for processing
+          courses_to_generate=""
+          missing_html=""
+          
+          # Check each course YAML file
+          for yaml_file in *.yml; do
+            course_name=$(basename "$yaml_file" .yml)
+            html_file="${course_name}.html"
+            
+            # Check if YAML was changed or HTML is missing
+            if echo "$changed_yamls" | grep -q "$yaml_file" || [ ! -f "$html_file" ]; then
+              echo "Course '$course_name' needs regeneration:"
+              if echo "$changed_yamls" | grep -q "$yaml_file"; then
+                echo "  - YAML file was changed"
+              fi
+              if [ ! -f "$html_file" ]; then
+                echo "  - HTML file is missing"
+                missing_html="$missing_html $course_name"
+              fi
+              courses_to_generate="$courses_to_generate $course_name"
+            else
+              echo "Course '$course_name' is up to date"
+            fi
+          done
+          
+          echo "courses_to_generate=$courses_to_generate" >> $GITHUB_OUTPUT
+          echo "missing_html=$missing_html" >> $GITHUB_OUTPUT
 
-      - name: Cache repository
-        uses: actions/cache@v3
-        with:
-          path: repository
-          key: repository-${{ github.sha }}
-
-  run_index:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-      - name: Restore repository
-        uses: actions/cache@v3
-        with:
-          path: repository
-          key: repository-${{ github.sha }}
-
-      - name: Setup Node.js
+      - name: Setup Node.js (if needed)
+        if: steps.changes.outputs.courses_to_generate != ''
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          # Removed npm cache that was causing failures
 
-      - name: Install LiaScript exporter
+      - name: Install LiaScript exporter (if needed)
+        if: steps.changes.outputs.courses_to_generate != ''
         run: npm install -g @liascript/exporter
 
-      - name: Run exporter for index
+      - name: Generate missing course websites
+        if: steps.changes.outputs.courses_to_generate != ''
         run: |
-          cd ${REPOSITORYFOLDER}
-          liaex -i index.yml -o index --format project --project-category-blur
+          echo "=== Generating Courses ==="
+          courses="${{ steps.changes.outputs.courses_to_generate }}"
+          
+          for course in $courses; do
+            yaml_file="${course}.yml"
+            html_file="${course}.html"
+            
+            if [ -f "$yaml_file" ]; then
+              echo "Generating $html_file from $yaml_file..."
+              
+              # Different parameters based on course type
+              case "$course" in
+                "index")
+                  liaex -i "$yaml_file" -o "$course" --format project --project-category-blur
+                  ;;
+                "digitalesysteme"|"prozprog"|"softwareentwicklung"|"robotikprojekt")
+                  liaex -i "$yaml_file" -o "$course" --format project --project-generate-cache --project-generate-pdf --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
+                  ;;
+                *)
+                  liaex -i "$yaml_file" -o "$course" --format project --project-category-blur
+                  ;;
+              esac
+              
+              if [ -f "$html_file" ]; then
+                echo "✅ Successfully generated $html_file"
+              else
+                echo "❌ Failed to generate $html_file"
+              fi
+            else
+              echo "⚠️  YAML file $yaml_file not found"
+            fi
+          done
 
-  run_prozprog:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-      - name: Restore repository
-        uses: actions/cache@v3
-        with:
-          path: repository
-          key: repository-${{ github.sha }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          # Removed npm cache that was causing failures
-
-      - name: Install LiaScript exporter
-        run: npm install -g @liascript/exporter
-
-      - name: Run exporter for prozprog
+      - name: Display deployment summary
         run: |
-          cd ${REPOSITORYFOLDER}
-          liaex -i prozprog.yml -o prozprog --format project --project-generate-cache --project-generate-pdf --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
-
-  run_softwareentwicklung:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-      - name: Restore repository
-        uses: actions/cache@v3
-        with:
-          path: repository
-          key: repository-${{ github.sha }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          # Removed npm cache that was causing failures
-
-      - name: Install LiaScript exporter
-        run: npm install -g @liascript/exporter
-
-      - name: Run exporter for softwareentwicklung
-        run: |
-          cd ${REPOSITORYFOLDER}
-          liaex -i softwareentwicklung.yml -o softwareentwicklung --format project --project-generate-cache --project-generate-pdf --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
-
-  run_robotikprojekt:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-      - name: Restore repository
-        uses: actions/cache@v3
-        with:
-          path: repository
-          key: repository-${{ github.sha }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          # Removed npm cache that was causing failures
-
-      - name: Install LiaScript exporter
-        run: npm install -g @liascript/exporter
-
-      - name: Run exporter for robotikprojekt
-        run: |
-          cd ${REPOSITORYFOLDER}
-          liaex -i robotikprojekt.yml -o robotikprojekt --format project --project-generate-cache --project-generate-pdf --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
-
-  run_digitalesysteme:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-      - name: Restore repository
-        uses: actions/cache@v3
-        with:
-          path: repository
-          key: repository-${{ github.sha }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          # Removed npm cache that was causing failures
-
-      - name: Install LiaScript exporter
-        run: npm install -g @liascript/exporter
-
-      - name: Run exporter for digitalesysteme
-        run: |
-          cd ${REPOSITORYFOLDER}
-          liaex -i digitalesysteme.yml -o digitalesysteme --format project --project-generate-cache --project-generate-pdf --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
-
-  commit_changes:
-    needs:
-      [
-        run_index,
-        run_prozprog,
-        run_softwareentwicklung,
-        run_robotikprojekt,
-        run_digitalesysteme,
-      ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Restore repository
-        uses: actions/cache@v3
-        with:
-          path: repository
-          key: repository-${{ github.sha }}
-
-      - name: Commit and push changes
-        run: |
-          cd ${REPOSITORYFOLDER}
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Add new export version of courses" || echo "No changes to commit"
-
-          # Fix authentication by updating remote URL with token
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "=== Deployment Summary ==="
+          echo "HTML files to deploy:"
+          ls -la *.html 2>/dev/null || echo "No HTML files"
+          echo ""
+          echo "Asset directories:"
+          find assets/ -type d 2>/dev/null || echo "No asset directories"
+          echo ""
+          echo "PDF counts per course:"
+          for dir in assets/*/pdf 2>/dev/null; do
+            if [ -d "$dir" ]; then
+              course=$(basename $(dirname "$dir"))
+              count=$(ls -1 "$dir"/*.pdf 2>/dev/null | wc -l)
+              echo "  $course: $count PDFs"
+            fi
+          done
+          
+          echo ""
+          echo "Generated in this run:"
+          courses="${{ steps.changes.outputs.courses_to_generate }}"
+          if [ -n "$courses" ]; then
+            for course in $courses; do
+              echo "  - $course"
+            done
+          else
+            echo "  - No courses needed regeneration"
+          fi
+          echo "=== End Summary ==="
