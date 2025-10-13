@@ -9,12 +9,54 @@ all: $(COURSES)
 
 # Generic function to build a course
 define build_course
-$(1): clean-$(1) build-$(1) organize-$(1) git-update
+$(1): $(1).yml
+	@echo "=== Checking changes for $(1) ==="
+	@mkdir -p .cache
+	@cache_file=".cache/$(1)"; \
+	yaml_hash=$$(sha256sum $(1).yml 2>/dev/null | cut -d' ' -f1 || echo "missing"); \
+	repo_name=$$(echo $(1) | sed 's/digitalesysteme/EingebetteteSysteme/;s/prozprog/ProzeduraleProgrammierung/;s/softwareentwicklung/Softwareentwicklung/;s/robotikprojekt/Robotikprojekt/;s/index/INDEX_SKIP/'); \
+	if [ "$$repo_name" != "INDEX_SKIP" ]; then \
+		remote_hash=$$(curl -s --connect-timeout 5 "https://api.github.com/repos/TUBAF-IfI-LiaScript/VL_$$repo_name/commits/master" 2>/dev/null | grep -o '"sha":"[^"]*"' | head -1 | cut -d'"' -f4 || echo "unreachable"); \
+	else \
+		remote_hash="index-no-remote"; \
+	fi; \
+	if [ -f "$$cache_file" ]; then \
+		cached_yaml=$$(sed -n '1p' "$$cache_file" 2>/dev/null || echo "missing"); \
+		cached_remote=$$(sed -n '2p' "$$cache_file" 2>/dev/null || echo "missing"); \
+	else \
+		cached_yaml="missing"; \
+		cached_remote="missing"; \
+	fi; \
+	echo "📄 YAML hash: $$yaml_hash"; \
+	echo "🌐 Remote hash: $$remote_hash"; \
+	echo "💾 Cached YAML: $$cached_yaml"; \
+	echo "💾 Cached remote: $$cached_remote"; \
+	if [ "$$yaml_hash" != "$$cached_yaml" ] || [ "$$remote_hash" != "$$cached_remote" ] || [ ! -f "$(1).html" ]; then \
+		if [ "$$yaml_hash" != "$$cached_yaml" ]; then \
+			echo "✅ YAML file changed - rebuilding $(1)"; \
+		elif [ "$$remote_hash" != "$$cached_remote" ]; then \
+			echo "✅ Remote repository changed - rebuilding $(1)"; \
+		else \
+			echo "✅ HTML file missing - rebuilding $(1)"; \
+		fi; \
+		$(MAKE) force-build-$(1); \
+		echo "$$yaml_hash" > "$$cache_file"; \
+		echo "$$remote_hash" >> "$$cache_file"; \
+		echo "📋 Cache updated for $(1)"; \
+	else \
+		echo "⏭️  No changes detected - skipping $(1)"; \
+		echo "📄 Using existing $(1).html and assets"; \
+	fi
+
+force-build-$(1): clean-$(1) build-$(1) organize-$(1) git-update
 
 clean-$(1):
+	@echo "🧹 Cleaning old files for $(1)..."
 	rm -f $(1).html $(1).zip
 	rm -rf assets/$(1)/ || true
 	$(if $(filter $(1),$(PDF_COURSES)),rm -rf assets/pdf/* || true)
+
+
 
 build-$(1):
 	$(if $(filter $(1),$(PDF_COURSES)), \
@@ -41,19 +83,66 @@ git-update:
 clean-all:
 	rm -f *.html *.zip
 	rm -rf assets/*/
+	rm -rf .cache/
+
+clean-cache:
+	rm -rf .cache/
+	@echo "All cache files cleared - next build will regenerate everything"
+
+force-all: clean-cache
+	$(MAKE) all
+
+status:
+	@echo "=== Build Status ==="
+	@for course in $(COURSES); do \
+		echo ""; \
+		echo "📚 Course: $$course"; \
+		if [ -f "$$course.html" ]; then \
+			echo "  ✅ HTML file exists"; \
+		else \
+			echo "  ❌ HTML file missing"; \
+		fi; \
+		if [ -f ".cache/$$course" ]; then \
+			echo "  📋 Cache file exists"; \
+			cached_yaml=$$(sed -n '1p' ".cache/$$course" 2>/dev/null || echo "missing"); \
+			cached_remote=$$(sed -n '2p' ".cache/$$course" 2>/dev/null || echo "missing"); \
+			echo "  💾 Cached YAML: $${cached_yaml:0:8}..."; \
+			echo "  💾 Cached remote: $${cached_remote:0:8}..."; \
+		else \
+			echo "  ⚪ No cache file"; \
+		fi; \
+		if [ -d "assets/$$course" ]; then \
+			pdf_count=$$(find "assets/$$course" -name "*.pdf" 2>/dev/null | wc -l); \
+			echo "  📁 Assets: $$pdf_count PDFs"; \
+		else \
+			echo "  📁 No assets"; \
+		fi; \
+		repo_name=$$(echo $$course | sed 's/digitalesysteme/EingebetteteSysteme/;s/prozprog/ProzeduraleProgrammierung/;s/softwareentwicklung/Softwareentwicklung/;s/robotikprojekt/Robotikprojekt/;s/index/INDEX_SKIP/'); \
+		if [ "$$repo_name" != "INDEX_SKIP" ]; then \
+			echo "  🌐 Monitoring: VL_$$repo_name"; \
+		else \
+			echo "  🌐 No remote monitoring (index)"; \
+		fi; \
+	done
 
 help:
 	@echo "Available targets:"
-	@echo "  all                 - Build all courses"
-	@echo "  clean-all          - Clean all generated files"
+	@echo "  all                 - Build all courses (with change detection)"
+	@echo "  force-all           - Force rebuild all courses (clears cache)"  
+	@echo "  clean-all          - Clean all generated files and cache"
+	@echo "  clean-cache        - Clear only cache files"
+	@echo "  status             - Show build status of all courses"
 	@echo "  git-update         - Update git repository"
 	@echo ""
-	@echo "Individual courses:"
+	@echo "Individual courses (with change detection):"
 	@$(foreach course,$(COURSES),echo "  $(course)";)
+	@echo ""
+	@echo "Force rebuild individual courses:"
+	@$(foreach course,$(COURSES),echo "  force-build-$(course)";)
 	@echo ""
 	@echo "Course configuration:"
 	@echo "  PDF courses: $(PDF_COURSES)"
 	@echo "  SCORM org:   $(SCORM_ORG)"
 	@echo "  SCORM score: $(SCORM_SCORE)"
 
-.PHONY: all clean-all git-update help $(COURSES)
+.PHONY: all clean-all clean-cache force-all status git-update help $(COURSES)

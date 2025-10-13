@@ -1,0 +1,5 @@
+# Build cache files
+.cache/
+
+# Temporary files
+*.tmp
