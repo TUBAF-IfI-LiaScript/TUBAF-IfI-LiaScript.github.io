@@ -50,9 +50,25 @@ esac
 
 if [ -n "$REPO_NAME" ]; then
     echo "🌐 Checking VL_${REPO_NAME} repository..."
-    REMOTE_HASH=$(curl -s --connect-timeout 10 \
-        "https://api.github.com/repos/TUBAF-IfI-LiaScript/VL_${REPO_NAME}/commits/master" \
-        2>/dev/null | grep -o '"sha":"[^"]*"' | head -1 | cut -d'"' -f4 || echo "unreachable")
+    API_URL="https://api.github.com/repos/TUBAF-IfI-LiaScript/VL_${REPO_NAME}/commits/master"
+    echo "🔗 API URL: $API_URL"
+    
+    # Try jq first (more reliable), fallback to grep
+    API_RESPONSE=$(curl -s --connect-timeout 10 "$API_URL" 2>/dev/null)
+    
+    if command -v jq >/dev/null 2>&1; then
+        REMOTE_HASH=$(echo "$API_RESPONSE" | jq -r '.sha' 2>/dev/null || echo "unreachable")
+    else
+        REMOTE_HASH=$(echo "$API_RESPONSE" | sed -n 's/.*"sha":"\([^"]*\)".*/\1/p' | head -1)
+        if [ -z "$REMOTE_HASH" ]; then
+            REMOTE_HASH="unreachable"
+        fi
+    fi
+    
+    if [ "$REMOTE_HASH" = "unreachable" ] || [ -z "$REMOTE_HASH" ]; then
+        echo "⚠️  Failed to get remote hash"
+        REMOTE_HASH="unreachable"
+    fi
 else
     REMOTE_HASH="no-remote"
 fi

@@ -75,8 +75,8 @@ status:
 			echo "  📋 Cache file exists"; \
 			cached_yaml=$$(sed -n '1p' ".cache/$$course" 2>/dev/null || echo "missing"); \
 			cached_remote=$$(sed -n '2p' ".cache/$$course" 2>/dev/null || echo "missing"); \
-			echo "  💾 Cached YAML: $${cached_yaml:0:8}..."; \
-			echo "  💾 Cached remote: $${cached_remote:0:8}..."; \
+			echo "  💾 Cached YAML: $$(echo $$cached_yaml | cut -c1-8)..."; \
+			echo "  💾 Cached remote: $$(echo $$cached_remote | cut -c1-8)..."; \
 		else \
 			echo "  ⚪ No cache file"; \
 		fi; \
