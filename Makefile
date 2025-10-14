@@ -11,40 +11,9 @@ all: $(COURSES)
 define build_course
 $(1): $(1).yml
 	@echo "=== Checking changes for $(1) ==="
-	@mkdir -p .cache
-	@cache_file=".cache/$(1)"; \
-	yaml_hash=$$(sha256sum $(1).yml 2>/dev/null | cut -d' ' -f1 || echo "missing"); \
-	repo_name=$$(echo $(1) | sed 's/digitalesysteme/EingebetteteSysteme/;s/prozprog/ProzeduraleProgrammierung/;s/softwareentwicklung/Softwareentwicklung/;s/robotikprojekt/Robotikprojekt/;s/index/INDEX_SKIP/'); \
-	if [ "$$repo_name" != "INDEX_SKIP" ]; then \
-		remote_hash=$$(curl -s --connect-timeout 5 "https://api.github.com/repos/TUBAF-IfI-LiaScript/VL_$$repo_name/commits/master" 2>/dev/null | grep -o '"sha":"[^"]*"' | head -1 | cut -d'"' -f4 || echo "unreachable"); \
-	else \
-		remote_hash="index-no-remote"; \
-	fi; \
-	if [ -f "$$cache_file" ]; then \
-		cached_yaml=$$(sed -n '1p' "$$cache_file" 2>/dev/null || echo "missing"); \
-		cached_remote=$$(sed -n '2p' "$$cache_file" 2>/dev/null || echo "missing"); \
-	else \
-		cached_yaml="missing"; \
-		cached_remote="missing"; \
-	fi; \
-	echo "📄 YAML hash: $$yaml_hash"; \
-	echo "🌐 Remote hash: $$remote_hash"; \
-	echo "💾 Cached YAML: $$cached_yaml"; \
-	echo "💾 Cached remote: $$cached_remote"; \
-	if [ "$$yaml_hash" != "$$cached_yaml" ] || [ "$$remote_hash" != "$$cached_remote" ] || [ ! -f "$(1).html" ]; then \
-		if [ "$$yaml_hash" != "$$cached_yaml" ]; then \
-			echo "✅ YAML file changed - rebuilding $(1)"; \
-		elif [ "$$remote_hash" != "$$cached_remote" ]; then \
-			echo "✅ Remote repository changed - rebuilding $(1)"; \
-		else \
-			echo "✅ HTML file missing - rebuilding $(1)"; \
-		fi; \
+	@if ./check_changes.sh $(1); then \
 		$(MAKE) force-build-$(1); \
-		echo "$$yaml_hash" > "$$cache_file"; \
-		echo "$$remote_hash" >> "$$cache_file"; \
-		echo "📋 Cache updated for $(1)"; \
 	else \
-		echo "⏭️  No changes detected - skipping $(1)"; \
 		echo "📄 Using existing $(1).html and assets"; \
 	fi
 
