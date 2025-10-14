@@ -51,7 +51,6 @@ esac
 if [ -n "$REPO_NAME" ]; then
     echo "🌐 Checking VL_${REPO_NAME} repository..."
     API_URL="https://api.github.com/repos/TUBAF-IfI-LiaScript/VL_${REPO_NAME}/commits/master"
-    echo "🔗 API URL: $API_URL"
     
     # Try jq first (more reliable), fallback to grep
     API_RESPONSE=$(curl -s --connect-timeout 10 "$API_URL" 2>/dev/null)
