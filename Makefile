@@ -5,7 +5,7 @@ SCORM_ORG = "TU-Bergakademie Freiberg"
 SCORM_SCORE = 80
 
 .DEFAULT_GOAL := all
-all: $(COURSES)
+all: $(COURSES) git-update-if-needed
 
 # Generic function to build a course
 define build_course
@@ -17,7 +17,7 @@ $(1): $(1).yml
 		echo "📄 Using existing $(1).html and assets"; \
 	fi
 
-force-build-$(1): clean-$(1) build-$(1) organize-$(1) git-update
+force-build-$(1): clean-$(1) build-$(1) organize-$(1) mark-changed
 
 clean-$(1):
 	@echo "🧹 Cleaning old files for $(1)..."
@@ -41,6 +41,21 @@ endef
 
 # Generate targets for all courses
 $(foreach course,$(COURSES),$(eval $(call build_course,$(course))))
+
+mark-changed:
+	@touch .cache/build_occurred
+
+git-update-if-needed:
+	@if [ -f .cache/build_occurred ]; then \
+		echo "🔄 Changes detected - updating git repository..."; \
+		git add assets/ || true; \
+		git add -A; \
+		git commit --amend --no-edit; \
+		git push origin main -f; \
+		rm -f .cache/build_occurred; \
+	else \
+		echo "✅ No courses rebuilt - git repository unchanged"; \
+	fi
 
 git-update:
 	git add assets/ || true
