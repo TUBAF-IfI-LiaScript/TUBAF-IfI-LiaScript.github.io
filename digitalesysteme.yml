@@ -26,7 +26,7 @@ collection:
       <span style="color: rgb(0,106,179)">
       <h1>Vorlesung Digitale System / Eingebettete Systeme</h1>
       </span>
-  - title:  Digitale systeme / Eingebettete Systeme (WiSe 2022/23)
+  - title:  Digitale systeme / Eingebettete Systeme (WiSe 2025/26)
     comment: >
        <p>Die Lehrveranstaltung vermittelt die Fähigkeiten, die Komponenten eines Rechners ausgehend von Schaltnetzen/-werken zu beschreiben und zu entwerfen, die Abläufe bei der Programmabarbeitung in verschiedenen Modellrechnern zu beherrschen sowie einfache, eingebettete Systeme zu realisieren.</p>
        <p>Die "Quellcodes" aller Vorlesungsmaterialien finden Sie im zugehörigen Github-Repository <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme">Github-Repository</a></p>
