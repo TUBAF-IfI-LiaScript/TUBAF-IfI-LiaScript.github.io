@@ -17,7 +17,7 @@ $(1): $(1).yml
 		echo "📄 Using existing $(1).html and assets"; \
 	fi
 
-force-build-$(1): clean-$(1) build-$(1) organize-$(1) mark-changed
+force-build-$(1): clean-$(1) build-$(1) organize-$(1) update-cache-$(1) mark-changed
 
 clean-$(1):
 	@echo "🧹 Cleaning old files for $(1)..."
@@ -44,6 +44,36 @@ $(foreach course,$(COURSES),$(eval $(call build_course,$(course))))
 
 mark-changed:
 	@touch .cache/build_occurred
+
+update-cache-%:
+	@YAML_HASH=$$(sha256sum $*.yml 2>/dev/null | cut -d' ' -f1 || echo "missing"); \
+	case "$*" in \
+		"digitalesysteme") REPO_NAME="EingebetteteSysteme" ;; \
+		"prozprog") REPO_NAME="ProzeduraleProgrammierung" ;; \
+		"softwareentwicklung") REPO_NAME="Softwareentwicklung" ;; \
+		"robotikprojekt") REPO_NAME="Robotikprojekt" ;; \
+		"index") REPO_NAME="" ;; \
+		*) REPO_NAME="" ;; \
+	esac; \
+	if [ -n "$$REPO_NAME" ]; then \
+		API_URL="https://api.github.com/repos/TUBAF-IfI-LiaScript/VL_$${REPO_NAME}/commits/master"; \
+		API_RESPONSE=$$(curl -sL --connect-timeout 10 "$$API_URL" 2>/dev/null); \
+		if command -v jq >/dev/null 2>&1; then \
+			REMOTE_HASH=$$(echo "$$API_RESPONSE" | jq -r '.sha' 2>/dev/null || echo "unreachable"); \
+		else \
+			REMOTE_HASH=$$(echo "$$API_RESPONSE" | sed -n 's/.*"sha":"\([^"]*\)".*/\1/p' | head -1); \
+			if [ -z "$$REMOTE_HASH" ]; then REMOTE_HASH="unreachable"; fi; \
+		fi; \
+		if [ "$$REMOTE_HASH" = "unreachable" ] || [ -z "$$REMOTE_HASH" ]; then \
+			REMOTE_HASH="unreachable"; \
+		fi; \
+	else \
+		REMOTE_HASH="no-remote"; \
+	fi; \
+	mkdir -p .cache; \
+	echo "$$YAML_HASH" > ".cache/$*"; \
+	echo "$$REMOTE_HASH" >> ".cache/$*"; \
+	echo "📝 Cache updated for $*"
 
 git-update-if-needed:
 	@if [ -f .cache/build_occurred ]; then \

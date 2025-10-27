@@ -53,7 +53,8 @@ if [ -n "$REPO_NAME" ]; then
     API_URL="https://api.github.com/repos/TUBAF-IfI-LiaScript/VL_${REPO_NAME}/commits/master"
     
     # Try jq first (more reliable), fallback to grep
-    API_RESPONSE=$(curl -s --connect-timeout 10 "$API_URL" 2>/dev/null)
+    # Use -L to follow redirects (in case repository was renamed/moved)
+    API_RESPONSE=$(curl -sL --connect-timeout 10 "$API_URL" 2>/dev/null)
     
     if command -v jq >/dev/null 2>&1; then
         REMOTE_HASH=$(echo "$API_RESPONSE" | jq -r '.sha' 2>/dev/null || echo "unreachable")
@@ -105,9 +106,7 @@ fi
 # Output result
 if [ "$REBUILD_NEEDED" = true ]; then
     echo "✅ $REASON - rebuild needed"
-    # Update cache
-    echo "$YAML_HASH" > "$CACHE_FILE"
-    echo "$REMOTE_HASH" >> "$CACHE_FILE"
+    # Note: Cache will be updated by the build system after successful build
     exit 0  # Rebuild needed
 else
     echo "⏭️  No changes detected - skipping"
