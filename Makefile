@@ -88,9 +88,13 @@ git-update-if-needed:
 	fi
 
 git-update:
-	git add assets/ || true
-	git add -A
+	@echo "🔍 Checking for untracked assets..."
+	git add assets/*/pdf/*.pdf || true
+	git add *.html
+	git add -u
+	@echo "📝 Committing changes..."
 	git commit --amend --no-edit
+	@echo "🚀 Pushing to remote..."
 	git push origin main -f
 
 # Utility targets
