@@ -40,7 +40,7 @@ collection:
       - UML-Modellierung
       - Softwaretest
       - Entwurfsmuster
-  - title:  Prozedurale Programmierung (alter Name)
+  - title:  Erhebung, Analyse und Visualisierung digitaler Daten (Prozedurale Programmierung)
     link: prozprog.html 
     comment: Datenerfassung und Aufbereitung im Kontext wissenschaftlicher Arbeit
     logo: https://github.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/blob/master/images/12_Anwendung/DistanzSetup_vonLinks.jpeg?raw=true
