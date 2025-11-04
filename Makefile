@@ -51,7 +51,7 @@ update-cache-%:
 		"digitalesysteme") REPO_NAME="EingebetteteSysteme" ;; \
 		"prozprog") REPO_NAME="ProzeduraleProgrammierung" ;; \
 		"softwareentwicklung") REPO_NAME="Softwareentwicklung" ;; \
-		"robotikprojekt") REPO_NAME="Robotikprojekt" ;; \
+		"robotikprojekt") REPO_NAME="SoftwareprojektRobotik" ;; \
 		"index") REPO_NAME="" ;; \
 		*) REPO_NAME="" ;; \
 	esac; \
@@ -88,10 +88,16 @@ git-update-if-needed:
 	fi
 
 git-update:
-	@echo "🔍 Checking for untracked assets..."
-	git add assets/*/pdf/*.pdf || true
-	git add *.html
+	@echo "🔍 Checking for changes..."
+	@echo "📝 Adding modified tracked files..."
 	git add -u
+	@echo "🔍 Looking for new PDFs..."
+	@if [ -n "$$(find assets/*/pdf -name "*.pdf" -type f 2>/dev/null)" ]; then \
+		echo "📎 Adding new PDF files..."; \
+		git add -f assets/*/pdf/*.pdf; \
+	fi
+	@echo "📄 Adding HTML files..."
+	git add *.html
 	@echo "📝 Committing changes..."
 	git commit --amend --no-edit
 	@echo "🚀 Pushing to remote..."
@@ -135,7 +141,7 @@ status:
 		else \
 			echo "  📁 No assets"; \
 		fi; \
-		repo_name=$$(echo $$course | sed 's/digitalesysteme/EingebetteteSysteme/;s/prozprog/ProzeduraleProgrammierung/;s/softwareentwicklung/Softwareentwicklung/;s/robotikprojekt/Robotikprojekt/;s/index/INDEX_SKIP/'); \
+		repo_name=$$(echo $$course | sed 's/digitalesysteme/EingebetteteSysteme/;s/prozprog/ProzeduraleProgrammierung/;s/softwareentwicklung/Softwareentwicklung/;s/robotikprojekt/SoftwareprojektRobotik/;s/index/INDEX_SKIP/'); \
 		if [ "$$repo_name" != "INDEX_SKIP" ]; then \
 			echo "  🌐 Monitoring: VL_$$repo_name"; \
 		else \

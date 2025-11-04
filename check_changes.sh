@@ -38,7 +38,7 @@ case "$COURSE" in
         REPO_NAME="Softwareentwicklung"
         ;;
     "robotikprojekt")
-        REPO_NAME="Robotikprojekt"
+        REPO_NAME="SoftwareprojektRobotik"
         ;;
     "index")
         REPO_NAME=""  # No remote monitoring for index
