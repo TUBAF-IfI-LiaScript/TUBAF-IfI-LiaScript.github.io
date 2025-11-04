@@ -9,7 +9,7 @@ all: $(COURSES) git-update-if-needed
 
 # Generic function to build a course
 define build_course
-$(1): $(1).yml
+$(1): $(1).yml $(wildcard assets/$(1)/pdf/*.pdf)
 	@echo "=== Checking changes for $(1) ==="
 	@if ./check_changes.sh $(1); then \
 		$(MAKE) force-build-$(1); \
@@ -88,10 +88,16 @@ git-update-if-needed:
 	fi
 
 git-update:
-	@echo "🔍 Checking for untracked assets..."
-	git add assets/*/pdf/*.pdf || true
-	git add *.html
+	@echo "🔍 Checking for changes..."
+	@echo "📝 Adding modified tracked files..."
 	git add -u
+	@echo "🔍 Looking for new PDFs..."
+	@if [ -n "$$(find assets/*/pdf -name "*.pdf" -type f 2>/dev/null)" ]; then \
+		echo "📎 Adding new PDF files..."; \
+		git add -f assets/*/pdf/*.pdf; \
+	fi
+	@echo "📄 Adding HTML files..."
+	git add *.html
 	@echo "📝 Committing changes..."
 	git commit --amend --no-edit
 	@echo "🚀 Pushing to remote..."
