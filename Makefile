@@ -88,10 +88,16 @@ git-update-if-needed:
 	fi
 
 git-update:
-	@echo "🔍 Checking for untracked assets..."
-	git add assets/*/pdf/*.pdf || true
-	git add *.html
+	@echo "🔍 Checking for changes..."
+	@echo "📝 Adding modified tracked files..."
 	git add -u
+	@echo "🔍 Looking for new PDFs..."
+	@if [ -n "$$(find assets/*/pdf -name "*.pdf" -type f 2>/dev/null)" ]; then \
+		echo "📎 Adding new PDF files..."; \
+		git add -f assets/*/pdf/*.pdf; \
+	fi
+	@echo "📄 Adding HTML files..."
+	git add *.html
 	@echo "📝 Committing changes..."
 	git commit --amend --no-edit
 	@echo "🚀 Pushing to remote..."

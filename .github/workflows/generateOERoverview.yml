@@ -79,12 +79,31 @@ jobs:
               echo "Generating $html_file from $yaml_file..."
               
               # Different parameters based on course type
+              # Check if PDFs already exist
+              pdf_dir="assets/${course}/pdf"
+              needs_pdfs=false
+              
+              if [ "$course" != "index" ]; then
+                if [ ! -d "$pdf_dir" ] || [ -z "$(ls -A $pdf_dir 2>/dev/null)" ]; then
+                  needs_pdfs=true
+                  echo "📄 PDFs missing for $course - will generate"
+                else
+                  echo "✅ PDFs already exist for $course - skipping generation"
+                fi
+              fi
+              
               case "$course" in
                 "index")
                   liaex -i "$yaml_file" -o "$course" --format project --project-category-blur
                   ;;
                 "digitalesysteme"|"prozprog"|"softwareentwicklung"|"robotikprojekt")
-                  liaex -i "$yaml_file" -o "$course" --format project --project-generate-cache --project-generate-pdf --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
+                  if [ "$needs_pdfs" = true ]; then
+                    echo "🔨 Generating course with PDFs..."
+                    liaex -i "$yaml_file" -o "$course" --format project --project-generate-cache --project-generate-pdf --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
+                  else
+                    echo "🔨 Generating course without PDFs..."
+                    liaex -i "$yaml_file" -o "$course" --format project --project-generate-cache --project-generate-scorm2004 --scorm-organization "TU-Bergakademie Freiberg" --scorm-embed --scorm-masteryScore 80 --project-category-blur
+                  fi
                   ;;
                 *)
                   liaex -i "$yaml_file" -o "$course" --format project --project-category-blur
