@@ -5,7 +5,7 @@ SCORM_ORG = "TU-Bergakademie Freiberg"
 SCORM_SCORE = 80
 
 .DEFAULT_GOAL := all
-all: $(COURSES) git-update-if-needed
+all: $(COURSES) prune-pdfs git-update-if-needed
 
 # Generic function to build a course
 define build_course
@@ -23,7 +23,6 @@ clean-$(1):
 	@echo "🧹 Cleaning old files for $(1)..."
 	rm -f $(1).html $(1).zip
 	rm -rf assets/$(1)/ || true
-	$(if $(filter $(1),$(PDF_COURSES)),rm -rf assets/pdf/* || true)
 
 
 
@@ -34,9 +33,7 @@ build-$(1):
 
 organize-$(1):
 	$(if $(filter $(1),$(PDF_COURSES)), \
-		mkdir -p assets/$(1)/pdf && \
-		cp assets/pdf/*.pdf assets/$(1)/pdf/ 2>/dev/null || true && \
-		sed -i 's|assets/pdf/|assets/$(1)/pdf/|g' $(1).html)
+		echo "🔗 Using shared assets/pdf for $(1); skipping duplication" )
 endef
 
 # Generate targets for all courses
@@ -78,10 +75,19 @@ update-cache-%:
 git-update-if-needed:
 	@if [ -f .cache/build_occurred ]; then \
 		echo "🔄 Changes detected - updating git repository..."; \
-		git add assets/ || true; \
-		git add -A; \
-		git commit --amend --no-edit; \
-		git push origin main -f; \
+		echo "📝 Staging modified tracked files..."; \
+		git add -u; \
+		echo "📦 Staging asset changes (including new files)..."; \
+		git add -A assets/ || true; \
+		echo "📄 Staging HTML files..."; \
+		git add *.html || true; \
+		if git diff --cached --quiet; then \
+			echo "🟡 No staged changes; skipping commit"; \
+		else \
+			echo "📝 Amending last commit and pushing..."; \
+			git commit --amend --no-edit; \
+			git push origin main -f; \
+		fi; \
 		rm -f .cache/build_occurred; \
 	else \
 		echo "✅ No courses rebuilt - git repository unchanged"; \
@@ -157,6 +163,7 @@ help:
 	@echo "  clean-cache        - Clear only cache files"
 	@echo "  status             - Show build status of all courses"
 	@echo "  git-update         - Update git repository"
+	@echo "  prune-pdfs         - Remove PDFs not referenced by any HTML"
 	@echo ""
 	@echo "Individual courses (with change detection):"
 	@$(foreach course,$(COURSES),echo "  $(course)";)
@@ -169,4 +176,12 @@ help:
 	@echo "  SCORM org:   $(SCORM_ORG)"
 	@echo "  SCORM score: $(SCORM_SCORE)"
 
-.PHONY: all clean-all clean-cache force-all status git-update help $(COURSES)
+.PHONY: all clean-all clean-cache force-all status git-update help prune-pdfs $(COURSES)
+
+prune-pdfs:
+	@echo "🗑️  Pruning unreferenced PDFs..."
+	@if [ -x ./prune_pdfs.sh ]; then \
+		./prune_pdfs.sh || true; \
+	else \
+		chmod +x prune_pdfs.sh && ./prune_pdfs.sh || true; \
+	fi
