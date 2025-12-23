@@ -83,7 +83,7 @@ collection:
         title: Erweiterte Konzepte der Programmiersprache Python
         logo:
         comment: Weitere Datentypen (Tupel, Dictionary, Set) und Funktionen
-      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/09_Datenvisualisierung.md 
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/09_PythonOOP.md 
         title: Datenvisualisierung
         logo:
         comment: Objektorientierung in Python, Visualisierungstool Matplotlib       
