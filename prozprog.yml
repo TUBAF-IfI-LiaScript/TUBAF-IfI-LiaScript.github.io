@@ -82,15 +82,19 @@ collection:
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/08_PythonVertiefung.md 
         title: Erweiterte Konzepte der Programmiersprache Python
         logo:
-        comment: Weitere Datentypen (Tupel, Dictionary, Set) und Funktionen
+        comment: Weitere Datentypen (Tupel, Dictionary, Set), Funktionen und 
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/09_PythonOOP.md 
-        title: Datenvisualisierung
+        title: Objektorientierung in Python
         logo:
-        comment: Objektorientierung in Python, Visualisierungstool Matplotlib       
+        comment: Anwendung der Objektorientierung in der Programmiersprache Python
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/10_DatenAnalyse.md 
         title: Datenanalyse mit Python
         logo:
         comment: Datenanalyse mit dem Python Paket Pandas - Series und DataFrame
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/11_Datenvisualisierung.md
+        title: Visualisierung mit Python
+        logo:
+        comment: Darstellung von Daten in wissenschaftlichen Diagrammen
       - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_ProzeduraleProgrammierung/master/12_Anwendungen.md 
         title: Finale Anwendung und Aublick
         logo:
