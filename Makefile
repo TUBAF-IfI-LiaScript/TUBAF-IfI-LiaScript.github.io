@@ -90,7 +90,16 @@ git-update-if-needed:
 		fi; \
 		rm -f .cache/build_occurred; \
 	else \
-		echo "✅ No courses rebuilt - git repository unchanged"; \
+		echo "✅ No courses rebuilt - checking for new PDFs..."; \
+		NEW_PDFS=$$(git ls-files --others --exclude-standard assets/pdf/*.pdf 2>/dev/null); \
+		if [ -n "$$NEW_PDFS" ]; then \
+			echo "📎 Found new PDFs: $$NEW_PDFS"; \
+			git add assets/pdf/*.pdf; \
+			git commit -m "Add new PDF files"; \
+			git push origin main; \
+		else \
+			echo "✅ No new PDFs found"; \
+		fi; \
 	fi
 
 git-update:
@@ -98,9 +107,9 @@ git-update:
 	@echo "📝 Adding modified tracked files..."
 	git add -u
 	@echo "🔍 Looking for new PDFs..."
-	@if [ -n "$$(find assets/*/pdf -name "*.pdf" -type f 2>/dev/null)" ]; then \
-		echo "📎 Adding new PDF files..."; \
-		git add -f assets/*/pdf/*.pdf; \
+	@if [ -n "$$(git ls-files --others --exclude-standard assets/pdf/*.pdf 2>/dev/null)" ]; then \
+		echo "📎 Adding new PDF files from assets/pdf/..."; \
+		git add assets/pdf/*.pdf; \
 	fi
 	@echo "📄 Adding HTML files..."
 	git add *.html
