@@ -107,19 +107,21 @@ SCORM_SCORE = 80
 ```
 ├── digitalesysteme.yml     # Kurskonfiguration
 ├── digitalesysteme.html    # Generierte Webseite
-├── check_changes.sh        # 🆕 Intelligente Change-Detection
-├── .cache/                 # 🆕 Cache für Change-Detection
+├── scripts/
+│   ├── check_changes.sh    # Intelligente Change-Detection
+│   ├── prune_pdfs.sh       # Entfernt unreferenzierte PDFs
+│   ├── detect_changes.sh   # GitHub-Action: Änderungserkennung
+│   ├── generate_courses.sh # GitHub-Action: Kurs-Generierung
+│   └── deployment_summary.sh # GitHub-Action: Deployment-Zusammenfassung
+├── .cache/                 # Cache für Change-Detection (von Git ignoriert)
 │   └── digitalesysteme     # Hash-Cache (YAML + Remote)
 ├── assets/
 │   └── digitalesysteme/
 │       └── pdf/           # Kurs-spezifische PDFs
-│           ├── 272cfe0.pdf
-│           ├── 0611ae484.pdf
-│           └── ...        # 16 PDFs insgesamt
-├── Makefile               # 🔄 Verbessertes Build-System
-├── .gitignore            # 🆕 Ignoriert .cache/ Verzeichnis
+├── Makefile               # Build-System
+├── .gitignore
 └── .github/workflows/
-    └── generateOERoverview.yml  # Optimierte GitHub Action
+    └── generateOERoverview.yml  # GitHub Action
 ```
 
 ## Intelligentes Change-Detection-System
@@ -161,7 +163,7 @@ SCORM_SCORE = 80
 
 ## Technische Implementierung
 
-### 🧠 **Change-Detection-Script** (`check_changes.sh`)
+### 🧠 **Change-Detection-Script** (`scripts/check_changes.sh`)
 ```bash
 # Prüft lokale YAML-Änderungen
 YAML_HASH=$(sha256sum digitalesysteme.yml | cut -d' ' -f1)

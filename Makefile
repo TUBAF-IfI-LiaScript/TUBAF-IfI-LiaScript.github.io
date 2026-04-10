@@ -11,7 +11,7 @@ all: $(COURSES) prune-pdfs git-update-if-needed
 define build_course
 $(1): $(1).yml
 	@echo "=== Checking changes for $(1) ==="
-	@if ./check_changes.sh $(1); then \
+	@if ./scripts/check_changes.sh $(1); then \
 		$(MAKE) force-build-$(1); \
 	else \
 		echo "📄 Using existing $(1).html and assets"; \
@@ -189,8 +189,8 @@ help:
 
 prune-pdfs:
 	@echo "🗑️  Pruning unreferenced PDFs..."
-	@if [ -x ./prune_pdfs.sh ]; then \
-		./prune_pdfs.sh || true; \
+	@if [ -x ./scripts/prune_pdfs.sh ]; then \
+		./scripts/prune_pdfs.sh || true; \
 	else \
-		chmod +x prune_pdfs.sh && ./prune_pdfs.sh || true; \
+		chmod +x scripts/prune_pdfs.sh && ./scripts/prune_pdfs.sh || true; \
 	fi

@@ -9,7 +9,7 @@ if [[ ${1-} == "--dry-run" ]]; then
   DRY_RUN=true
 fi
 
-repo_root="$(cd "$(dirname "$0")" && pwd)"
+repo_root="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$repo_root"
 
 # Collect referenced PDFs from all HTML files
