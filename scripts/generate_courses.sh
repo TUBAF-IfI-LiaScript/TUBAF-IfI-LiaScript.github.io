@@ -6,6 +6,8 @@ set -euo pipefail
 
 IFS=' ' read -ra course_list <<< "$1"
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 echo "=== Generating Courses ==="
 
 for course in "${course_list[@]}"; do
@@ -19,16 +21,34 @@ for course in "${course_list[@]}"; do
 
   echo "Generating $html_file from $yaml_file..."
 
-  # Check whether PDFs already exist for this course
-  pdf_dir="assets/${course}/pdf"
+  # Determine whether PDF generation is needed for this course
   needs_pdfs=false
+  manifest=".cache/${course}_upstream_pdfs"
 
   if [ "$course" != "index" ]; then
-    if [ ! -d "$pdf_dir" ] || [ -z "$(ls -A "$pdf_dir" 2>/dev/null)" ]; then
-      needs_pdfs=true
-      echo "📄 PDFs missing for $course - will generate"
+    # Try to download upstream PDFs (creates/updates the manifest)
+    if bash "$SCRIPT_DIR/download_upstream_pdfs.sh" "$course"; then
+      # Count lessons and compare with upstream PDF coverage
+      lesson_count=$(grep -c '^\s*- url:' "$yaml_file" 2>/dev/null || echo 0)
+      upstream_count=$(wc -l < "$manifest" 2>/dev/null | tr -d ' ' || echo 0)
+
+      if [ "$upstream_count" -ge "$lesson_count" ] && [ "$lesson_count" -gt 0 ]; then
+        echo "✅ All ${upstream_count} upstream PDFs available for ${course} – skipping PDF generation"
+        needs_pdfs=false
+      else
+        echo "📄 ${upstream_count}/${lesson_count} upstream PDFs for ${course} – will generate remaining"
+        needs_pdfs=true
+      fi
     else
-      echo "✅ PDFs already exist for $course - skipping generation"
+      # No upstream PDFs available or mapping not found
+      pdf_dir="assets/${course}/pdf"
+      if [ ! -d "$pdf_dir" ] || [ -z "$(ls -A "$pdf_dir" 2>/dev/null)" ]; then
+        echo "📄 No upstream PDFs and no local PDFs for ${course} – will generate"
+        needs_pdfs=true
+      else
+        echo "✅ No upstream PDFs but local PDFs exist for ${course} – skipping generation"
+        needs_pdfs=false
+      fi
     fi
   fi
 

@@ -30,6 +30,17 @@ while IFS= read -r rel; do
   keep["$abs"]=1
 done < <(printf "%s\n" "$referenced")
 
+# Also protect upstream PDFs listed in .cache/*_upstream_pdfs manifests
+for manifest in .cache/*_upstream_pdfs; do
+  [ -f "$manifest" ] || continue
+  course="$(basename "$manifest" _upstream_pdfs)"
+  while IFS= read -r pdf_name; do
+    [[ -z "$pdf_name" ]] && continue
+    abs="$repo_root/assets/${course}/pdf/${pdf_name}"
+    keep["$abs"]=1
+  done < "$manifest"
+done
+
 # Find all PDFs under assets/**/pdf
 mapfile -t all_pdfs < <(find assets -type f -name '*.pdf')
 
