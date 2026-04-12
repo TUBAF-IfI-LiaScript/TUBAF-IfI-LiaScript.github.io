@@ -62,7 +62,7 @@ for course in "${course_list[@]}"; do
       ;;
     *)
       # If the course has an upstream repo mapping it is a full SCORM/PDF course
-      _repo=$(grep -v '^\s*#' "$SCRIPT_DIR/courses.conf" | grep "^${course}:" | cut -d: -f2 | tr -d '[:space:]' || true)
+      _repo=$(grep -v '^[[:space:]]*#' "$SCRIPT_DIR/courses.conf" | grep "^${course}:" | cut -d: -f2 | tr -d '[:space:]' || true)
       if [ -n "$_repo" ]; then
         if [ "$needs_pdfs" = true ]; then
           echo "🔨 Generating course with PDFs..."

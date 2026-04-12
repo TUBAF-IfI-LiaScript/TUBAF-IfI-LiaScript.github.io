@@ -79,7 +79,7 @@ mark-changed:
 
 update-cache-%:
 	@YAML_HASH=$$(sha256sum $*.yml 2>/dev/null | cut -d' ' -f1 || echo "missing"); \
-	REPO_NAME=$$(grep -v '^\s*#' scripts/courses.conf | grep '^$*:' | cut -d: -f2 | tr -d '[:space:]' || true); \
+	REPO_NAME=$$(grep -v '^[[:space:]]*#' scripts/courses.conf | grep '^$*:' | cut -d: -f2 | tr -d '[:space:]' || true); \
 	if [ -n "$$REPO_NAME" ]; then \
 		API_URL="https://api.github.com/repos/TUBAF-IfI-LiaScript/VL_$${REPO_NAME}/commits/master"; \
 		API_RESPONSE=$$(curl -sL --connect-timeout 10 "$$API_URL" 2>/dev/null); \
@@ -184,7 +184,7 @@ status:
 		else \
 			echo "  📁 No assets"; \
 		fi; \
-		repo_name=$$(grep -v '^\s*#' scripts/courses.conf | grep "^$$course:" | cut -d: -f2 | tr -d '[:space:]' || true); \
+		repo_name=$$(grep -v '^[[:space:]]*#' scripts/courses.conf | grep "^$$course:" | cut -d: -f2 | tr -d '[:space:]' || true); \
 		if [ -n "$$repo_name" ]; then \
 			echo "  🌐 Monitoring: VL_$$repo_name"; \
 		else \

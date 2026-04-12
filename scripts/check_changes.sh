@@ -29,7 +29,7 @@ YAML_HASH=$(sha256sum "$YAML_FILE" 2>/dev/null | cut -d' ' -f1 || echo "missing"
 # Get remote repository name from central config
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 COURSES_CONF="${SCRIPT_DIR}/courses.conf"
-REPO_NAME=$(grep -v '^\s*#' "$COURSES_CONF" | grep "^${COURSE}:" | cut -d: -f2 | tr -d '[:space:]' || true)
+REPO_NAME=$(grep -v '^[[:space:]]*#' "$COURSES_CONF" | grep "^${COURSE}:" | cut -d: -f2 | tr -d '[:space:]' || true)
 
 if [ -n "$REPO_NAME" ]; then
     echo "🌐 Checking VL_${REPO_NAME} repository..."

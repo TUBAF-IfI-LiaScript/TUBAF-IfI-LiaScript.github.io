@@ -26,7 +26,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 COURSES_CONF="${SCRIPT_DIR}/courses.conf"
 
 # Map course name → upstream repository name via central config
-REPO_NAME=$(grep -v '^\s*#' "$COURSES_CONF" | grep "^${COURSE}:" | cut -d: -f2 | tr -d '[:space:]' || true)
+REPO_NAME=$(grep -v '^[[:space:]]*#' "$COURSES_CONF" | grep "^${COURSE}:" | cut -d: -f2 | tr -d '[:space:]' || true)
 if [ -z "$REPO_NAME" ]; then
   echo "ℹ️  No upstream repo mapped for course '$COURSE'" >&2
   exit 1
