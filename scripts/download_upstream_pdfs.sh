@@ -122,18 +122,27 @@ for i in "${!NAMES[@]}"; do
     # File exists and URL hasn't changed → already up-to-date
     already_present=$((already_present + 1))
   else
+    is_update=false
     if [ -f "$target" ]; then
       echo "  🔄 Updating ${name} (new release available)..."
-      updated=$((updated + 1))
+      is_update=true
     else
       echo "  ⬇️  Downloading ${name}..."
-      downloaded=$((downloaded + 1))
     fi
-    if ! curl -fsSL --connect-timeout 30 "${CURL_AUTH[@]}" -o "$target" "$url"; then
+    if curl -fsSL --connect-timeout 30 "${CURL_AUTH[@]}" -o "$target" "$url"; then
+      # Increment only after a confirmed successful download
+      if [ "$is_update" = true ]; then
+        updated=$((updated + 1))
+      else
+        downloaded=$((downloaded + 1))
+      fi
+    else
       echo "  ⚠️  Failed to download ${name} from ${url}" >&2
       rm -f "$target"
-      # Remove from manifest so the next run retries
-      grep -v "^${name}	" "${MANIFEST}.tmp" > "${MANIFEST}.tmp2" && mv "${MANIFEST}.tmp2" "${MANIFEST}.tmp" || true
+      # Remove from manifest so the next run retries.
+      # Use awk index() for literal (non-regex) prefix matching so that
+      # filenames containing '.' or other regex metacharacters are safe.
+      awk -v prefix="${name}" 'index($0, prefix "\t") != 1' "${MANIFEST}.tmp" > "${MANIFEST}.tmp2" && mv "${MANIFEST}.tmp2" "${MANIFEST}.tmp" || true
     fi
   fi
 done
