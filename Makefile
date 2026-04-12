@@ -51,7 +51,7 @@ download-pdfs-%:
 	@if [ -n "$(filter $*,$(PDF_COURSES))" ]; then \
 		mkdir -p .cache; \
 		[ -x scripts/download_upstream_pdfs.sh ] || chmod +x scripts/download_upstream_pdfs.sh; \
-		LESSON_COUNT=$$(grep -c '^[[:space:]]*- url:' "$*.yml" 2>/dev/null || true); \
+		LESSON_COUNT=$$(grep -c '^[[:space:]]*- url:' "$*.yml" 2>/dev/null) || LESSON_COUNT=0; \
 		if bash scripts/download_upstream_pdfs.sh "$*"; then \
 			if [ -f ".cache/$*_upstream_pdfs" ]; then \
 				UPSTREAM_COUNT=$$(wc -l < ".cache/$*_upstream_pdfs" | tr -d ' '); \
