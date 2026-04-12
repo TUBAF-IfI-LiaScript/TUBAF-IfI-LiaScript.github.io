@@ -26,27 +26,10 @@ fi
 # Calculate YAML hash
 YAML_HASH=$(sha256sum "$YAML_FILE" 2>/dev/null | cut -d' ' -f1 || echo "missing")
 
-# Get remote repository hash
-case "$COURSE" in
-    "digitalesysteme")
-        REPO_NAME="EingebetteteSysteme"
-        ;;
-    "prozprog")
-        REPO_NAME="ProzeduraleProgrammierung"
-        ;;
-    "softwareentwicklung")
-        REPO_NAME="Softwareentwicklung"
-        ;;
-    "robotikprojekt")
-        REPO_NAME="SoftwareprojektRobotik"
-        ;;
-    "index")
-        REPO_NAME=""  # No remote monitoring for index
-        ;;
-    *)
-        REPO_NAME=""
-        ;;
-esac
+# Get remote repository name from central config
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+COURSES_CONF="${SCRIPT_DIR}/courses.conf"
+REPO_NAME=$(grep -v '^\s*#' "$COURSES_CONF" | grep "^${COURSE}:" | cut -d: -f2 | tr -d '[:space:]' || true)
 
 if [ -n "$REPO_NAME" ]; then
     echo "🌐 Checking VL_${REPO_NAME} repository..."

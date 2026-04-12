@@ -75,14 +75,7 @@ mark-changed:
 
 update-cache-%:
 	@YAML_HASH=$$(sha256sum $*.yml 2>/dev/null | cut -d' ' -f1 || echo "missing"); \
-	case "$*" in \
-		"digitalesysteme") REPO_NAME="EingebetteteSysteme" ;; \
-		"prozprog") REPO_NAME="ProzeduraleProgrammierung" ;; \
-		"softwareentwicklung") REPO_NAME="Softwareentwicklung" ;; \
-		"robotikprojekt") REPO_NAME="SoftwareprojektRobotik" ;; \
-		"index") REPO_NAME="" ;; \
-		*) REPO_NAME="" ;; \
-	esac; \
+	REPO_NAME=$$(grep -v '^\s*#' scripts/courses.conf | grep '^$*:' | cut -d: -f2 | tr -d '[:space:]' || true); \
 	if [ -n "$$REPO_NAME" ]; then \
 		API_URL="https://api.github.com/repos/TUBAF-IfI-LiaScript/VL_$${REPO_NAME}/commits/master"; \
 		API_RESPONSE=$$(curl -sL --connect-timeout 10 "$$API_URL" 2>/dev/null); \
@@ -187,11 +180,11 @@ status:
 		else \
 			echo "  📁 No assets"; \
 		fi; \
-		repo_name=$$(echo $$course | sed 's/digitalesysteme/EingebetteteSysteme/;s/prozprog/ProzeduraleProgrammierung/;s/softwareentwicklung/Softwareentwicklung/;s/robotikprojekt/SoftwareprojektRobotik/;s/index/INDEX_SKIP/'); \
-		if [ "$$repo_name" != "INDEX_SKIP" ]; then \
+		repo_name=$$(grep -v '^\s*#' scripts/courses.conf | grep "^$$course:" | cut -d: -f2 | tr -d '[:space:]' || true); \
+		if [ -n "$$repo_name" ]; then \
 			echo "  🌐 Monitoring: VL_$$repo_name"; \
 		else \
-			echo "  🌐 No remote monitoring (index)"; \
+			echo "  🌐 No remote monitoring"; \
 		fi; \
 	done
 

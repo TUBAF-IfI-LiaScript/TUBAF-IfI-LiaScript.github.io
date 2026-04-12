@@ -56,30 +56,33 @@ for course in "${course_list[@]}"; do
     "index")
       liaex -i "$yaml_file" -o "$course" --format project --project-category-blur
       ;;
-    "digitalesysteme"|"prozprog"|"softwareentwicklung"|"robotikprojekt")
-      if [ "$needs_pdfs" = true ]; then
-        echo "🔨 Generating course with PDFs..."
-        liaex -i "$yaml_file" -o "$course" --format project \
-          --project-generate-cache \
-          --project-generate-pdf \
-          --project-generate-scorm2004 \
-          --scorm-organization "TU-Bergakademie Freiberg" \
-          --scorm-embed \
-          --scorm-masteryScore 80 \
-          --project-category-blur
-      else
-        echo "🔨 Generating course without PDFs..."
-        liaex -i "$yaml_file" -o "$course" --format project \
-          --project-generate-cache \
-          --project-generate-scorm2004 \
-          --scorm-organization "TU-Bergakademie Freiberg" \
-          --scorm-embed \
-          --scorm-masteryScore 80 \
-          --project-category-blur
-      fi
-      ;;
     *)
-      liaex -i "$yaml_file" -o "$course" --format project --project-category-blur
+      # If the course has an upstream repo mapping it is a full SCORM/PDF course
+      _repo=$(grep -v '^\s*#' "$SCRIPT_DIR/courses.conf" | grep "^${course}:" | cut -d: -f2 | tr -d '[:space:]' || true)
+      if [ -n "$_repo" ]; then
+        if [ "$needs_pdfs" = true ]; then
+          echo "🔨 Generating course with PDFs..."
+          liaex -i "$yaml_file" -o "$course" --format project \
+            --project-generate-cache \
+            --project-generate-pdf \
+            --project-generate-scorm2004 \
+            --scorm-organization "TU-Bergakademie Freiberg" \
+            --scorm-embed \
+            --scorm-masteryScore 80 \
+            --project-category-blur
+        else
+          echo "🔨 Generating course without PDFs..."
+          liaex -i "$yaml_file" -o "$course" --format project \
+            --project-generate-cache \
+            --project-generate-scorm2004 \
+            --scorm-organization "TU-Bergakademie Freiberg" \
+            --scorm-embed \
+            --scorm-masteryScore 80 \
+            --project-category-blur
+        fi
+      else
+        liaex -i "$yaml_file" -o "$course" --format project --project-category-blur
+      fi
       ;;
   esac
 

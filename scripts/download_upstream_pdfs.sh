@@ -20,17 +20,17 @@ if [ -z "$COURSE" ]; then
   exit 1
 fi
 
-# Map course name → upstream repository name
-case "$COURSE" in
-  digitalesysteme)     REPO_NAME="EingebetteteSysteme" ;;
-  prozprog)            REPO_NAME="ProzeduraleProgrammierung" ;;
-  softwareentwicklung) REPO_NAME="Softwareentwicklung" ;;
-  robotikprojekt)      REPO_NAME="SoftwareprojektRobotik" ;;
-  *)
-    echo "ℹ️  No upstream repo mapped for course '$COURSE'" >&2
-    exit 1
-    ;;
-esac
+# Resolve this script's directory so courses.conf is always found regardless
+# of the working directory.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+COURSES_CONF="${SCRIPT_DIR}/courses.conf"
+
+# Map course name → upstream repository name via central config
+REPO_NAME=$(grep -v '^\s*#' "$COURSES_CONF" | grep "^${COURSE}:" | cut -d: -f2 | tr -d '[:space:]' || true)
+if [ -z "$REPO_NAME" ]; then
+  echo "ℹ️  No upstream repo mapped for course '$COURSE'" >&2
+  exit 1
+fi
 
 REPO_ORG="TUBAF-IfI-LiaScript"
 API_URL="https://api.github.com/repos/${REPO_ORG}/VL_${REPO_NAME}/releases?per_page=100"
