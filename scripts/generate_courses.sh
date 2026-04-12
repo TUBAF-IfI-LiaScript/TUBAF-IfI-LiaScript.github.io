@@ -7,6 +7,8 @@ set -euo pipefail
 IFS=' ' read -ra course_list <<< "$1"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=courses_lib.sh
+. "${SCRIPT_DIR}/courses_lib.sh"
 
 echo "=== Generating Courses ==="
 
@@ -62,7 +64,7 @@ for course in "${course_list[@]}"; do
       ;;
     *)
       # If the course has an upstream repo mapping it is a full SCORM/PDF course
-      _repo=$(grep -v '^[[:space:]]*#' "$SCRIPT_DIR/courses.conf" | grep "^${course}:" | cut -d: -f2 | tr -d '[:space:]' || true)
+      _repo=$(lookup_repo "$course")
       if [ -n "$_repo" ]; then
         if [ "$needs_pdfs" = true ]; then
           echo "🔨 Generating course with PDFs..."

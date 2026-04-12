@@ -26,10 +26,11 @@ fi
 # Calculate YAML hash
 YAML_HASH=$(sha256sum "$YAML_FILE" 2>/dev/null | cut -d' ' -f1 || echo "missing")
 
-# Get remote repository name from central config
+# Get remote repository name from central config via shared library
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COURSES_CONF="${SCRIPT_DIR}/courses.conf"
-REPO_NAME=$(grep -v '^[[:space:]]*#' "$COURSES_CONF" | grep "^${COURSE}:" | cut -d: -f2 | tr -d '[:space:]' || true)
+# shellcheck source=courses_lib.sh
+. "${SCRIPT_DIR}/courses_lib.sh"
+REPO_NAME=$(lookup_repo "$COURSE")
 
 if [ -n "$REPO_NAME" ]; then
     echo "🌐 Checking VL_${REPO_NAME} repository..."

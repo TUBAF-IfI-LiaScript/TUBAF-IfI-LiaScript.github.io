@@ -20,13 +20,14 @@ if [ -z "$COURSE" ]; then
   exit 1
 fi
 
-# Resolve this script's directory so courses.conf is always found regardless
+# Resolve this script's directory so courses_lib.sh is always found regardless
 # of the working directory.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COURSES_CONF="${SCRIPT_DIR}/courses.conf"
+# shellcheck source=courses_lib.sh
+. "${SCRIPT_DIR}/courses_lib.sh"
 
-# Map course name → upstream repository name via central config
-REPO_NAME=$(grep -v '^[[:space:]]*#' "$COURSES_CONF" | grep "^${COURSE}:" | cut -d: -f2 | tr -d '[:space:]' || true)
+# Map course name → upstream repository name via shared lookup function
+REPO_NAME=$(lookup_repo "$COURSE")
 if [ -z "$REPO_NAME" ]; then
   echo "ℹ️  No upstream repo mapped for course '$COURSE'" >&2
   exit 1
