@@ -46,7 +46,7 @@ if [ -n "${GITHUB_TOKEN:-}" ]; then
 fi
 
 echo "🔍 Checking upstream releases for VL_${REPO_NAME}..."
-API_RESPONSE=$(curl -sL --connect-timeout 15 "${CURL_AUTH[@]}" "$API_URL" 2>/dev/null)
+API_RESPONSE=$(curl -sL --connect-timeout 15 "${CURL_AUTH[@]}" "$API_URL")
 
 # Check for API error / rate-limit response
 if echo "$API_RESPONSE" | grep -q '"message"' && ! echo "$API_RESPONSE" | grep -q '"assets"'; then
@@ -110,8 +110,12 @@ for i in "${!NAMES[@]}"; do
     already_present=$((already_present + 1))
   else
     echo "  ⬇️  Downloading ${name}..."
-    curl -sL --connect-timeout 30 "${CURL_AUTH[@]}" -o "$target" "$url"
-    downloaded=$((downloaded + 1))
+    if ! curl -fsSL --connect-timeout 30 "${CURL_AUTH[@]}" -o "$target" "$url"; then
+      echo "  ⚠️  Failed to download ${name} from ${url}" >&2
+      rm -f "$target"
+    else
+      downloaded=$((downloaded + 1))
+    fi
   fi
 done
 
