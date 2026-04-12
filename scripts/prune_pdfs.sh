@@ -31,10 +31,11 @@ while IFS= read -r rel; do
 done < <(printf "%s\n" "$referenced")
 
 # Also protect upstream PDFs listed in .cache/*_upstream_pdfs manifests
+# Manifest format: "<filename>\t<url>"
 for manifest in .cache/*_upstream_pdfs; do
   [ -f "$manifest" ] || continue
   course="$(basename "$manifest" _upstream_pdfs)"
-  while IFS= read -r pdf_name; do
+  while IFS=$'\t' read -r pdf_name _url; do
     [[ -z "$pdf_name" ]] && continue
     abs="$repo_root/assets/${course}/pdf/${pdf_name}"
     keep["$abs"]=1

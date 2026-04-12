@@ -5,8 +5,8 @@
 # Env:    GITHUB_TOKEN  – optional, used to authenticate API calls and avoid rate-limiting
 #
 # Outputs:
-#   assets/<course>/pdf/<name>.pdf  – downloaded files (only when not already present)
-#   .cache/<course>_upstream_pdfs   – manifest: one PDF filename per line
+#   assets/<course>/pdf/<name>.pdf  – downloaded files (re-downloaded when upstream URL changes)
+#   .cache/<course>_upstream_pdfs   – manifest: one "filename<TAB>url" line per PDF
 #
 # Exit codes:
 #   0  – at least one upstream PDF was found / downloaded
@@ -22,10 +22,10 @@ fi
 
 # Map course name → upstream repository name
 case "$COURSE" in
-  digitalesysteme)   REPO_NAME="EingebetteteSysteme" ;;
-  prozprog)          REPO_NAME="ProzeduraleProgrammierung" ;;
+  digitalesysteme)     REPO_NAME="EingebetteteSysteme" ;;
+  prozprog)            REPO_NAME="ProzeduraleProgrammierung" ;;
   softwareentwicklung) REPO_NAME="Softwareentwicklung" ;;
-  robotikprojekt)    REPO_NAME="SoftwareprojektRobotik" ;;
+  robotikprojekt)      REPO_NAME="SoftwareprojektRobotik" ;;
   *)
     echo "ℹ️  No upstream repo mapped for course '$COURSE'" >&2
     exit 1
@@ -55,13 +55,14 @@ if echo "$API_RESPONSE" | grep -q '"message"' && ! echo "$API_RESPONSE" | grep -
   exit 1
 fi
 
-# Extract PDF asset names and their download URLs.
-# Deduplicate by name (keep first occurrence = most-recent release wins).
 if ! command -v jq >/dev/null 2>&1; then
   echo "⚠️  jq is not installed – cannot parse GitHub release assets" >&2
   exit 1
 fi
 
+# Extract PDF asset names and their download URLs.
+# Releases API returns newest-first; deduplicate by filename so the newest
+# release's URL wins for each lesson PDF.
 mapfile -t ALL_NAMES < <(
   echo "$API_RESPONSE" \
     | jq -r '.[].assets[] | select(.name | endswith(".pdf")) | .name' 2>/dev/null \
@@ -79,7 +80,7 @@ if [ "${#ALL_NAMES[@]}" -eq 0 ]; then
   exit 1
 fi
 
-# Deduplicate: keep the first occurrence of each filename
+# Deduplicate: keep the first occurrence of each filename (= most-recent release)
 declare -A SEEN
 NAMES=()
 URLS=()
@@ -94,8 +95,19 @@ done
 
 echo "📦 Found ${#NAMES[@]} unique upstream PDF(s) for ${COURSE}"
 
-# Download missing PDFs and build manifest
+# Load previously cached URLs so we can detect version updates.
+# Manifest format: "<filename>\t<url>"
+declare -A CACHED_URL
+if [ -f "$MANIFEST" ]; then
+  while IFS=$'\t' read -r cached_name cached_url; do
+    [[ -z "$cached_name" ]] && continue
+    CACHED_URL["$cached_name"]="$cached_url"
+  done < "$MANIFEST"
+fi
+
+# Download PDFs that are missing or whose upstream URL has changed (new version).
 downloaded=0
+updated=0
 already_present=0
 > "${MANIFEST}.tmp"
 
@@ -104,17 +116,24 @@ for i in "${!NAMES[@]}"; do
   url="${URLS[$i]}"
   target="${PDF_DIR}/${name}"
 
-  echo "${name}" >> "${MANIFEST}.tmp"
+  printf '%s\t%s\n' "${name}" "${url}" >> "${MANIFEST}.tmp"
 
-  if [ -f "$target" ]; then
+  if [ -f "$target" ] && [ "${CACHED_URL[$name]+x}" ] && [ "${CACHED_URL[$name]}" = "$url" ]; then
+    # File exists and URL hasn't changed → already up-to-date
     already_present=$((already_present + 1))
   else
-    echo "  ⬇️  Downloading ${name}..."
+    if [ -f "$target" ]; then
+      echo "  🔄 Updating ${name} (new release available)..."
+      updated=$((updated + 1))
+    else
+      echo "  ⬇️  Downloading ${name}..."
+      downloaded=$((downloaded + 1))
+    fi
     if ! curl -fsSL --connect-timeout 30 "${CURL_AUTH[@]}" -o "$target" "$url"; then
       echo "  ⚠️  Failed to download ${name} from ${url}" >&2
       rm -f "$target"
-    else
-      downloaded=$((downloaded + 1))
+      # Remove from manifest so the next run retries
+      grep -v "^${name}	" "${MANIFEST}.tmp" > "${MANIFEST}.tmp2" && mv "${MANIFEST}.tmp2" "${MANIFEST}.tmp" || true
     fi
   fi
 done
@@ -122,5 +141,5 @@ done
 # Atomically replace manifest
 mv "${MANIFEST}.tmp" "$MANIFEST"
 
-echo "✅ Upstream PDFs: ${downloaded} downloaded, ${already_present} already present"
+echo "✅ Upstream PDFs: ${downloaded} new, ${updated} updated, ${already_present} already up-to-date"
 exit 0
