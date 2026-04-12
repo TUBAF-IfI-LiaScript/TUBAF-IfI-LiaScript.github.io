@@ -140,9 +140,9 @@ for i in "${!NAMES[@]}"; do
       echo "  ⚠️  Failed to download ${name} from ${url}" >&2
       rm -f "$target"
       # Remove from manifest so the next run retries.
-      # Use awk index() for literal (non-regex) prefix matching so that
-      # filenames containing '.' or other regex metacharacters are safe.
-      awk -v prefix="${name}" 'index($0, prefix "\t") != 1' "${MANIFEST}.tmp" > "${MANIFEST}.tmp2" && mv "${MANIFEST}.tmp2" "${MANIFEST}.tmp" || true
+      # Split on the tab separator and compare the first field exactly so that
+      # filenames that are substrings of each other don't cause false removals.
+      awk -F'\t' -v prefix="${name}" '$1 != prefix' "${MANIFEST}.tmp" > "${MANIFEST}.tmp2" && mv "${MANIFEST}.tmp2" "${MANIFEST}.tmp" || true
     fi
   fi
 done
