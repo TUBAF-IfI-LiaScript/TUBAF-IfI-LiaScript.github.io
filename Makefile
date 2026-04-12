@@ -51,9 +51,13 @@ download-pdfs-%:
 	@if [ -n "$(filter $*,$(PDF_COURSES))" ]; then \
 		mkdir -p .cache; \
 		[ -x scripts/download_upstream_pdfs.sh ] || chmod +x scripts/download_upstream_pdfs.sh; \
-		LESSON_COUNT=$$(grep -c '^\s*- url:' "$*.yml" 2>/dev/null || echo 0); \
+		LESSON_COUNT=$$(grep -c '^[[:space:]]*- url:' "$*.yml" 2>/dev/null || true); \
 		if bash scripts/download_upstream_pdfs.sh "$*"; then \
-			UPSTREAM_COUNT=$$(wc -l < ".cache/$*_upstream_pdfs" 2>/dev/null | tr -d ' ' || echo 0); \
+			if [ -f ".cache/$*_upstream_pdfs" ]; then \
+				UPSTREAM_COUNT=$$(wc -l < ".cache/$*_upstream_pdfs" | tr -d ' '); \
+			else \
+				UPSTREAM_COUNT=0; \
+			fi; \
 			if [ "$$UPSTREAM_COUNT" -ge "$$LESSON_COUNT" ] && [ "$$LESSON_COUNT" -gt 0 ]; then \
 				touch ".cache/$*_skip_pdf_gen"; \
 				echo "✅ All $$UPSTREAM_COUNT upstream PDFs present for $* – PDF generation will be skipped"; \

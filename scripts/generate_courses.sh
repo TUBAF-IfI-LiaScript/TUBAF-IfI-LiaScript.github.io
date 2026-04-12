@@ -29,8 +29,12 @@ for course in "${course_list[@]}"; do
     # Try to download upstream PDFs (creates/updates the manifest)
     if bash "$SCRIPT_DIR/download_upstream_pdfs.sh" "$course"; then
       # Count lessons and compare with upstream PDF coverage
-      lesson_count=$(grep -c '^\s*- url:' "$yaml_file" 2>/dev/null || echo 0)
-      upstream_count=$(wc -l < "$manifest" 2>/dev/null | tr -d ' ' || echo 0)
+      lesson_count=$(grep -c '^[[:space:]]*- url:' "$yaml_file" 2>/dev/null || true)
+      if [ -f "$manifest" ]; then
+        upstream_count=$(wc -l < "$manifest" | tr -d ' ')
+      else
+        upstream_count=0
+      fi
 
       if [ "$upstream_count" -ge "$lesson_count" ] && [ "$lesson_count" -gt 0 ]; then
         echo "✅ All ${upstream_count} upstream PDFs available for ${course} – skipping PDF generation"
