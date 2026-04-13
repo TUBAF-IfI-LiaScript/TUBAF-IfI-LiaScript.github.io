@@ -34,6 +34,8 @@ jobs:
 
       - name: Generate missing course websites
         if: steps.changes.outputs.courses_to_generate != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash scripts/generate_courses.sh "${{ steps.changes.outputs.courses_to_generate }}"
 
       - name: Display deployment summary

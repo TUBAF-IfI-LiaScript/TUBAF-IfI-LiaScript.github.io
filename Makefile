@@ -15,9 +15,10 @@ $(1): $(1).yml
 		$(MAKE) force-build-$(1); \
 	else \
 		echo "📄 Using existing $(1).html and assets"; \
+		$(MAKE) download-pdfs-$(1); \
 	fi
 
-force-build-$(1): clean-$(1) build-$(1) organize-$(1) update-cache-$(1) mark-changed
+force-build-$(1): clean-$(1) download-pdfs-$(1) build-$(1) organize-$(1) update-cache-$(1) mark-changed
 
 clean-$(1):
 	@echo "🧹 Cleaning old files for $(1)..."
@@ -28,8 +29,14 @@ clean-$(1):
 
 build-$(1):
 	$(if $(filter $(1),$(PDF_COURSES)), \
-		liaex --input $(1).yml --output $(1) --format project --project-generate-pdf --scorm-organization $(SCORM_ORG) --scorm-embed --scorm-masteryScore $(SCORM_SCORE), \
-		liaex --input $(1).yml --output $(1) --format project)
+		if [ -f ".cache/$(1)_skip_pdf_gen" ]; then \
+			echo "🔨 Building $(1) (all PDFs from upstream)..."; \
+			liaex --input $(1).yml --output $(1) --format project --scorm-organization $(SCORM_ORG) --scorm-embed --scorm-masteryScore $(SCORM_SCORE) --project-category-blur; \
+		else \
+			echo "🔨 Building $(1) with PDF generation..."; \
+			liaex --input $(1).yml --output $(1) --format project --project-generate-pdf --scorm-organization $(SCORM_ORG) --scorm-embed --scorm-masteryScore $(SCORM_SCORE) --project-category-blur; \
+		fi, \
+		liaex --input $(1).yml --output $(1) --format project --project-category-blur)
 
 organize-$(1):
 	$(if $(filter $(1),$(PDF_COURSES)), \
@@ -39,19 +46,41 @@ endef
 # Generate targets for all courses
 $(foreach course,$(COURSES),$(eval $(call build_course,$(course))))
 
+# Download upstream release PDFs for a single course.
+# Creates .cache/<course>_skip_pdf_gen when all lessons are covered by upstream PDFs.
+download-pdfs-%:
+	@if [ -n "$(filter $*,$(PDF_COURSES))" ]; then \
+		mkdir -p .cache; \
+		[ -x scripts/download_upstream_pdfs.sh ] || chmod +x scripts/download_upstream_pdfs.sh; \
+		LESSON_COUNT=$$(grep -c '^[[:space:]]*- url:' "$*.yml" 2>/dev/null) || LESSON_COUNT=0; \
+		if bash scripts/download_upstream_pdfs.sh "$*"; then \
+			if [ -f ".cache/$*_upstream_pdfs" ]; then \
+				UPSTREAM_COUNT=$$(wc -l < ".cache/$*_upstream_pdfs" | tr -d ' '); \
+			else \
+				UPSTREAM_COUNT=0; \
+			fi; \
+			if [ "$$UPSTREAM_COUNT" -ge "$$LESSON_COUNT" ] && [ "$$LESSON_COUNT" -gt 0 ]; then \
+				touch ".cache/$*_skip_pdf_gen"; \
+				echo "✅ All $$UPSTREAM_COUNT upstream PDFs present for $* – PDF generation will be skipped"; \
+			else \
+				rm -f ".cache/$*_skip_pdf_gen"; \
+				echo "📄 $$UPSTREAM_COUNT/$$LESSON_COUNT upstream PDFs for $* – PDF generation needed"; \
+			fi; \
+		else \
+			rm -f ".cache/$*_skip_pdf_gen"; \
+			echo "📄 No upstream PDFs for $* – PDF generation needed"; \
+		fi; \
+	fi
+
+# Download upstream PDFs for all PDF courses (useful for local mode: make download-pdfs)
+download-pdfs: $(foreach course,$(PDF_COURSES),download-pdfs-$(course))
+
 mark-changed:
 	@touch .cache/build_occurred
 
 update-cache-%:
 	@YAML_HASH=$$(sha256sum $*.yml 2>/dev/null | cut -d' ' -f1 || echo "missing"); \
-	case "$*" in \
-		"digitalesysteme") REPO_NAME="EingebetteteSysteme" ;; \
-		"prozprog") REPO_NAME="ProzeduraleProgrammierung" ;; \
-		"softwareentwicklung") REPO_NAME="Softwareentwicklung" ;; \
-		"robotikprojekt") REPO_NAME="SoftwareprojektRobotik" ;; \
-		"index") REPO_NAME="" ;; \
-		*) REPO_NAME="" ;; \
-	esac; \
+	REPO_NAME=$$(bash scripts/courses_lib.sh '$*' || true); \
 	if [ -n "$$REPO_NAME" ]; then \
 		API_URL="https://api.github.com/repos/TUBAF-IfI-LiaScript/VL_$${REPO_NAME}/commits/master"; \
 		API_RESPONSE=$$(curl -sL --connect-timeout 10 "$$API_URL" 2>/dev/null); \
@@ -156,11 +185,11 @@ status:
 		else \
 			echo "  📁 No assets"; \
 		fi; \
-		repo_name=$$(echo $$course | sed 's/digitalesysteme/EingebetteteSysteme/;s/prozprog/ProzeduraleProgrammierung/;s/softwareentwicklung/Softwareentwicklung/;s/robotikprojekt/SoftwareprojektRobotik/;s/index/INDEX_SKIP/'); \
-		if [ "$$repo_name" != "INDEX_SKIP" ]; then \
+		repo_name=$$(bash scripts/courses_lib.sh "$$course" || true); \
+		if [ -n "$$repo_name" ]; then \
 			echo "  🌐 Monitoring: VL_$$repo_name"; \
 		else \
-			echo "  🌐 No remote monitoring (index)"; \
+			echo "  🌐 No remote monitoring"; \
 		fi; \
 	done
 
@@ -173,6 +202,7 @@ help:
 	@echo "  status             - Show build status of all courses"
 	@echo "  git-update         - Update git repository"
 	@echo "  prune-pdfs         - Remove PDFs not referenced by any HTML"
+	@echo "  download-pdfs      - Download upstream release PDFs for all PDF courses"
 	@echo ""
 	@echo "Individual courses (with change detection):"
 	@$(foreach course,$(COURSES),echo "  $(course)";)
@@ -185,7 +215,7 @@ help:
 	@echo "  SCORM org:   $(SCORM_ORG)"
 	@echo "  SCORM score: $(SCORM_SCORE)"
 
-.PHONY: all clean-all clean-cache force-all status git-update help prune-pdfs $(COURSES)
+.PHONY: all clean-all clean-cache force-all status git-update help prune-pdfs download-pdfs $(COURSES)
 
 prune-pdfs:
 	@echo "🗑️  Pruning unreferenced PDFs..."
