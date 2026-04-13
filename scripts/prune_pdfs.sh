@@ -12,8 +12,10 @@ fi
 repo_root="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$repo_root"
 
-# Associative array of PDF absolute paths to keep
+# Associative array of PDF absolute paths to keep (populated by collect_* functions)
 declare -A keep
+# Array of on-disk PDFs that are not referenced (populated by find_unreferenced)
+unreferenced=()
 
 # ---------------------------------------------------------------------------
 # collect_html_refs – scan HTML files and add referenced PDFs to `keep`

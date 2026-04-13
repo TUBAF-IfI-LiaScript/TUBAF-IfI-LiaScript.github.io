@@ -15,9 +15,11 @@ get_changed_yamls() {
 
 # ---------------------------------------------------------------------------
 # check_courses – iterate all course YAMLs, collect which need regeneration.
+# $1: space-separated list of changed YAML files
 # Sets COURSES_TO_GENERATE and MISSING_HTML.
 # ---------------------------------------------------------------------------
 check_courses() {
+  local changed_yamls="$1"
   COURSES_TO_GENERATE=""
   MISSING_HTML=""
 
@@ -26,9 +28,9 @@ check_courses() {
     course_name=$(basename "$yaml_file" .yml)
     html_file="${course_name}.html"
 
-    if echo "$CHANGED_YAMLS" | grep -q "$yaml_file" || [ ! -f "$html_file" ]; then
+    if echo "$changed_yamls" | grep -q "$yaml_file" || [ ! -f "$html_file" ]; then
       echo "Course '$course_name' needs regeneration:"
-      if echo "$CHANGED_YAMLS" | grep -q "$yaml_file"; then
+      if echo "$changed_yamls" | grep -q "$yaml_file"; then
         echo "  - YAML file was changed"
       fi
       if [ ! -f "$html_file" ]; then
@@ -56,7 +58,7 @@ write_outputs() {
 main() {
   echo "=== Detecting Changes ==="
   get_changed_yamls
-  check_courses
+  check_courses "$CHANGED_YAMLS"
   write_outputs
 }
 

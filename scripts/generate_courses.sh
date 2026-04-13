@@ -10,13 +10,13 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # ---------------------------------------------------------------------------
 # determine_pdf_needs – decide if PDF generation is required for a course.
-# Sets the global `needs_pdfs` variable (true/false).
+# Sets the caller-visible variable `needs_pdfs` to "true" or "false".
+# Must be called from a context where `needs_pdfs` is already declared.
 # ---------------------------------------------------------------------------
 determine_pdf_needs() {
   local course="$1"
   local yaml_file="${course}.yml"
   local manifest=".cache/${course}_upstream_pdfs"
-  needs_pdfs=false
 
   # Try to download upstream PDFs (creates/updates the manifest)
   if bash "$SCRIPT_DIR/download_upstream_pdfs.sh" "$course"; then
@@ -51,9 +51,11 @@ determine_pdf_needs() {
 
 # ---------------------------------------------------------------------------
 # run_liaex – run the liaex command for a given course.
+# $1: course name  $2: "true" if PDF generation is needed, "false" otherwise
 # ---------------------------------------------------------------------------
 run_liaex() {
   local course="$1"
+  local needs_pdfs="$2"
   local yaml_file="${course}.yml"
 
   case "$course" in
@@ -107,13 +109,14 @@ generate_course() {
 
   echo "Generating $html_file from $yaml_file..."
 
-  # Determine whether PDF generation is needed (skipped for index)
+  # Initialize needs_pdfs; determine_pdf_needs() will update it if applicable.
+  # Not declared local so that determine_pdf_needs can write to the same variable.
   needs_pdfs=false
   if [ "$course" != "index" ]; then
     determine_pdf_needs "$course"
   fi
 
-  run_liaex "$course"
+  run_liaex "$course" "$needs_pdfs"
 
   if [ -f "$html_file" ]; then
     echo "✅ Successfully generated $html_file"

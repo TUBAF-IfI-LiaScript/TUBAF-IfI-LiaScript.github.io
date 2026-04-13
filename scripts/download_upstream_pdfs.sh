@@ -20,6 +20,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=courses_lib.sh
 . "${SCRIPT_DIR}/courses_lib.sh"
 
+# Global state shared between functions
+NAMES=()        # deduplicated PDF asset names (set by parse_pdf_assets)
+URLS=()         # corresponding download URLs  (set by parse_pdf_assets)
+declare -A CACHED_URL  # manifest cache: name → url (set by load_manifest)
+
 # ---------------------------------------------------------------------------
 # validate_args – check required arguments and resolve course→repo mapping
 # ---------------------------------------------------------------------------
@@ -107,7 +112,7 @@ parse_pdf_assets() {
   fi
 
   # Deduplicate: keep the first occurrence of each filename (= most-recent release)
-  declare -gA SEEN
+  declare -A SEEN
   NAMES=()
   URLS=()
   for i in "${!ALL_NAMES[@]}"; do
@@ -126,7 +131,6 @@ parse_pdf_assets() {
 # load_manifest – read the cached URL manifest into CACHED_URL associative array
 # ---------------------------------------------------------------------------
 load_manifest() {
-  declare -gA CACHED_URL
   if [ -f "$MANIFEST" ]; then
     while IFS=$'\t' read -r cached_name cached_url; do
       [[ -z "$cached_name" ]] && continue
