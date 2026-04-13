@@ -47,11 +47,14 @@ if [ -n "${GITHUB_TOKEN:-}" ]; then
 fi
 
 echo "🔍 Checking upstream releases for VL_${REPO_NAME}..."
-API_RESPONSE=$(curl -sL --connect-timeout 15 "${CURL_AUTH[@]}" "$API_URL")
+if ! API_RESPONSE=$(curl -fsSL --connect-timeout 15 "${CURL_AUTH[@]}" "$API_URL" 2>/dev/null); then
+  echo "⚠️  Failed to reach the GitHub API for VL_${REPO_NAME}" >&2
+  exit 1
+fi
 
 # Check for API error / rate-limit response
 if echo "$API_RESPONSE" | grep -q '"message"' && ! echo "$API_RESPONSE" | grep -q '"assets"'; then
-  MSG=$(echo "$API_RESPONSE" | grep -o '"message":"[^"]*"' | head -1 | sed 's/"message":"//;s/"$//')
+  MSG=$(echo "$API_RESPONSE" | sed -n 's/.*"message"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -1)
   echo "⚠️  GitHub API error: ${MSG:-unknown error}" >&2
   exit 1
 fi
