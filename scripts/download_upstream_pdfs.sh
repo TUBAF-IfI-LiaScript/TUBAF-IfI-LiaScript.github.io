@@ -118,7 +118,16 @@ already_present=0
 for i in "${!NAMES[@]}"; do
   name="${NAMES[$i]}"
   url="${URLS[$i]}"
-  target="${PDF_DIR}/${name}"
+
+  # Sanitize the asset name so the file is always written inside PDF_DIR:
+  #   1. Strip any path-separator components (keeps only the basename).
+  #   2. Replace any remaining ".." traversal sequences with a single underscore.
+  safe_name="$(basename -- "$name")"
+  safe_name="${safe_name//../_}"
+  if [ "$safe_name" != "$name" ]; then
+    echo "  ⚠️  Unsafe asset name '${name}' sanitized to '${safe_name}'" >&2
+  fi
+  target="${PDF_DIR}/${safe_name}"
 
   printf '%s\t%s\n' "${name}" "${url}" >> "${MANIFEST}.tmp"
 
