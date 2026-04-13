@@ -129,9 +129,10 @@ for i in "${!NAMES[@]}"; do
   fi
   target="${PDF_DIR}/${safe_name}"
 
-  printf '%s\t%s\n' "${name}" "${url}" >> "${MANIFEST}.tmp"
+  # Use safe_name as the manifest key so the manifest reflects what is on disk.
+  printf '%s\t%s\n' "${safe_name}" "${url}" >> "${MANIFEST}.tmp"
 
-  if [ -f "$target" ] && [ "${CACHED_URL[$name]+x}" ] && [ "${CACHED_URL[$name]}" = "$url" ]; then
+  if [ -f "$target" ] && [ "${CACHED_URL[$safe_name]+x}" ] && [ "${CACHED_URL[$safe_name]}" = "$url" ]; then
     # File exists and URL hasn't changed → already up-to-date
     already_present=$((already_present + 1))
   else
@@ -155,7 +156,7 @@ for i in "${!NAMES[@]}"; do
       # Remove from manifest so the next run retries.
       # Split on the tab separator and compare the first field exactly so that
       # filenames that are substrings of each other don't cause false removals.
-      awk -F'\t' -v prefix="${name}" '$1 != prefix' "${MANIFEST}.tmp" > "${MANIFEST}.tmp2" && mv "${MANIFEST}.tmp2" "${MANIFEST}.tmp" || true
+      awk -F'\t' -v prefix="${safe_name}" '$1 != prefix' "${MANIFEST}.tmp" > "${MANIFEST}.tmp2" && mv "${MANIFEST}.tmp2" "${MANIFEST}.tmp" || true
     fi
   fi
 done
