@@ -108,11 +108,19 @@ SCORM_SCORE = 80
 ├── digitalesysteme.yml     # Kurskonfiguration
 ├── digitalesysteme.html    # Generierte Webseite
 ├── scripts/
-│   ├── check_changes.sh    # Intelligente Change-Detection
-│   ├── prune_pdfs.sh       # Entfernt unreferenzierte PDFs
-│   ├── detect_changes.sh   # GitHub-Action: Änderungserkennung
+│   ├── check_changes.sh    # Intelligente Change-Detection (Makefile)
+│   ├── detect_changes.sh   # Änderungserkennung (GitHub Action)
+│   ├── courses.conf        # Kurs → Upstream-Repo Mapping
+│   ├── courses_lib.sh      # Shared library für courses.conf lookups
 │   ├── generate_courses.sh # GitHub-Action: Kurs-Generierung
+│   ├── prune_pdfs.sh       # Entfernt unreferenzierte PDFs
 │   └── deployment_summary.sh # GitHub-Action: Deployment-Zusammenfassung
+├── tests/
+│   ├── run_tests.sh        # Test-Runner (alle Tests ausführen)
+│   ├── lib/
+│   │   └── test_lib.sh     # Gemeinsame Test-Hilfsfunktionen
+│   ├── test_check_changes.sh  # Tests für check_changes.sh
+│   └── test_detect_changes.sh # Tests für detect_changes.sh
 ├── .cache/                 # Cache für Change-Detection (von Git ignoriert)
 │   └── digitalesysteme     # Hash-Cache (YAML + Remote)
 ├── assets/
@@ -219,3 +227,50 @@ Das System erkennt automatisch neue Commits in den überwachten Repositories:
 - **Mit Änderungen**: ~3-5 Minuten (komplette PDF-Generierung)
 - **Ohne Änderungen**: ~3-5 Sekunden (Change-Detection + Skip)
 - **Überwachte Repositories**: 4 aktive + 1 index (nur lokal)
+
+## Tests
+
+Die Change-Detection-Logik ist durch eine dedizierte Test-Suite in `tests/` abgedeckt.
+
+### ▶️ Tests ausführen
+
+```bash
+bash tests/run_tests.sh
+```
+
+### 📁 Test-Struktur
+
+| Datei | Beschreibung |
+|-------|-------------|
+| `tests/run_tests.sh` | Führt alle Test-Dateien aus und gibt eine Gesamtzusammenfassung |
+| `tests/lib/test_lib.sh` | Gemeinsame Hilfsfunktionen (`suite`, `pass`, `fail`, `assert_*`, …) |
+| `tests/test_check_changes.sh` | Tests für `scripts/check_changes.sh` (Makefile-seitige Detection) |
+| `tests/test_detect_changes.sh` | Tests für `scripts/detect_changes.sh` (GitHub-Action-seitige Detection) |
+
+### 🧪 Testfälle für `check_changes.sh`
+
+| Szenario | Erwartetes Verhalten |
+|----------|----------------------|
+| Kein Argument übergeben | Usage-Meldung, Exit ≠ 0 |
+| YAML-Datei fehlt | Fehlermeldung, Exit ≠ 0 |
+| Kein Cache, kein HTML | Exit 0 (Rebuild nötig) |
+| Kein Cache, HTML vorhanden | Exit 0 (kein Cached-Hash → Rebuild) |
+| Cache + HTML stimmen überein | Exit 1 (kein Rebuild, "No changes detected") |
+| YAML-Hash geändert | Exit 0, Grund "YAML file changed" |
+| Remote-Hash geändert | Exit 0, Grund "Remote repository changed" |
+| HTML-Datei fehlt | Exit 0, Grund "HTML file missing" |
+| Remote nicht erreichbar, sonst unverändert | Exit 1 (unreachable wird ignoriert) |
+| Remote nicht erreichbar, YAML geändert | Exit 0 (Rebuild trotzdem ausgelöst) |
+| Kurs ohne Remote-Mapping, aktuell | Exit 1 |
+| Kurs ohne Remote-Mapping, YAML geändert | Exit 0 |
+
+### 🧪 Testfälle für `detect_changes.sh`
+
+| Szenario | Erwartetes Verhalten |
+|----------|----------------------|
+| Keine YAML-Änderungen, alle HTML vorhanden | `courses_to_generate` ist leer |
+| YAML geändert (git diff) | Kurs erscheint in `courses_to_generate` |
+| HTML-Datei fehlt | Kurs erscheint in `courses_to_generate` und `missing_html` |
+| YAML geändert UND HTML fehlt | Kurs erscheint in beiden Outputs |
+| `.github/workflows/*.yml` geändert | Workflow-Datei wird nicht als Kurs behandelt |
+| Mehrere Kurse, nur einer geändert | Nur der geänderte Kurs wird regeneriert |
