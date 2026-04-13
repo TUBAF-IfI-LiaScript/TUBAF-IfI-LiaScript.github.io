@@ -15,6 +15,7 @@ $(1): $(1).yml
 		$(MAKE) force-build-$(1); \
 	else \
 		echo "📄 Using existing $(1).html and assets"; \
+		$(MAKE) download-pdfs-$(1); \
 	fi
 
 force-build-$(1): clean-$(1) download-pdfs-$(1) build-$(1) organize-$(1) update-cache-$(1) mark-changed
