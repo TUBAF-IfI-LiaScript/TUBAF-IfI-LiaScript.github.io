@@ -108,11 +108,24 @@ SCORM_SCORE = 80
 ├── digitalesysteme.yml     # Kurskonfiguration
 ├── digitalesysteme.html    # Generierte Webseite
 ├── scripts/
-│   ├── check_changes.sh    # Intelligente Change-Detection
-│   ├── prune_pdfs.sh       # Entfernt unreferenzierte PDFs
-│   ├── detect_changes.sh   # GitHub-Action: Änderungserkennung
+│   ├── check_changes.sh    # Intelligente Change-Detection (verwendet vom Makefile)
+│   ├── detect_changes.sh   # Änderungserkennung (GitHub Action)
+│   ├── courses.conf        # Kurs → Upstream-Repo Mapping
+│   ├── courses_lib.sh      # Shared library für courses.conf lookups
 │   ├── generate_courses.sh # GitHub-Action: Kurs-Generierung
+│   ├── prune_pdfs.sh       # Entfernt unreferenzierte PDFs
 │   └── deployment_summary.sh # GitHub-Action: Deployment-Zusammenfassung
+├── tests/
+│   ├── run_tests.sh        # Test-Runner (bats + cram + remake)
+│   ├── bats/               # Shell-Unit-Tests (bats-core)
+│   │   ├── check_changes.bats
+│   │   ├── detect_changes.bats
+│   │   └── courses_lib.bats
+│   ├── cram/               # CLI-Integrationstests (cram)
+│   │   ├── check_changes.t
+│   │   └── detect_changes.t
+│   └── remake/             # Makefile-Tests (remake)
+│       └── Makefile.test
 ├── .cache/                 # Cache für Change-Detection (von Git ignoriert)
 │   └── digitalesysteme     # Hash-Cache (YAML + Remote)
 ├── assets/
@@ -219,3 +232,95 @@ Das System erkennt automatisch neue Commits in den überwachten Repositories:
 - **Mit Änderungen**: ~3-5 Minuten (komplette PDF-Generierung)
 - **Ohne Änderungen**: ~3-5 Sekunden (Change-Detection + Skip)
 - **Überwachte Repositories**: 4 aktive + 1 index (nur lokal)
+
+## Tests
+
+Die Change-Detection-Logik ist durch eine dreistufige Test-Suite in `tests/` abgedeckt:
+
+| Tool | Zweck | Dateien |
+|------|-------|---------|
+| **[bats](https://github.com/bats-core/bats-core)** | Shell-Unit-Tests | `tests/bats/*.bats` |
+| **[cram](https://bitheap.org/cram/)** | CLI-Integrationstests | `tests/cram/*.t` |
+| **[remake](https://bashdb.sourceforge.net/remake/)** | Makefile-Tests | `tests/remake/Makefile.test` |
+
+### ▶️ Tests ausführen
+
+```bash
+bash tests/run_tests.sh
+```
+
+Einzelne Frameworks können auch direkt aufgerufen werden:
+
+```bash
+# nur bats
+bats tests/bats/
+
+# nur cram
+REPO_ROOT=$(pwd) cram --shell=bash tests/cram/*.t
+
+# nur remake
+remake -f tests/remake/Makefile.test test
+```
+
+### 📁 Test-Struktur
+
+| Datei | Framework | Beschreibung |
+|-------|-----------|-------------|
+| `tests/run_tests.sh` | – | Führt alle drei Suiten aus |
+| `tests/bats/check_changes.bats` | bats | 12 Unit-Tests für `check_changes.sh` |
+| `tests/bats/detect_changes.bats` | bats | 6 Unit-Tests für `detect_changes.sh` |
+| `tests/bats/courses_lib.bats` | bats | 11 Unit-Tests für `courses_lib.sh` |
+| `tests/cram/check_changes.t` | cram | CLI-Integrationstests für `check_changes.sh` |
+| `tests/cram/detect_changes.t` | cram | CLI-Integrationstests für `detect_changes.sh` |
+| `tests/remake/Makefile.test` | remake | 8 Tests für Makefile-Variablen und Targets |
+
+### 🧪 Testfälle für `check_changes.sh` (bats + cram)
+
+| Szenario | Erwartetes Verhalten |
+|----------|----------------------|
+| Kein Argument übergeben | Usage-Meldung, Exit ≠ 0 |
+| YAML-Datei fehlt | Fehlermeldung, Exit ≠ 0 |
+| Kein Cache, kein HTML | Exit 0 (Rebuild nötig) |
+| Kein Cache, HTML vorhanden | Exit 0 (kein Cached-Hash → Rebuild) |
+| Cache + HTML stimmen überein | Exit 1 (kein Rebuild, "No changes detected") |
+| YAML-Hash geändert | Exit 0, Grund "YAML file changed" |
+| Remote-Hash geändert | Exit 0, Grund "Remote repository changed" |
+| HTML-Datei fehlt | Exit 0, Grund "HTML file missing" |
+| Remote nicht erreichbar, sonst unverändert | Exit 1 (unreachable wird ignoriert) |
+| Remote nicht erreichbar, YAML geändert | Exit 0 (Rebuild trotzdem ausgelöst) |
+| Kurs ohne Remote-Mapping, aktuell | Exit 1 |
+| Kurs ohne Remote-Mapping, YAML geändert | Exit 0 |
+
+### 🧪 Testfälle für `detect_changes.sh` (bats + cram)
+
+| Szenario | Erwartetes Verhalten |
+|----------|----------------------|
+| Keine YAML-Änderungen, alle HTML vorhanden | `courses_to_generate` ist leer |
+| YAML geändert (git diff) | Kurs erscheint in `courses_to_generate` |
+| HTML-Datei fehlt | Kurs erscheint in `courses_to_generate` und `missing_html` |
+| YAML geändert UND HTML fehlt | Kurs erscheint in beiden Outputs |
+| `.github/workflows/*.yml` geändert | Workflow-Datei wird nicht als Kurs behandelt |
+| Mehrere Kurse, nur einer geändert | Nur der geänderte Kurs wird regeneriert |
+
+### 🧪 Testfälle für `courses_lib.sh` (bats)
+
+| Szenario | Erwartetes Verhalten |
+|----------|----------------------|
+| Kein Argument (CLI) | Usage-Meldung, Exit ≠ 0 |
+| Kurs mit Mapping (z. B. `digitalesysteme`) | Gibt korrekten Repo-Namen aus |
+| Kurs ohne Mapping (z. B. `index`) | Leere Ausgabe |
+| Unbekannter Kurs | Leere Ausgabe |
+| Als Bibliothek gesourct | `lookup_repo()` gibt korrekte Werte zurück |
+
+### 🧪 Testfälle für das Makefile (remake)
+
+| Test | Was wird geprüft |
+|------|-----------------|
+| `test-courses-var` | `COURSES`-Variable enthält alle 5 Kurse |
+| `test-pdf-courses-var` | `PDF_COURSES` enthält die 4 PDF-Kurse |
+| `test-scorm-score-var` | `SCORM_SCORE = 80` |
+| `test-scorm-org-var` | `SCORM_ORG` ist nicht leer |
+| `test-phony-targets` | Wichtige Targets als `.PHONY` deklariert |
+| `test-help-target` | `make help` gibt "Available targets" aus |
+| `test-status-target` | `make status` gibt "Build Status" aus |
+| `test-clean-cache-target` | `make clean-cache` räumt `.cache/` auf |

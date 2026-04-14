@@ -1,0 +1,142 @@
+# tests/remake/Makefile.test
+#
+# Makefile tests exercised via `remake`.
+#
+# Usage (from anywhere):
+#   remake -f tests/remake/Makefile.test test
+#   # or:
+#   remake -C tests/remake -f Makefile.test test
+#
+# Each test target verifies a specific property of the production Makefile.
+# A test target exits 0 on success and non-zero on failure.
+
+# Resolve REPO_ROOT relative to this file's location, regardless of CWD.
+MAKEFILE_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
+REPO_ROOT    := $(realpath $(MAKEFILE_DIR)../..)
+PROD_MK      := $(REPO_ROOT)/Makefile
+
+# Expected values
+EXPECTED_COURSES     := index digitalesysteme prozprog robotikprojekt softwareentwicklung
+EXPECTED_PDF_COURSES := digitalesysteme prozprog robotikprojekt softwareentwicklung
+EXPECTED_SCORM_SCORE := 80
+
+# Shell pipeline that strips non-printable bytes (e.g. emoji) and leading spaces
+# from command output so plain-text patterns can be matched reliably.
+STRIP_EMOJI := LC_ALL=C sed 's/[^[:print:]]//g; s/^[[:space:]]*//'
+
+ALL_TESTS := \
+  test-courses-var \
+  test-pdf-courses-var \
+  test-scorm-score-var \
+  test-scorm-org-var \
+  test-phony-targets \
+  test-help-target \
+  test-status-target \
+  test-clean-cache-target
+
+.PHONY: test $(ALL_TESTS)
+
+test: $(ALL_TESTS)
+	@echo ""
+	@echo "remake: all $(words $(ALL_TESTS)) Makefile tests passed"
+
+# ---------------------------------------------------------------------------
+# Variable tests (read from `make -pn` database dump)
+# ---------------------------------------------------------------------------
+
+test-courses-var:
+	@ACTUAL=$$(make -pn -f $(PROD_MK) -C $(REPO_ROOT) 2>/dev/null | \
+	            grep '^COURSES = ' | sed 's/^COURSES = //'); \
+	if [ "$$ACTUAL" = "$(EXPECTED_COURSES)" ]; then \
+	  echo "PASS: COURSES = $$ACTUAL"; \
+	else \
+	  echo "FAIL: COURSES expected '$(EXPECTED_COURSES)', got '$$ACTUAL'"; \
+	  exit 1; \
+	fi
+
+test-pdf-courses-var:
+	@ACTUAL=$$(make -pn -f $(PROD_MK) -C $(REPO_ROOT) 2>/dev/null | \
+	            grep '^PDF_COURSES = ' | sed 's/^PDF_COURSES = //'); \
+	if [ "$$ACTUAL" = "$(EXPECTED_PDF_COURSES)" ]; then \
+	  echo "PASS: PDF_COURSES = $$ACTUAL"; \
+	else \
+	  echo "FAIL: PDF_COURSES expected '$(EXPECTED_PDF_COURSES)', got '$$ACTUAL'"; \
+	  exit 1; \
+	fi
+
+test-scorm-score-var:
+	@ACTUAL=$$(make -pn -f $(PROD_MK) -C $(REPO_ROOT) 2>/dev/null | \
+	            grep '^SCORM_SCORE = ' | sed 's/^SCORM_SCORE = //'); \
+	if [ "$$ACTUAL" = "$(EXPECTED_SCORM_SCORE)" ]; then \
+	  echo "PASS: SCORM_SCORE = $$ACTUAL"; \
+	else \
+	  echo "FAIL: SCORM_SCORE expected '$(EXPECTED_SCORM_SCORE)', got '$$ACTUAL'"; \
+	  exit 1; \
+	fi
+
+test-scorm-org-var:
+	@ACTUAL=$$(make -pn -f $(PROD_MK) -C $(REPO_ROOT) 2>/dev/null | \
+	            grep '^SCORM_ORG = ' | sed 's/^SCORM_ORG = //'); \
+	if [ -n "$$ACTUAL" ]; then \
+	  echo "PASS: SCORM_ORG = $$ACTUAL"; \
+	else \
+	  echo "FAIL: SCORM_ORG is empty"; \
+	  exit 1; \
+	fi
+
+# ---------------------------------------------------------------------------
+# .PHONY declaration test
+# ---------------------------------------------------------------------------
+
+test-phony-targets:
+	@PHONY_LINE=$$(make -pn -f $(PROD_MK) -C $(REPO_ROOT) 2>/dev/null | \
+	               grep '^\.PHONY:' | tr '\n' ' '); \
+	MISSING=""; \
+	for t in help status clean-all clean-cache force-all; do \
+	  echo "$$PHONY_LINE" | grep -qw "$$t" || MISSING="$$MISSING $$t"; \
+	done; \
+	if [ -z "$$MISSING" ]; then \
+	  echo "PASS: required targets are all declared .PHONY"; \
+	else \
+	  echo "FAIL: not declared .PHONY:$$MISSING"; \
+	  exit 1; \
+	fi
+
+# ---------------------------------------------------------------------------
+# Target execution tests (non-destructive)
+# ---------------------------------------------------------------------------
+
+test-help-target:
+	@COUNT=$$(make --no-print-directory -f $(PROD_MK) -C $(REPO_ROOT) help 2>&1 | \
+	           grep -c "Available targets"); \
+	if [ "$$COUNT" -ge 1 ]; then \
+	  echo "PASS: help target outputs 'Available targets'"; \
+	else \
+	  echo "FAIL: help target did not output 'Available targets'"; \
+	  exit 1; \
+	fi
+
+test-status-target:
+	@COUNT=$$(make --no-print-directory -f $(PROD_MK) -C $(REPO_ROOT) status 2>&1 | \
+	           $(STRIP_EMOJI) | grep -c "Build Status"); \
+	if [ "$$COUNT" -ge 1 ]; then \
+	  echo "PASS: status target outputs 'Build Status'"; \
+	else \
+	  echo "FAIL: status target did not output 'Build Status'"; \
+	  exit 1; \
+	fi
+
+test-clean-cache-target:
+	@TMPWORK=$$(mktemp -d); \
+	mkdir -p "$$TMPWORK/.cache"; \
+	touch "$$TMPWORK/.cache/testentry"; \
+	OUT=$$(make --no-print-directory -f $(PROD_MK) -C "$$TMPWORK" clean-cache 2>&1 | \
+	         $(STRIP_EMOJI) | grep "cache files cleared"); \
+	STATUS=$$?; \
+	rm -rf "$$TMPWORK"; \
+	if [ "$$STATUS" -eq 0 ]; then \
+	  echo "PASS: clean-cache target reports cache cleared"; \
+	else \
+	  echo "FAIL: clean-cache target did not report cache cleared"; \
+	  exit 1; \
+	fi
