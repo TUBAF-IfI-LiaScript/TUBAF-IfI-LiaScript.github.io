@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Run the full test suite.
 #
-# Prerequisites
+# Prerequisites (all must be installed – any missing tool aborts immediately)
 #   bats   ≥ 1.0  (https://github.com/bats-core/bats-core)
 #   cram   ≥ 0.7  (pip install cram)
 #   remake ≥ 4.3  (apt install remake)
@@ -14,7 +14,11 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 TESTS_DIR="$REPO_ROOT/tests"
-overall_failed=0
+
+# Per-framework pass/fail tracking (0 = passed, 1 = failed)
+bats_failed=0
+cram_failed=0
+remake_failed=0
 
 # ---------------------------------------------------------------------------
 # helpers
@@ -26,74 +30,87 @@ section() {
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
+# require_tool <name> <install-hint>
+# Exits the entire script immediately if <name> is not on PATH.
 require_tool() {
   if ! command -v "$1" >/dev/null 2>&1; then
-    echo "  ⚠️  '$1' not found – skipping those tests"
-    echo "      Install: $2"
-    return 1
+    echo ""
+    echo "❌  Required tool '$1' not found."
+    echo "    Install with: $2"
+    echo "    All three tools (bats, cram, remake) must be installed before running the suite."
+    exit 1
   fi
-  return 0
 }
 
+# ---------------------------------------------------------------------------
+# Dependency check – fails fast if any tool is missing
 # ---------------------------------------------------------------------------
 echo "╔══════════════════════════════════════╗"
 echo "║  LiaScript Course Builder Test Suite ║"
 echo "╚══════════════════════════════════════╝"
 
+section "Checking prerequisites"
+require_tool bats   "https://github.com/bats-core/bats-core  (or: npm install -g bats)"
+require_tool cram   "pip install cram"
+require_tool remake "apt install remake"
+echo "  ✅  bats, cram, remake all found"
+
 # ---------------------------------------------------------------------------
 # 1. bats – shell script unit tests
 # ---------------------------------------------------------------------------
 section "bats  (shell script unit tests)"
-if require_tool bats "https://github.com/bats-core/bats-core"; then
-  for bats_file in "$TESTS_DIR"/bats/*.bats; do
+bats_files=("$TESTS_DIR"/bats/*.bats)
+if [ ! -e "${bats_files[0]}" ]; then
+  echo "  ⚠️  No .bats files found in tests/bats/ – nothing to run"
+else
+  for bats_file in "${bats_files[@]}"; do
     echo ""
     echo "  ▶  $(basename "$bats_file")"
-    if bats "$bats_file"; then
-      : # success
-    else
-      overall_failed=$((overall_failed + 1))
+    if ! bats "$bats_file"; then
+      bats_failed=1
     fi
   done
-else
-  overall_failed=$((overall_failed + 1))
 fi
 
 # ---------------------------------------------------------------------------
 # 2. cram – CLI integration tests
 # ---------------------------------------------------------------------------
 section "cram  (CLI integration tests)"
-if require_tool cram "pip install cram"; then
+cram_files=("$TESTS_DIR"/cram/*.t)
+if [ ! -e "${cram_files[0]}" ]; then
+  echo "  ⚠️  No .t files found in tests/cram/ – nothing to run"
+else
   export REPO_ROOT
-  if cram --shell=bash "$TESTS_DIR"/cram/*.t; then
+  if cram --shell=bash "${cram_files[@]}"; then
     echo "  cram: all tests passed"
   else
-    overall_failed=$((overall_failed + 1))
+    cram_failed=1
   fi
-else
-  overall_failed=$((overall_failed + 1))
 fi
 
 # ---------------------------------------------------------------------------
 # 3. remake – Makefile tests
 # ---------------------------------------------------------------------------
 section "remake  (Makefile tests)"
-if require_tool remake "apt install remake"; then
-  if remake -f "$TESTS_DIR/remake/Makefile.test" test; then
-    : # success – remake already prints a summary
-  else
-    overall_failed=$((overall_failed + 1))
-  fi
+if remake -f "$TESTS_DIR/remake/Makefile.test" test; then
+  : # success – remake already prints a summary
 else
-  overall_failed=$((overall_failed + 1))
+  remake_failed=1
 fi
 
 # ---------------------------------------------------------------------------
+# Final summary
+# ---------------------------------------------------------------------------
+overall_failed=$(( bats_failed + cram_failed + remake_failed ))
+
 echo ""
 echo "╔══════════════════════════════════════╗"
 if [ "$overall_failed" -eq 0 ]; then
   echo "║  ✅  All test suites passed          ║"
 else
-  echo "║  ❌  $overall_failed suite(s) had failures          ║"
+  [ "$bats_failed"   -eq 1 ] && echo "║  ❌  bats   suite FAILED             ║"
+  [ "$cram_failed"   -eq 1 ] && echo "║  ❌  cram   suite FAILED             ║"
+  [ "$remake_failed" -eq 1 ] && echo "║  ❌  remake suite FAILED             ║"
 fi
 echo "╚══════════════════════════════════════╝"
 exit "$overall_failed"
