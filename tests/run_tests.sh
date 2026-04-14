@@ -15,9 +15,11 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 TESTS_DIR="$REPO_ROOT/tests"
 
-# Per-framework pass/fail tracking (0 = passed, 1 = failed)
+# Per-framework pass/fail/skip tracking (0 = passed/not-skipped, 1 = failed/skipped)
 bats_failed=0
+bats_skipped=0
 cram_failed=0
+cram_skipped=0
 remake_failed=0
 
 # ---------------------------------------------------------------------------
@@ -61,7 +63,8 @@ echo "  ✅  bats, cram, remake all found"
 section "bats  (shell script unit tests)"
 bats_files=("$TESTS_DIR"/bats/*.bats)
 if [ ! -e "${bats_files[0]}" ]; then
-  echo "  ⚠️  No .bats files found in tests/bats/ – nothing to run"
+  echo "  ⚠️  No .bats files found in tests/bats/ – skipping bats suite"
+  bats_skipped=1
 else
   for bats_file in "${bats_files[@]}"; do
     echo ""
@@ -78,7 +81,8 @@ fi
 section "cram  (CLI integration tests)"
 cram_files=("$TESTS_DIR"/cram/*.t)
 if [ ! -e "${cram_files[0]}" ]; then
-  echo "  ⚠️  No .t files found in tests/cram/ – nothing to run"
+  echo "  ⚠️  No .t files found in tests/cram/ – skipping cram suite"
+  cram_skipped=1
 else
   export REPO_ROOT
   if cram --shell=bash "${cram_files[@]}"; then
@@ -105,12 +109,15 @@ overall_failed=$(( bats_failed + cram_failed + remake_failed ))
 
 echo ""
 echo "╔══════════════════════════════════════╗"
-if [ "$overall_failed" -eq 0 ]; then
+if [ "$overall_failed" -eq 0 ] && [ "$bats_skipped" -eq 0 ] && [ "$cram_skipped" -eq 0 ]; then
   echo "║  ✅  All test suites passed          ║"
 else
   [ "$bats_failed"   -eq 1 ] && echo "║  ❌  bats   suite FAILED             ║"
   [ "$cram_failed"   -eq 1 ] && echo "║  ❌  cram   suite FAILED             ║"
   [ "$remake_failed" -eq 1 ] && echo "║  ❌  remake suite FAILED             ║"
+  [ "$bats_skipped"  -eq 1 ] && echo "║  ⚠️   bats   suite SKIPPED (no files) ║"
+  [ "$cram_skipped"  -eq 1 ] && echo "║  ⚠️   cram   suite SKIPPED (no files) ║"
+  [ "$overall_failed" -eq 0 ] && echo "║  ✅  No failures (some suites skipped)║"
 fi
 echo "╚══════════════════════════════════════╝"
 exit "$overall_failed"
