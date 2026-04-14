@@ -11,14 +11,16 @@ emoji-prefixed output lines compare cleanly against plain-text expectations.
 No argument → usage message, non-zero exit
 ------------------------------------------
 
-  $ bash "$REPO_ROOT/scripts/check_changes.sh" 2>&1 | ascii | grep "Usage:"
+  $ output=$(bash "$REPO_ROOT/scripts/check_changes.sh" 2>&1); status=$?; printf '%s\n' "$output" | ascii | grep "Usage:"; echo "exit:$status"
   Usage: */check_changes.sh <course_name> (glob)
+  exit:1
 
-Missing YAML file → error message
-----------------------------------
+Missing YAML file → error message, non-zero exit
+-------------------------------------------------
 
-  $ bash "$REPO_ROOT/scripts/check_changes.sh" "doesnotexist" 2>&1 | ascii | grep "not found"
+  $ output=$(bash "$REPO_ROOT/scripts/check_changes.sh" "doesnotexist" 2>&1); status=$?; printf '%s\n' "$output" | ascii | grep "not found"; echo "exit:$status"
   YAML file doesnotexist.yml not found
+  exit:1
 
 First run – no cache, no HTML → rebuild needed
 -----------------------------------------------
