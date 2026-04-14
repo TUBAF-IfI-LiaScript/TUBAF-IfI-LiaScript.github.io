@@ -22,7 +22,7 @@ EXPECTED_SCORM_SCORE := 80
 
 # Shell pipeline that strips non-printable bytes (e.g. emoji) and leading spaces
 # from command output so plain-text patterns can be matched reliably.
-STRIP_EMOJI := LC_ALL=C sed 's/[^[:print:]]//g; s/^[[:space:]]*//' 
+STRIP_EMOJI := LC_ALL=C sed 's/[^[:print:]]//g; s/^[[:space:]]*//'
 
 ALL_TESTS := \
   test-courses-var \
