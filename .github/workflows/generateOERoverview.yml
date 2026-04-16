@@ -9,34 +9,41 @@ on:
       - '*.yml'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Restore build cache
+        uses: actions/cache@v4
         with:
-          fetch-depth: 2  # Need previous commit to compare changes
+          path: .cache
+          key: build-cache-${{ hashFiles('*.yml') }}
+          restore-keys: |
+            build-cache-
 
-      - name: Detect changed YAML files and missing HTML
-        id: changes
-        run: bash scripts/detect_changes.sh
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Setup Node.js (if needed)
-        if: steps.changes.outputs.courses_to_generate != ''
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - name: Install LiaScript exporter (if needed)
-        if: steps.changes.outputs.courses_to_generate != ''
+      - name: Install LiaScript exporter
         run: npm install -g @liascript/exporter
 
-      - name: Generate missing course websites
-        if: steps.changes.outputs.courses_to_generate != ''
+      - name: Build and deploy courses
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bash scripts/generate_courses.sh "${{ steps.changes.outputs.courses_to_generate }}"
+        run: make all
 
       - name: Display deployment summary
-        run: bash scripts/deployment_summary.sh "${{ steps.changes.outputs.courses_to_generate }}"
+        run: make status

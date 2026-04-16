@@ -31,10 +31,10 @@ build-$(1):
 	$(if $(filter $(1),$(PDF_COURSES)), \
 		if [ -f ".cache/$(1)_skip_pdf_gen" ]; then \
 			echo "🔨 Building $(1) (all PDFs from upstream)..."; \
-			liaex --input $(1).yml --output $(1) --format project --scorm-organization $(SCORM_ORG) --scorm-embed --scorm-masteryScore $(SCORM_SCORE) --project-category-blur; \
+			liaex --input $(1).yml --output $(1) --format project --project-generate-cache --project-generate-scorm2004 --scorm-organization $(SCORM_ORG) --scorm-embed --scorm-masteryScore $(SCORM_SCORE) --project-category-blur; \
 		else \
 			echo "🔨 Building $(1) with PDF generation..."; \
-			liaex --input $(1).yml --output $(1) --format project --project-generate-pdf --scorm-organization $(SCORM_ORG) --scorm-embed --scorm-masteryScore $(SCORM_SCORE) --project-category-blur; \
+			liaex --input $(1).yml --output $(1) --format project --project-generate-cache --project-generate-pdf --project-generate-scorm2004 --scorm-organization $(SCORM_ORG) --scorm-embed --scorm-masteryScore $(SCORM_SCORE) --project-category-blur; \
 		fi, \
 		liaex --input $(1).yml --output $(1) --format project --project-category-blur)
 
@@ -203,6 +203,7 @@ help:
 	@echo "  git-update         - Update git repository"
 	@echo "  prune-pdfs         - Remove PDFs not referenced by any HTML"
 	@echo "  download-pdfs      - Download upstream release PDFs for all PDF courses"
+	@echo "  test               - Run the full test suite (bats, cram, remake)"
 	@echo ""
 	@echo "Individual courses (with change detection):"
 	@$(foreach course,$(COURSES),echo "  $(course)";)
@@ -215,7 +216,7 @@ help:
 	@echo "  SCORM org:   $(SCORM_ORG)"
 	@echo "  SCORM score: $(SCORM_SCORE)"
 
-.PHONY: all clean-all clean-cache force-all status git-update help prune-pdfs download-pdfs $(COURSES)
+.PHONY: all clean-all clean-cache force-all status git-update help prune-pdfs download-pdfs test $(COURSES)
 
 prune-pdfs:
 	@echo "🗑️  Pruning unreferenced PDFs..."
@@ -224,3 +225,6 @@ prune-pdfs:
 	else \
 		chmod +x scripts/prune_pdfs.sh && ./scripts/prune_pdfs.sh || true; \
 	fi
+
+test:
+	bash tests/run_tests.sh
