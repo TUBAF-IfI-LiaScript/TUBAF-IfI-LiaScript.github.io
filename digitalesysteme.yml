@@ -1,0 +1,65 @@
+title: >
+  <span style="background-color: rgba(0,106,179,0.75); padding: 5px; color: white">
+    OER - Kurssammlung
+  </span>
+comment: >
+  <span style="color: rgb(0,106,179); background-color: rgba(255,255,255,0.85)">
+    Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)
+  </span>
+logo: https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Universitaetsbibliothek_Freiberg_Fassade.jpg/1024px-Universitaetsbibliothek_Freiberg_Fassade.jpg
+
+icon: https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Logo_TU_Bergakademie_Freiberg.svg/242px-Logo_TU_Bergakademie_Freiberg.svg.png
+
+footer: >
+  Kontakt - Prof. Dr.-Ing. Sebastian Zug -
+  <a href="https://tu-freiberg.de/fakult1/inf/professuren/softwaretechnologie-und-robotik" target="_blank">Lehrstuhl für Softwaretechnologie und Robotik</a>
+  -
+  <a href="mailto:Sebastian.Zug@informatik.tu-freiberg.de">Sebastian.Zug@informatik.tu-freiberg.de</a>
+meta:
+  title: OER-Kurssammlung
+  description: Sammlung der OER Inhalte der Arbeitsgruppe Softwareentwicklung und Robotik (TU Freiberg)
+  #image:
+
+collection:
+  - html: >
+      <hr>
+      <span style="color: rgb(0,106,179)">
+      <h1>Vorlesung Digitale System / Eingebettete Systeme</h1>
+      </span>
+  - title:  Digitale systeme / Eingebettete Systeme (WiSe 2022/23)
+    comment: >
+       <p>Die Lehrveranstaltung vermittelt die Fähigkeiten, die Komponenten eines Rechners ausgehend von Schaltnetzen/-werken zu beschreiben und zu entwerfen, die Abläufe bei der Programmabarbeitung in verschiedenen Modellrechnern zu beherrschen sowie einfache, eingebettete Systeme zu realisieren.</p>
+       <p>Die "Quellcodes" aller Vorlesungsmaterialien finden Sie im zugehörigen Github-Repository <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme">Github-Repository</a></p>
+    grid: true
+    tags: 
+      - Boolesche Algebra
+      - Boolesche Funktion
+      - Schaltungssynthese
+      - Quine-McCluskey Verfahren
+      - Schaltnetz
+      - Flip-Flop Schaltungen
+      - Schaltwerk
+      - Rechnerarithmetik
+      - ALU
+      - CPU
+      - AVR Architektur
+      - AD-Wandler
+      - Mikrokontroller
+
+    collection:
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/00_Einfuehrung.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/01_HistorischerUeberblick.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/02_BoolscheAlgebra.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/03_Minimierung.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/04_Schaltnetze.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/05_Standardschaltnetze.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/06_FlipFlops.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/07_Schaltwerke.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/08_StandardSchaltwerke.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/09_Rechnerarithmetik.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/10_CPU_Basis.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/11_Modell_CPU.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/13_AVR_CPU.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/14_ADC.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/15_TimerUndInterrupts.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/16_Aktoren.md
