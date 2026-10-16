@@ -5,3 +5,7 @@ https://liascript.github.io/course/?https://raw.githubusercontent.com/liascript/
 git add -u
 git commit --amend
 git push origin main -f
+
+Einzelne PDFs neu bauen (nach dem Push der Vorlesung):
+python3 update_pdfs.py digitalesysteme.html ../VL_EingebetteteSysteme 00_Einfuehrung.md
+python3 update_pdfs.py digitalesysteme.html ../VL_EingebetteteSysteme --since <commit>
