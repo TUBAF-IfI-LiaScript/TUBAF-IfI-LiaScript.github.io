@@ -71,7 +71,7 @@ collection:
       - Datenfusion
   - title:  Digitale Systeme
     link: https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/
-    comment: Grundlagen der mobilen Robotik
+    comment: Grundlagen der technischen Informatik
     logo: https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/images/05_FlipFlops/SynchronesRSFF.png?raw=true
     tags: 
       - Boolesche Algebra
